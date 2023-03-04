@@ -25,7 +25,6 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        
         $url = route('admin.gallery.store');
         return view('admin.gallery.form', compact('url'));
     }
@@ -46,6 +45,7 @@ class GalleryController extends Controller
 
         // image
 
+        toast('Your Gallery as been submited!','success');
         return redirect()->route('admin.gallery.index');
     }
 
@@ -54,7 +54,8 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        return view('admin.gallery.show', compact('gallery'));
     }
 
     /**
@@ -62,7 +63,13 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        $url = route('admin.gallery.update', $gallery);
+        // $data = [
+        //     'gallery' => Gallery::findOrFail($id),
+        //     'url' => route('admin.gallery.update', $gallery)
+        // ];
+        return view('admin.gallery.form', compact('url', 'gallery'));
     }
 
     /**
@@ -70,14 +77,26 @@ class GalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $gallery = Gallery::findOrFail($id);
+        $data = $request->validate([
+            'name' => 'string|required',
+            'description' => 'string|nullable'
+        ]);
+
+        $data['slug'] = Str::slug($request->name);
+        $gallery->update($data);
+
+        return redirect()->route('admin.gallery.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Gallery $gallery)
     {
-        //
+        $gallery->delete();
+        return redirect()->route('admin.gallery.index');
+
     }
 }

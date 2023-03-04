@@ -206,6 +206,8 @@
             return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
         }
     </script>
+
+    @stack('styles')
 </head>
 
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
@@ -2600,6 +2602,8 @@
         })()
     </script>
 
+    @include('sweetalert::alert')
+    @stack('scripts')
     <!-- End Style Switcher JS -->
 </body>
 

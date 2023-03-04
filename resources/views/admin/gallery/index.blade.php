@@ -1,4 +1,8 @@
 <x-app-layout>
+    @push('styles')
+        
+    @endpush
+    
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -23,31 +27,66 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Gallery</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($galleries as $gallery)
-                        <tr>
-                            <td scope="row">{{ $gallery->name }}</td>
-                            <td>{{ $gallery->description }}</td>
-                            <td></td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="3" class="text-center">No Data</td>
-                        </tr>
-                            
-                        @endforelse
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-align-middle">
+                            @forelse ($galleries as $gallery)
+                                <tr>
+                                    <td scope="row">{{ $gallery->name }}</td>
+                                    <td>{{ Str::limit($gallery->description, 100, '...') }}</td>
+                                    <td>
+                                        <a name="" id="" class="btn btn-outline-primary btn-sm"
+                                            href="{{ route('admin.gallery.edit', $gallery) }}">Edit</a>
+                                        <a name="" id="" class="btn btn-outline-info btn-sm"
+                                            href="{{ route('admin.gallery.show', $gallery) }}">Show</a>
+                                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">No Data</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <!-- End Content -->
+    
+    @push('scripts')    
+    <!-- Push Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Once deleted, you will not be able to recover this data!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+    @endpush
 </x-app-layout>

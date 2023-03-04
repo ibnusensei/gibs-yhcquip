@@ -23,18 +23,21 @@
         <div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">{{ @$gallery ? 'Edit' : 'Create' }} Gallery</h4>
+                    <h4 class="mb-3 card-title">{{ @$gallery ? 'Edit' : 'Create' }} Gallery</h4>
                     <form action="{{ $url }}" method="POST">
+                        @if (@$gallery)
+                            @method('PUT')
+                        @endif
                         @csrf
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
                             <input type="text" id="name" class="form-control" name="name"
-                                placeholder="Name of Gallery">
+                                placeholder="Name of Gallery" value="{{ @$gallery->name }}">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4"></textarea>
+                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$gallery->description }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
