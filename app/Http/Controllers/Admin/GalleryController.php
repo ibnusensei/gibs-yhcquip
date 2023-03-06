@@ -87,6 +87,7 @@ class GalleryController extends Controller
         $data['slug'] = Str::slug($request->name);
         $gallery->update($data);
 
+        toast('Your Gallery as been updated!','success');
         return redirect()->route('admin.gallery.index');
     }
 
