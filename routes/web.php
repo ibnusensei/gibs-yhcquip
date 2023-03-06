@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', AdminGalleryController::class);
+
+    Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
+    Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 });
 
 
