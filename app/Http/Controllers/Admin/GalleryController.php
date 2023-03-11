@@ -121,7 +121,7 @@ class GalleryController extends Controller
 
     public function imageDestroy($id)
     {
-        $media = Media::findOrFail($id);
+        $media = Media::findOrFail($id); 
         $media->delete();
 
         toast('Your Image has been deleted', 'success');
