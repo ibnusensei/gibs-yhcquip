@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
 
 
 // administrator
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', AdminGalleryController::class);
 
