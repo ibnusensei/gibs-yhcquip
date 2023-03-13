@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet"
-        href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+    <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 
     <!-- CSS Front Template -->
 
@@ -214,8 +213,7 @@
 
     <script src="{{ asset('dist') }}/assets/js/hs.theme-appearance.js"></script>
 
-    <script
-        src="{{ asset('dist') }}/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js">
+    <script src="{{ asset('dist') }}/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js">
     </script>
 
     <!-- ========== HEADER ========== -->
@@ -227,13 +225,12 @@
             <a class="navbar-brand" href="./index.html" aria-label="Front">
                 <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos/logo.svg" alt="Logo"
                     data-hs-theme-appearance="default">
-                <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos-light/logo.svg"
-                    alt="Logo" data-hs-theme-appearance="dark">
+                <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos-light/logo.svg" alt="Logo"
+                    data-hs-theme-appearance="dark">
                 <img class="navbar-brand-logo-mini" src="{{ asset('dist') }}/assets/svg/logos/logo-short.svg"
                     alt="Logo" data-hs-theme-appearance="default">
-                <img class="navbar-brand-logo-mini"
-                    src="{{ asset('dist') }}/assets/svg/logos-light/logo-short.svg" alt="Logo"
-                    data-hs-theme-appearance="dark">
+                <img class="navbar-brand-logo-mini" src="{{ asset('dist') }}/assets/svg/logos-light/logo-short.svg"
+                    alt="Logo" data-hs-theme-appearance="dark">
             </a>
             <!-- End Logo -->
 
@@ -261,8 +258,7 @@
                                 data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
                                 data-bs-dropdown-animation>
                                 <div class="avatar avatar-sm avatar-circle">
-                                    <img class="avatar-img"
-                                        src="{{ asset('dist') }}/assets/img/160x160/img6.jpg"
+                                    <img class="avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img6.jpg"
                                         alt="Image Description">
                                     <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                                 </div>
@@ -293,8 +289,10 @@
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    this.closest('form').submit();">Sign out</button>
+                                    <button class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">Sign
+                                        out</button>
                                 </form>
                             </div>
                         </div>
@@ -322,9 +320,8 @@
                         alt="Logo" data-hs-theme-appearance="default">
                     <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos-light/logo.svg"
                         alt="Logo" data-hs-theme-appearance="dark">
-                    <img class="navbar-brand-logo-mini"
-                        src="{{ asset('dist') }}/assets/svg/logos/logo-short.svg" alt="Logo"
-                        data-hs-theme-appearance="default">
+                    <img class="navbar-brand-logo-mini" src="{{ asset('dist') }}/assets/svg/logos/logo-short.svg"
+                        alt="Logo" data-hs-theme-appearance="default">
                     <img class="navbar-brand-logo-mini"
                         src="{{ asset('dist') }}/assets/svg/logos-light/logo-short.svg" alt="Logo"
                         data-hs-theme-appearance="dark">
@@ -352,16 +349,26 @@
                         <small class="bi-three-dots nav-subtitle-replacer"></small> --}}
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+                                href="{{ route('admin.dashboard') }}" data-placement="left">
                                 <i class="bi-layers nav-icon"></i>
                                 <span class="nav-link-title">Dashboard</span>
                             </a>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.gallery.*') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.gallery.*') ? 'active' : '' }}"
+                                href="{{ route('admin.gallery.index') }}" data-placement="left">
                                 <i class="bi-book nav-icon"></i>
                                 <span class="nav-link-title">Gallery</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.article') ? 'active' : '' }}"
+                                href="{{ route('admin.article') }}" data-placement="left">
+                                <i class="bi-book nav-icon"></i>
+                                <span class="nav-link-title">Article</span>
                             </a>
                         </div>
                     </div>
@@ -398,10 +405,8 @@
 
                             <li class="list-inline-item">
                                 <!-- Keyboard Shortcuts Toggle -->
-                                <button
-                                    class="btn btn-ghost-secondary btn-icon rounded-circle"
-                                    type="button" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasKeyboardShortcuts"
+                                <button class="btn btn-ghost-secondary btn-icon rounded-circle" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasKeyboardShortcuts"
                                     aria-controls="offcanvasKeyboardShortcuts">
                                     <i class="bi-command"></i>
                                 </button>
@@ -992,8 +997,7 @@
                 <li class="step-item">
                     <div class="step-content-wrapper">
                         <div class="step-avatar">
-                            <img class="step-avatar-img"
-                                src="{{ asset('dist') }}/assets/img/160x160/img3.jpg"
+                            <img class="step-avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img3.jpg"
                                 alt="Image Description">
                         </div>
 
@@ -1055,8 +1059,7 @@
                 <li class="step-item">
                     <div class="step-content-wrapper">
                         <div class="step-avatar">
-                            <img class="step-avatar-img"
-                                src="{{ asset('dist') }}/assets/img/160x160/img7.jpg"
+                            <img class="step-avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img7.jpg"
                                 alt="Image Description">
                         </div>
 
@@ -1078,8 +1081,7 @@
                 <li class="step-item">
                     <div class="step-content-wrapper">
                         <div class="step-avatar">
-                            <img class="step-avatar-img"
-                                src="{{ asset('dist') }}/assets/img/160x160/img5.jpg"
+                            <img class="step-avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img5.jpg"
                                 alt="Image Description">
                         </div>
 
@@ -1164,23 +1166,19 @@
                     <div class="mx-auto w-85">
                         <div class="row justify-content-between">
                             <div class="col">
-                                <img class="img-fluid"
-                                    src="{{ asset('dist') }}/assets/svg/brands/gitlab-gray.svg"
+                                <img class="img-fluid" src="{{ asset('dist') }}/assets/svg/brands/gitlab-gray.svg"
                                     alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid"
-                                    src="{{ asset('dist') }}/assets/svg/brands/fitbit-gray.svg"
+                                <img class="img-fluid" src="{{ asset('dist') }}/assets/svg/brands/fitbit-gray.svg"
                                     alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid"
-                                    src="{{ asset('dist') }}/assets/svg/brands/flow-xo-gray.svg"
+                                <img class="img-fluid" src="{{ asset('dist') }}/assets/svg/brands/flow-xo-gray.svg"
                                     alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid"
-                                    src="{{ asset('dist') }}/assets/svg/brands/layar-gray.svg"
+                                <img class="img-fluid" src="{{ asset('dist') }}/assets/svg/brands/layar-gray.svg"
                                     alt="Image Description">
                             </div>
                         </div>
@@ -1200,8 +1198,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="inviteUserModalLabel">Invite users</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- Body -->
@@ -1307,8 +1304,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img"
-                                            src="{{ asset('dist') }}/assets/img/160x160/img3.jpg"
+                                        <img class="avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img3.jpg"
                                             alt="Image Description">
                                     </div>
                                 </div>
@@ -1354,8 +1350,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img"
-                                            src="{{ asset('dist') }}/assets/img/160x160/img9.jpg"
+                                        <img class="avatar-img" src="{{ asset('dist') }}/assets/img/160x160/img9.jpg"
                                             alt="Image Description">
                                     </div>
                                 </div>
@@ -1363,9 +1358,9 @@
                                 <div class="flex-grow-1 ms-3">
                                     <div class="row align-items-center">
                                         <div class="col-sm">
-                                            <h5 class="mb-0">Ella Lauda <i
-                                                    class="bi-patch-check-fill text-primary" data-toggle="tooltip"
-                                                    data-placement="top" title="Top endorsed"></i></h5>
+                                            <h5 class="mb-0">Ella Lauda <i class="bi-patch-check-fill text-primary"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Top endorsed"></i></h5>
                                             <span class="d-block small">Markvt@site.com</span>
                                         </div>
 
@@ -1485,8 +1480,7 @@
     <script src="{{ asset('dist') }}/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- JS Implementing Plugins -->
-    <script src="{{ asset('dist') }}/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js">
-    </script>
+    <script src="{{ asset('dist') }}/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
     <script src="{{ asset('dist') }}/assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
 
     <script src="{{ asset('dist') }}/assets/vendor/chart.js/dist/Chart.min.js"></script>
