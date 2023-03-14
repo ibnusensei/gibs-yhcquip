@@ -50,7 +50,7 @@
                             @forelse ($informations as $information)
                                 <tr>
                                     <td scope="row">{{ $information->title }}</td>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit($information->description, 50) }}</td>
+                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit(strip_tags($information->description), 50) }}</td>
                                     <td class="img-custom">@if ($information->getFirstMedia('image'))
                                         <img src="{{ $information->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
                                     @endif</td>

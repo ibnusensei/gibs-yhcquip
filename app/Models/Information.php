@@ -23,9 +23,4 @@ class Information extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }
-
-    public function careers()
-    {
-        return $this->hasMany(Career::class);
-    }
 }

@@ -30,17 +30,6 @@
                             @method('PUT')
                         @endif
                         @csrf
-
-                        {{-- ckeditor description --}}
-
-                        {{-- <div class="mb-3">
-                            <label class="form-label" for="description">Description</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->description }}</textarea>
-                        </div> --}}
-
-                        {{-- ckeditor description end --}}
-
-
                         <div class="mb-3">
                             <label class="form-label" for="posisi">Posisi</label>
                             <input type="text" id="posisi" class="form-control" name="posisi"
@@ -55,35 +44,27 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->description }}</textarea>
+                            <textarea id="editor" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->description }}</textarea>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="requirements">requirements</label>
-                            <textarea id="requirements" name="requirements" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->requirements }}</textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="information_id">information_id</label>
-                            <input type="text" id="information_id" class="form-control" name="information_id"
-                                placeholder="information_id of career" value="{{ @$career->information_id}}">
-                        </div>
-
-                        {{-- <div class="mb-3">
-                            <label class="form-label" for="date">date</label>
-                            <input type="date" id="date" class="form-control" name="date"
-                                placeholder="date" value="{{ @$career->date}}">
-                        </div> --}}
 
                         <!-- Flatpickr -->
-                        {{-- <div class="mb-3">
-                            <label class="form-label" for="date">Date</label>
-                            <input type="text" name="date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select date" value="{{ @$event->date }}"
+                        <div class="mb-3">
+                            <label class="form-label" for="start_date">start_date</label>
+                            <input type="text" name="start_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select start_date" value="{{ @$career->start_date }}"
                             data-hs-flatpickr-options='{
                                 "dateFormat": "d/m/Y"
                             }'>
 
-                        </div> --}}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="end_date">end_date</label>
+                            <input type="text" name="end_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select end_date" value="{{ @$career->end_date }}"
+                            data-hs-flatpickr-options='{
+                                "dateFormat": "d/m/Y"
+                            }'>
+
+                        </div>
 
                         <div class="mb-3">
                             <label class="form-label" for="image">Image</label>

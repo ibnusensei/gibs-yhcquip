@@ -41,7 +41,6 @@
                         <thead>
                             <tr>
                                 <th>Description</th>
-                                <th>Requirements</th>
                                 <th>Posisi</th>
                                 <th>Unit</th>
                                 <th>Poster</th>
@@ -52,12 +51,12 @@
                             @forelse ($careers as $career)
                                 <tr>
                                     <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit($career->description, 50) }}</td>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit($career->requirements, 50) }}</td>
+                                    <td>{{ $career->posisi }}</td>
+                                    <td>{{ $career->unit }}</td>
                                     <td class="img-custom">@if ($career->getFirstMedia('image'))
                                         <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
                                     @endif</td>
-                                    <td>{{ $career->posisi }}</td>
-                                    <td>{{ $career->unit }}</td>
+                                    
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
                                             href="{{ route('admin.career.edit', $career) }}">Edit</a>
@@ -72,7 +71,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data</td>
+                                    <td colspan="6" class="text-center">No Data</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -82,6 +81,5 @@
         </div>
     </div>
     <!-- End Content -->
-    
     @include('scripts.delete')
 </x-app-layout>

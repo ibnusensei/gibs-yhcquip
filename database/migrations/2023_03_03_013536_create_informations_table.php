@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('informations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->string('description')->nullable();
-            $table->date('date'); 
+            $table->string('slug')->unique();
+            $table->text('description');
+            $table->date('date');
             $table->timestamps();
         });
     }

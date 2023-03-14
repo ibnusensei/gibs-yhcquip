@@ -37,18 +37,18 @@
                                 placeholder="title" value="{{ @$information->title}}">
                         </div>
                         
-                        <div class="mb-3">
-                            <label class="form-label" for="description">Description</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$information->description }}</textarea>
-                        </div>
-
-
-                        {{-- ckeditor description --}}
-
                         {{-- <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
                             <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$information->description }}</textarea>
                         </div> --}}
+
+                        
+                        {{-- ckeditor description --}}
+
+                        <div class="mb-3">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea id="editor" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$information->description }}</textarea>
+                        </div>
 
                         {{-- ckeditor description end --}}
 
@@ -62,6 +62,11 @@
                             }'>
 
                         </div>
+
+                    
+                        
+                        
+                        
 
                         <div class="mb-3">
                             <label class="form-label" for="image">Image</label>

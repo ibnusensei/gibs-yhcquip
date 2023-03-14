@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class Career extends Model implements HasMedia
 {
     use InteractsWithMedia;
-    protected $fillable = [ 'slug', 'description','requirements', 'posisi', 'unit','information_id', 'is_published'];
+    protected $fillable = [ 'slug', 'description', 'posisi','start_date','end_date', 'unit', 'is_published'];
     use HasFactory;
 
     public function registerMediaConversions(Media $media = null): void
@@ -23,8 +23,4 @@ class Career extends Model implements HasMedia
             ->nonQueued();
     }
 
-    public function information()
-    {
-        return $this->belongsTo(Information::class);
-    }
 }

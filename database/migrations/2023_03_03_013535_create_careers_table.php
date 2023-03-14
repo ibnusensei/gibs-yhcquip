@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('careers', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('description')->nullable();
-            $table->string('requirements')->nullable();
+            $table->string('slug')->unique();
+            $table->text('description');
             $table->string('posisi');
             $table->string('unit');
-            $table->unsignedBigInteger('information_id');
-            $table->foreign('information_id')->references('id')->on('informations');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
