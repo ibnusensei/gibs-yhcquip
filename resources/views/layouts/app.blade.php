@@ -23,7 +23,7 @@
         href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 
     <!-- CSS Front Template -->
-
+<link rel="stylesheet" href="./node_modules/tom-select/dist/css/tom-select.bootstrap5.css">
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme.min.css" data-hs-appearance="default"
         as="style">
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme-dark.min.css" data-hs-appearance="dark"
@@ -362,6 +362,12 @@
                             <a class="nav-link {{ Request()->routeIs('admin.gallery.*') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}" data-placement="left">
                                 <i class="bi-book nav-icon"></i>
                                 <span class="nav-link-title">Gallery</span>
+                            </a>
+                        </div>
+                          <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}" href="{{ route('admin.news.index') }}" data-placement="left">
+                                <i class="bi  bi-newspaper nav-icon"></i>
+                                <span class="nav-link-title">News</span>
                             </a>
                         </div>
                     </div>

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +33,15 @@ Route::middleware('auth')->group(function () {
 
 
 // administrator
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', AdminGalleryController::class);
-
+    Route::resource('news', AdminNewsController::class);
+    Route::post('news-publis', [AdminNewsController::class, 'publis'])->name('publis.news');
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
