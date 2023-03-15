@@ -46,7 +46,7 @@ class GalleryController extends Controller
 
         // image
 
-        toast('Your Gallery as been submited!','success');
+        toast('Your Gallery as been submited!', 'success');
         return redirect()->route('admin.gallery.index');
     }
 
@@ -88,7 +88,7 @@ class GalleryController extends Controller
         $data['slug'] = Str::slug($request->name);
         $gallery->update($data);
 
-        toast('Your Gallery has been updated!','success');
+        toast('Your Gallery has been updated!', 'success');
         return redirect()->route('admin.gallery.index');
     }
 
@@ -99,7 +99,6 @@ class GalleryController extends Controller
     {
         $gallery->delete();
         return redirect()->route('admin.gallery.index');
-
     }
 
     public function imageStore(Request $request, $id)
@@ -109,19 +108,18 @@ class GalleryController extends Controller
 
         if ($request->has('images')) {
             $gallery->addMultipleMediaFromRequest(['images'])
-            ->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('images');
-            });
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('images');
+                });
         }
 
-        toast('Your Image has been uploaded!','success');
+        toast('Your Image has been uploaded!', 'success');
         return redirect()->back();
-
     }
 
     public function imageDestroy($id)
     {
-        $media = Media::findOrFail($id); 
+        $media = Media::findOrFail($id);
         $media->delete();
 
         toast('Your Image has been deleted', 'success');
