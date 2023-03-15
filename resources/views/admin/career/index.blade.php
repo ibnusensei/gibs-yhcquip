@@ -37,7 +37,7 @@
             <div class="card-body">
                 <h4 class="card-title">Careers Data</h4>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="table_data" class="table">
                         <thead>
                             <tr>
                                 <th>Description</th>
@@ -82,4 +82,13 @@
     </div>
     <!-- End Content -->
     @include('scripts.delete')
+
+    @push('scripts')
+    <script>
+    $(document).ready(function () {
+    $("#table_data").DataTable();
+    });
+
+    </script>
+    @endpush
 </x-app-layout>
