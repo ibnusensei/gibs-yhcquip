@@ -116,7 +116,6 @@ class GalleryController extends Controller
         toast('Your Image has been uploaded!', 'success');
         return redirect()->back();
     }
-
     public function imageDestroy($id)
     {
         $media = Media::findOrFail($id);

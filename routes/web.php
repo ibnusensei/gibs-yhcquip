@@ -39,7 +39,9 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
+
     Route::resource('event', EventController::class);
+    Route::post('image', [EventController::class, 'imageStore'])->name('event.image.store');
 });
 
 

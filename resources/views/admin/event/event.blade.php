@@ -33,7 +33,10 @@
                                 <tr>
                                     <td scope="row">{{ $event->title }}</td>
                                     <td>{{ $event->description }}</td>
-                                    <td>image</td>
+                                    <td>
+                                        <img src=" {{ $event->getFirstMediaUrl('images') }}"
+                                            style="max-width: 100px; height: auto">
+                                    </td>
                                     <td>
                                         <h1><i class="bi bi-toggle2-off ms-3"></i></h1>
                                     </td>

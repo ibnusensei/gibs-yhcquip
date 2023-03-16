@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3 card-title">{{ @$event ? 'Edit' : 'Create' }} Event</h4>
-                    <form action="{{ $url }}" method="post">
+                    <form action="{{ $url }}" method="post" enctype="multipart/form-data">
                         @if (@$event)
                             @method('PUT')
                         @endif
@@ -40,15 +40,20 @@
                                 value="{{ @$event->description }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="image">Choose Image</label>
-                            <input type="file" id="image" class="form-control">
+                            <div class="mb-3">
+                                @if (@$event)
+                                    <img src=" {{ $event->getFirstMediaUrl('images') }}"
+                                        style="max-width: 100px; height: auto">
+                                @endif
+                                <label class="form-label" for="image">Choose Image</label>
+                                <input type="file" id="image" name="images" multiple class="form-control">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- End Content -->
 </x-app-layout>

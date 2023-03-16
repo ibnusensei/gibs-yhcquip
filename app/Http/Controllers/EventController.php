@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      */
     public function index()
@@ -38,10 +38,13 @@ class EventController extends Controller
 
         $data['slug'] = Str::slug($request->title);
         $event = Event::create($data);
+        // dd($request->all());
+        if ($request->hasFile('images')) {
+            $event->addMediaFromRequest('images')->toMediaCollection('images');
+        }
 
         return redirect()->route('admin.event.index');
     }
-
     /**
      * Display the specified resource.
      */
@@ -50,7 +53,6 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         return view('admin.event.show', compact('event'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -75,6 +77,14 @@ class EventController extends Controller
 
         $data['slug'] = Str::slug($request->title);
         $event->update($data);
+
+        if ($request->hasFile('images')) { // check if a new image has been uploaded
+            if ($event->hasMedia('images')) { // check if an existing image exists
+                $event->getFirstMedia('images')->delete(); // delete the existing image
+            }
+            $event->addMediaFromRequest('images')->toMediaCollection('images'); // add the new image
+        }
+
         return redirect()->route('admin.event.index');
     }
 
@@ -85,5 +95,14 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->route('admin.event.index');
+    }
+
+    public function imageStore(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $event->addMediaFromRequest('image')->toMediaCollection('images');
+        }
     }
 }
