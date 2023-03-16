@@ -40,22 +40,27 @@
                     <table id="table_data" class="table">
                         <thead>
                             <tr>
-                                <th>Description</th>
+                                <th>No</th>
                                 <th>Posisi</th>
                                 <th>Unit</th>
-                                <th>Poster</th>
+                                <th>Description</th>
+                                <th>Publish</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody class="table-align-middle">
                             @forelse ($careers as $career)
                                 <tr>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit($career->description, 50) }}</td>
+                                    <td>{{ $career->id }}</td>
                                     <td>{{ $career->posisi }}</td>
                                     <td>{{ $career->unit }}</td>
-                                    <td class="img-custom">@if ($career->getFirstMedia('image'))
-                                        <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
-                                    @endif</td>
+                                    <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($career->description, 50) !!}</td>
+                                    <td><form action="{{ route('admin.career.publish', $career->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm {{ $career->is_published ? 'btn-success' : 'btn-danger' }}">
+                                            {{ $career->is_published ? 'Published' : 'Unpublished' }}
+                                        </button>
+                                    </form></td>
                                     
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"

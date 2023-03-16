@@ -22,6 +22,15 @@ class CareerController extends Controller
         return view('admin.career.index', compact('careers'));
     }
 
+    public function publish($id)
+    {
+        $career = Career::findOrFail($id);
+        $career->is_published = !$career->is_published;
+        $career->save();
+
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */

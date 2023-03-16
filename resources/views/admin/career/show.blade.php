@@ -2,19 +2,6 @@
   <!-- Content -->
   @push('styles')
       <style>
-          .img-custom {
-              height: 200px !important;
-              border-radius: 0.25rem
-                  /* 4px */
-              ;
-              overflow: hidden;
-          }
-
-          .img-custom>img {
-              background-size: cover;
-              height: auto;
-              width: 100%;
-          }
       </style>
   @endpush
   <div class="content container-fluid">
@@ -25,6 +12,7 @@
                   <h1 class="page-header-title">career</h1>
               </div>
               <!-- End Col -->
+
 
               <div class="col-auto">
                   <a class="btn btn-primary" href="{{ route('admin.career.index') }}">
@@ -37,43 +25,27 @@
       </div>
       <!-- End Page Header -->
 
-      <div class="card mb-3">
-          <div class="card-body">
-              <h4 class="card-title">Add Images</h4>
-              <form action="{{ route('admin.career.image.store', $career) }}" method="POST"
-                  enctype="multipart/form-data">
-                  @csrf
-                  <div class="mb-3">
-                      <input type="file" id="customFileEg1" name="image" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-              </form>
-          </div>
-      </div>
       <div class="card">
           <div class="card-body">
-              <h4 class="card-title">{{ $career->title }}</h4>
-              <p class="card-text">{{ $career->description }}</p>
+              <h1 class="card-title">Posisi: {{ $career->posisi }}</h1>
+              <h3>Unit: {{ $career->unit }}</h3>
+              <p class="card-text">{!! $career->description !!}</p>
 
-              {{-- media --}}
-              <div class="row ">
-                  @foreach ($career->getMedia('images') as $image)
-                      <div class="col-md-4 mb-4">
-                          <div class="img-custom rounded mb-2">
-                              <img src="{{ $image->getUrl() }}" class="" alt="">
-                          </div>
-                          <form action="{{ route('admin.career.image.destroy', $image
-                          ) }}" method="POST" class="d-inline">
-                              @method('DELETE')
-                              @csrf
-                              <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
-                          </form>
+          </div>    
+      </div>
 
-                      </div>
-                  @endforeach
-              </div>
-          </div>
-          
+      <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                @foreach ($career->getMedia('image') as $image)
+                    <div class="col-md-4 mb-4">
+                        <div class="img-custom rounded mb-2">
+                        <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
       </div>
 
   </div>
