@@ -29,6 +29,7 @@
           <div class="card-body">
               <h1 class="card-title">Posisi: {{ $career->posisi }}</h1>
               <h3>Unit: {{ $career->unit }}</h3>
+              <h5>Deadline pendaftaran: {{ $career->start_date }} - {{ $career->end_date }}</h5>
               <p class="card-text">{!! $career->description !!}</p>
 
           </div>    

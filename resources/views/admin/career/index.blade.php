@@ -55,18 +55,18 @@
                                     <td>{{ $career->posisi }}</td>
                                     <td>{{ $career->unit }}</td>
                                     <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($career->description, 50) !!}</td>
-                                    <td><form action="{{ route('admin.career.publish', $career->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm {{ $career->is_published ? 'btn-success' : 'btn-danger' }}">
-                                            {{ $career->is_published ? 'Published' : 'Unpublished' }}
-                                        </button>
-                                    </form></td>
-                                    
                                     <td>
-                                        <a name="" id="" class="btn btn-outline-primary btn-sm"
-                                            href="{{ route('admin.career.edit', $career) }}">Edit</a>
-                                        <a name="" id="" class="btn btn-outline-info btn-sm"
-                                            href="{{ route('admin.career.show', $career) }}">Show</a>
+                                        <form class="publishForm" action="{{ route('admin.career.publish', $career->id) }}" method="POST">
+                                            @csrf
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $career->is_published ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="publishSwitch">{{ $career->is_published ? 'Published' : 'Unpublished' }}</label>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a name="" id="" class="btn btn-outline-primary btn-sm" href="{{ route('admin.career.edit', $career) }}">Edit</a>
+                                        <a name="" id="" class="btn btn-outline-info btn-sm" href="{{ route('admin.career.show', $career) }}">Show</a>
                                         <form action="{{ route('admin.career.destroy', $career) }}" method="POST" class="d-inline">
                                             @method('DELETE')
                                             @csrf
@@ -79,6 +79,7 @@
                                     <td colspan="6" class="text-center">No Data</td>
                                 </tr>
                             @endforelse
+
                         </tbody>
                     </table>
                 </div>
@@ -95,5 +96,17 @@
     });
 
     </script>
+
+    <script>
+    const publishForms = document.querySelectorAll('.publishForm');
+    const publishSwitches = document.querySelectorAll('.publishSwitch');
+
+    publishSwitches.forEach((publishSwitch, index) => {
+        publishSwitch.addEventListener('change', () => {
+            publishForms[index].submit();
+        });
+    });
+
+  </script>
     @endpush
 </x-app-layout>

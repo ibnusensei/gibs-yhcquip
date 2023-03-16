@@ -96,10 +96,12 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $('#preview').html('<img src="' + e.target.result + '" alt="">');
+                    $('#preview img').css('max-width', '300px'); // Add this line
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
 
     </script>    
     <script>
