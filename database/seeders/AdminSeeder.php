@@ -22,5 +22,7 @@ class AdminSeeder extends Seeder
 
         $user = User::create($data);
         $user->assignRole('admin');
+
+
     }
 }
