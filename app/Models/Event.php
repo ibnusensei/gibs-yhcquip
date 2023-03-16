@@ -17,7 +17,8 @@ class Event extends Model implements HasMedia
     protected $fillable = [
         'title',
         'slug',
-        'description'
+        'description',
+        'is_published'
     ];
 
     public function registerMediaConversions(Media $media = null): void

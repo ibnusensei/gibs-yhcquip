@@ -49,6 +49,10 @@
                                 <input type="file" id="image" name="images" multiple class="form-control">
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <input name="is_published" type="checkbox" @checked(@$event->is_published)>
+                            <label for="is_published">Publish Event?</label>
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

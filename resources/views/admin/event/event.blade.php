@@ -25,7 +25,6 @@
                                 <th>Image</th>
                                 <th>Publish</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody class="table-align-middle">
@@ -38,7 +37,11 @@
                                             style="max-width: 100px; height: auto">
                                     </td>
                                     <td>
-                                        <h1><i class="bi bi-toggle2-off ms-3"></i></h1>
+                                        @if ($event->is_published)
+                                            <i class="bi bi-check-circle fs-2 text-success"></i>
+                                        @else
+                                            <i class="bi bi-x-circle fs-2 text-danger "></i>
+                                        @endif
                                     </td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"

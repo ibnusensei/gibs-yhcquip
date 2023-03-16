@@ -31,14 +31,16 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'title' => 'string|required',
             'description' => 'string'
         ]);
 
         $data['slug'] = Str::slug($request->title);
+        $data['is_published'] = $request->has('is_published') ? true : false;
         $event = Event::create($data);
-        // dd($request->all());
+
         if ($request->hasFile('images')) {
             $event->addMediaFromRequest('images')->toMediaCollection('images');
         }
@@ -76,6 +78,7 @@ class EventController extends Controller
         ]);
 
         $data['slug'] = Str::slug($request->title);
+        $data['is_published'] = $request->has('is_published') ? true : false;
         $event->update($data);
 
         if ($request->hasFile('images')) { // check if a new image has been uploaded
@@ -89,20 +92,21 @@ class EventController extends Controller
     }
 
     /**
+     * Create function for publishing event.
+     */
+    // public function publish(string $id)
+    // {
+    //     $event = Event::findOrFail($id);
+    //     $event->update(['is_published' => !$event->is_published]);
+    //     return redirect()->route('admin.event.index');
+    // }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
     {
         $event->delete();
         return redirect()->route('admin.event.index');
-    }
-
-    public function imageStore(Request $request, $id)
-    {
-        $event = Event::findOrFail($id);
-
-        if ($request->hasFile('image')) {
-            $event->addMediaFromRequest('image')->toMediaCollection('images');
-        }
     }
 }
