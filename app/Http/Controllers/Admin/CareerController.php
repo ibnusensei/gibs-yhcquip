@@ -28,6 +28,11 @@ class CareerController extends Controller
         $career->is_published = !$career->is_published;
         $career->save();
 
+        if ($career->is_published) {
+            toast('Item has been published', 'success');
+        } else {
+            toast('Item has been published', 'info');
+        }
         return redirect()->back();
     }
 
