@@ -131,26 +131,4 @@ class CareerController extends Controller
         return redirect()->route('admin.career.index');
     }
 
-    public function imageStore(Request $request, $id)
-    {
-        $career = Career::findOrFail($id);
-
-        if ($request->hasFile('image')) {
-            $career->addMediaFromRequest('image')->toMediaCollection('image');
-        }
-
-        toast('Your Image has been uploaded!', 'success');
-        return redirect()->back();
-    }
-
-
-    public function imageDestroy($image)
-    {
-        $media = Media::findOrFail($image);
-        $media->delete();
-
-        toast('Your Image has been deleted', 'success');
-        return redirect()->back();
-
-    }
 }

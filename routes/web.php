@@ -45,8 +45,6 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
     // career
     Route::resource('career', AdminCareerController::class);
-    Route::post('career-image/{career}', [AdminCareerController::class, 'imageStore'])->name('career.image.store');
-    Route::delete('career-image/{career}', [AdminCareerController::class, 'imageDestroy'])->name('career.image.destroy');
     Route::post('career-publish/{career}', [AdminCareerController::class, 'publish'])->name('career.publish');
 
     // information
