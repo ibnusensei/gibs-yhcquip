@@ -1926,6 +1926,8 @@
     @include('sweetalert::alert')
     @stack('scripts')
     <!-- End Style Switcher JS -->
+
+
 </body>
 
 </html>
