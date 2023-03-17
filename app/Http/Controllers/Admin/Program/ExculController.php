@@ -41,6 +41,21 @@ class ExculController extends Controller
         // return view('admin.program.excul.index', compact('exculs'))->with('user');
     }
 
+    public function publish($id)
+    {
+        $excul = Excul::findOrFail($id);
+        $excul->is_published = !$excul->is_published;
+        $excul->save();
+
+        if($excul->is_published == 1 ){
+            toast('Your Excule has been published!','success');
+        }
+        else {
+            toast('Your Excule was unpublished!','success');
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -78,7 +93,7 @@ class ExculController extends Controller
 
         // image
 
-        toast('Your excul has been submited!','success');
+        toast('Your excul has been created!','success');
         return redirect()->route('admin.excul.index');
     }
 

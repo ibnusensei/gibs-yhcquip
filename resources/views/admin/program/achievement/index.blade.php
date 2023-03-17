@@ -120,10 +120,13 @@
                                     <td>{{ $achievement->level->name }}</td>
                                     <td>{{ $achievement->user->name}}</td>
                                     <td>
-                                        <div class="form-check form-switch">
-                                            <input type="checkbox" class="form-check-input" id="formSwitch1">
-                                            <label class="form-check-label" for="formSwitch1"></label>
-                                          </div>
+                                        <form class="publishForm" action="{{ route('admin.achievement.publish', $achievement->id) }}" method="POST">
+                                            @csrf
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $achievement->is_published ? 'checked' : '' }}>
+                                                {{-- <label class="form-check-label" for="publishSwitch">{{ $achievement->is_published ? '' : '' }}</label> --}}
+                                            </div>
+                                        </form>
                                     </td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
@@ -139,7 +142,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data</td>
+                                    <td colspan="55" class="text-center pt-5">No Data</td>
                                     {{-- <div class="col-auto"> --}}
                                         {{-- <a class="btn btn-primary" href="{{ route('admin.achievement.index') }}">
                                             <i class="bi-chevron-left me-1"></i> Back
@@ -159,5 +162,6 @@
     </div>
     <!-- End Content -->
 
+    @include('scripts.publish')
     @include('scripts.delete')
 </x-app-layout>

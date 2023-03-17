@@ -50,21 +50,25 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::resource('streams', AdminProgramStreamsController::class);
     Route::post('streams-image/{streams}', [AdminProgramStreamsController::class, 'imageStore'])->name('streams.image.store');
     Route::delete('streams-image/{streams}', [AdminProgramStreamsController::class, 'imageDestroy'])->name('streams.image.destroy');
+    Route::post('streams-publish/{streams}', [AdminProgramStreamsController::class, 'publish'])->name('streams.publish');
 
     // excul
     Route::resource('excul', AdminProgramExculController::class);
     Route::post('excul-image/{excul}', [AdminProgramExculController::class, 'imageStore'])->name('excul.image.store');
     Route::delete('excul-image/{excul}', [AdminProgramExculController::class, 'imageDestroy'])->name('excul.image.destroy');
+    Route::post('excul-publish/{excul}', [AdminProgramExculController::class, 'publish'])->name('excul.publish');
 
     // Achievement
     Route::resource('achievement', AdminProgramAchievementController::class);
     Route::post('achievement-image/{achievement}', [AdminProgramAchievementController::class, 'imageStore'])->name('achievement.image.store');
     Route::delete('achievement-image/{achievement}', [AdminProgramAchievementController::class, 'imageDestroy'])->name('achievement.image.destroy');
+    Route::post('achievement-publish/{achievement}', [AdminProgramAchievementController::class, 'publish'])->name('achievement.publish');
 
     // Program Unggulan
     Route::resource('unggulan', AdminProgramUnggulanController::class);
     Route::post('unggulan-image/{unggulan}', [AdminProgramUnggulanController::class, 'imageStore'])->name('unggulan.image.store');
     Route::delete('unggulan-image/{unggulan}', [AdminProgramUnggulanController::class, 'imageDestroy'])->name('unggulan.image.destroy');
+    Route::post('unggulan-publish/{unggulan}', [AdminProgramUnggulanController::class, 'publish'])->name('unggulan.publish');
 
 });
 

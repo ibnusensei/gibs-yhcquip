@@ -20,7 +20,7 @@ class Unggulan extends Model implements HasMedia
      *
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'superiority', 'program_category_id', 'user_id'];
+    protected $fillable = ['title', 'slug', 'superiority', 'program_category_id', 'user_id', 'is_published'];
 
     public function registerMediaConversions(Media $media = null): void
     {

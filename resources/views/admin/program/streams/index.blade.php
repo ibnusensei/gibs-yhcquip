@@ -93,10 +93,13 @@
                                         </td>
                                     <td>{{$stream->user->name}}</td>
                                     <td>
-                                        <div class="form-check form-switch">
-                                            <input type="checkbox" class="form-check-input" id="formSwitch1">
-                                            <label class="form-check-label" for="formSwitch1"></label>
-                                          </div>
+                                        <form class="publishForm" action="{{ route('admin.streams.publish', $stream->id) }}" method="POST">
+                                            @csrf
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $stream->is_published ? 'checked' : '' }}>
+                                                {{-- <label class="form-check-label" for="publishSwitch">{{ $stream->is_published ? '' : '' }}</label> --}}
+                                            </div>
+                                        </form>
                                     </td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
@@ -112,7 +115,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data</td>
+                                    <td colspan="55" class="text-center pt-5">No Data</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -126,4 +129,6 @@
     <!-- End Content -->
 
     @include('scripts.delete')
+    @include('scripts.publish')
+
 </x-app-layout>

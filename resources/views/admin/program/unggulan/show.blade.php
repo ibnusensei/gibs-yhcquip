@@ -52,9 +52,9 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{ $unggulans->name }}</h4>
+                <h4 class="card-title">{{ $unggulans->title }}</h4>
                 <p class="card-text">{{ $unggulans->superiority }}</p>
-                <p class="card-text">{{ $unggulans->program_category->name }}</p>
+                <p class="card-text">Category: {{ $unggulans->program_category->name }}</p>
 
                 {{-- media --}}
                 <div class="row ">

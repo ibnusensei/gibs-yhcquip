@@ -20,7 +20,7 @@ class Achievement extends Model implements HasMedia
      *
      * @var array
      */
-    protected $fillable = ['achiev', 'title', 'slug', 'location', 'year', 'name', 'from', 'level_id', 'user_id'];
+    protected $fillable = ['achiev', 'title', 'slug', 'location', 'year', 'name', 'from', 'level_id', 'user_id', 'is_published'];
 
     public function registerMediaConversions(Media $media = null): void
     {

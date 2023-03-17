@@ -41,6 +41,22 @@ class StreamsController extends Controller
         // return view('admin.program.streams.index', compact('streams'))->with('user');
     }
 
+
+    public function publish($id)
+    {
+        $stream = Streams::findOrFail($id);
+        $stream->is_published = !$stream->is_published;
+        $stream->save();
+
+        if($stream->is_published == 1 ){
+            toast('Your Stream has been published!','success');
+        }
+        else {
+            toast('Your Stream was unpublished!','success');
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -78,7 +94,7 @@ class StreamsController extends Controller
 
         // image
 
-        toast('Your Streams has been submited!','success');
+        toast('Your Streams has been created!','success');
         return redirect()->route('admin.streams.index');
     }
 

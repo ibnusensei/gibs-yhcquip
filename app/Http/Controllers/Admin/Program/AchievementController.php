@@ -42,6 +42,21 @@ class AchievementController extends Controller
         return view('admin.program.achievement.index', $data);
     }
 
+    public function publish($id)
+    {
+        $achievement = Achievement::findOrFail($id);
+        $achievement->is_published = !$achievement->is_published;
+        $achievement->save();
+
+        if($achievement->is_published == 1 ){
+            toast('Your Achievement has been published!','success');
+        }
+        else {
+            toast('Your Achievement was unpublished!','success');
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -83,6 +98,7 @@ class AchievementController extends Controller
 
         //return succes
         // flash('Book was stored!');
+        toast('Your Achievement has been created!','success');
         return to_route('admin.achievement.index');
     }
 
@@ -133,6 +149,7 @@ class AchievementController extends Controller
 
         // return success
         // flash('Book was updated!');
+        toast('Your Achievement has been updated!','success');
         return to_route('admin.achievement.index');
 
     }
@@ -173,8 +190,4 @@ class AchievementController extends Controller
         return redirect()->back();
     }
 
-
-    public function home() {
-        return view('pages.welcome');
-    }
 }

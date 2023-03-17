@@ -37,7 +37,7 @@
                 <a class="btn btn-soft-secondary btn-xs rounded-pill m-1" href="javascript:;">SMA</a>
               </div> --}}
 
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <select name="program_category" class="form-select" onchange="form.submit()">
                     <option value="">Semua Program</option>
                     @foreach ($program_categories as $item)
@@ -120,10 +120,13 @@
                                     <td>{{ Str::limit($unggulan->program_category->name  , 20, '...') }}</td>
                                     <td>{{ $unggulan->user->name}}</td>
                                     <td>
-                                        <div class="form-check form-switch">
-                                            <input type="checkbox" class="form-check-input" id="formSwitch1">
-                                            <label class="form-check-label" for="formSwitch1"></label>
-                                          </div>
+                                        <form class="publishForm" action="{{ route('admin.unggulan.publish', $unggulan->id) }}" method="POST">
+                                            @csrf
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $unggulan->is_published ? 'checked' : '' }}>
+                                                {{-- <label class="form-check-label" for="publishSwitch">{{ $unggulan->is_published ? '' : '' }}</label> --}}
+                                            </div>
+                                        </form>
                                     </td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
@@ -139,7 +142,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data</td>
+                                    <td colspan="55" class="text-center pt-5">No Data</td>
                                     {{-- <div class="col-auto"> --}}
                                         {{-- <a class="btn btn-primary" href="{{ route('admin.unggulan.index') }}">
                                             <i class="bi-chevron-left me-1"></i> Back
@@ -160,4 +163,5 @@
     <!-- End Content -->
 
     @include('scripts.delete')
+    @include('scripts.publish')
 </x-app-layout>

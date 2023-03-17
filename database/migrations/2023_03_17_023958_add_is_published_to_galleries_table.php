@@ -14,7 +14,24 @@ return new class extends Migration
         Schema::table('galleries', function (Blueprint $table) {
             $table->tinyInteger('is_published')->default(0)->after('description');
         });
+
+        Schema::table('achievements', function (Blueprint $table) {
+            $table->tinyInteger('is_published')->default(0)->after('location');
+        });
+
+        Schema::table('exculs', function (Blueprint $table) {
+            $table->tinyInteger('is_published')->default(0)->after('description');
+        });
+
+        Schema::table('streams', function (Blueprint $table) {
+            $table->tinyInteger('is_published')->default(0)->after('description');
+        });
+
+        Schema::table('unggulans', function (Blueprint $table) {
+            $table->tinyInteger('is_published')->default(0)->after('superiority');
+        });
     }
+
 
     /**
      * Reverse the migrations.

@@ -39,6 +39,21 @@ class UnggulanController extends Controller
         return view('admin.program.unggulan.index', $data);
     }
 
+    public function publish($id)
+    {
+        $unggulan = Unggulan::findOrFail($id);
+        $unggulan->is_published = !$unggulan->is_published;
+        $unggulan->save();
+
+        if($unggulan->is_published == 1 ){
+            toast('Your Program has been published!','success');
+        }
+        else {
+            toast('Your Program was unpublished!','success');
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -76,6 +91,7 @@ class UnggulanController extends Controller
 
         //return succes
         // flash('Book was stored!');
+        toast('Your Program has been created!','success');
         return to_route('admin.unggulan.index');
     }
 
@@ -122,6 +138,7 @@ class UnggulanController extends Controller
 
         // return success
         // flash('Book was updated!');
+        toast('Your Program has been updated!','success');
         return to_route('admin.unggulan.index');
 
     }
