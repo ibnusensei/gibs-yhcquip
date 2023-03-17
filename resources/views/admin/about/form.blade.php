@@ -6,7 +6,7 @@
                     <h1 class="page-header-title">About</h1>
                 </div>
                 <div class="col-auto">
-                    <a href="{{ route('admin.about.index') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.about.index') }}" class="btn btn-soft-primary">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
