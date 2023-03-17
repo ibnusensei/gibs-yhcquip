@@ -9,7 +9,7 @@
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.leader.index') }}">
+                    <a class="btn btn-soft-primary" href="{{ route('admin.leader.index') }}">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
