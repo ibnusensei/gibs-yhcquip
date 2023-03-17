@@ -392,13 +392,13 @@
           
                         <!-- Collapse -->
                         <div class="nav-item">
-                          <a class="nav-link  " href="#navbarVerticalMenuPagesAccountMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesAccountMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesAccountMenu">
+                          <a class="nav-link {{ Request()->routeIs('admin.staff.*') ? 'active' : '' }}  " href="{{ route('admin.staff.index') }}">
                             <i class="bi-people nav-icon"></i>
                             <span class="nav-link-title">Staff</span>
                           </a>
                         </div>
                         <div class="nav-item">
-                          <a class="nav-link  " href="#navbarVerticalMenuPagesAccountMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesAccountMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesAccountMenu">
+                          <a class="nav-link {{ Request()->routeIs('admin.campustour.*') ? 'active' : '' }}  " href="{{ route('admin.campustour.index') }}" >
                             <i class="bi bi-building nav-icon"></i>
                             <span class="nav-link-title">Campus Tour</span>
                           </a>

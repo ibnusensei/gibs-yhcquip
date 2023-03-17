@@ -21,12 +21,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Leader</h1>
+                    <h1 class="page-header-title">Staff</h1>
                 </div>
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.leader.index') }}">
+                    <a class="btn btn-primary" href="{{ route('admin.staff.index') }}">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
@@ -37,10 +37,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="card" style="max-width: 20rem;">
-                    <img class="card-img-top" src="{{ $leader->getFirstMediaUrl('image', 'thumbs') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ $staff->getFirstMediaUrl('image', 'thumbs') }}" alt="Card image cap">
                     <div class="card-body">
-                      <h3 class="card-title text-center">{{ $leader->name }}</h3>
-                      <p class="card-text text-center">{{ $leader->position }}</p>
+                      <h3 class="card-title text-center">{{ $staff->name }}</h3>
+                      <p class="card-text text-center">{{ $staff->position }}</p>
                       
                     </div>
                   </div>

@@ -36,20 +36,24 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody class="table-align-middle">
+                        <tbody class="table-align-middle" >
                             @forelse ($galleries as $gallery)
                                 <tr>
                                     <td scope="row">{{ $gallery->name }}</td>
                                     <td>{{ Str::limit($gallery->description, 50, '...') }}</td>
-                                    <td>
-                                        <a name="" id="" class="btn btn-outline-primary btn-sm"
-                                            href="{{ route('admin.gallery.edit', $gallery) }}">Edit</a>
-                                        <a name="" id="" class="btn btn-outline-info btn-sm"
-                                            href="{{ route('admin.gallery.show', $gallery) }}">Show</a>
+                                    <td style="display: flex;
+                                    flex-direction: row;">
+                                        <a name="" id="" class="btn btn-soft-primary btn-sm"
+                                            href="{{ route('admin.gallery.edit', $gallery) }}">
+                                            <i class="bi bi-pencil"></i> Edit</a>
+                                        <a name="" id="" class="btn btn-soft-info btn-sm"
+                                            href="{{ route('admin.gallery.show', $gallery) }}" style="margin-left:10px">
+                                            <i class="bi bi-eye"></i> Show</a>
                                         <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
+                                            <button class="btn btn-soft-danger btn-sm delete-btn" style="margin-left:10px;">
+                                                <i class="bi bi-trash3"></i> Delete</button>
                                         </form>
                                     </td>
                                 </tr>

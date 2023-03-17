@@ -5,9 +5,9 @@
              <div class="col">
                  <h1 class="page-header-title">About</h1>
              </div>
-             <div class="col-auto">
-                 <a href="{{ route('admin.about.create') }}" class="btn btn-sm btn-primary">
-                     <i class="bi-plus"></i>
+             <div class="col-auto">  
+                 <a href="{{ route('admin.about.create') }}" class="btn btn-sm btn-soft-primary">
+                     <i class="bi bi-plus"></i>
                      Create New About
                  </a>
              </div>
@@ -23,29 +23,37 @@
                         <th>No</th>
                          <th>Title</th>
                          <th>Description</th>
+                         <th>Image</th>
                          <th>Action</th>
                      </tr>
                  </thead>
                  @php($nomor = 1)
-                 <tbody class="table-align-middle">
+                 <tbody >
                      @forelse ($abouts as $about)
-                         <tr>
+                         <tr >
                             <td>{{ $nomor++ }}</td>
                              <td scope="row">{{ $about->title }}</td>
-                             <td>{{ Str::limit($about->description, 50, '...') }}</td>
+                             <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit($about->description, 20, '...') }}</td>
                              <td>
-                                <a href="{{ route('admin.about.edit', $about) }}" class="btn btn-outline-warning btn-sm ">
+                                <div class="avatar avatar-xl">
+                                    <img class="avatar-img" src="{{ $about->getFirstMediaUrl('image') }} " alt="Image Description">
+                                  </div>
+                             </td>
+                             <td style="display: flex;
+                             flex-direction: row;">
+                                <a href="{{ route('admin.about.edit', $about) }}" class="btn btn-soft-warning btn-sm">
+                                    <i class="bi bi-pencil"></i>
                                      Edit
                                 </a>
-                                <a href="{{ route('admin.about.show', $about) }}" class="btn btn-outline-info btn-sm">
-                                    Detail
+                                <a href="{{ route('admin.about.show', $about) }}" class="btn btn-soft-info btn-sm" style="margin-left:20px">
+                                   <i class="bi bi-eye"></i> Detail
                                 </a>
                                
                                 <form action="{{ route('admin.about.destroy', $about) }}" method="post">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-outline-danger btn-sm delete-btn">
-                                          Delete
+                                    <button class="btn btn-soft-danger  btn-sm btn-block delete-btn" style="margin-left:20px;">
+                                        <i class="bi bi-trash3"></i> Delete
                                     </button>
                                 </form>
                                
@@ -63,5 +71,9 @@
          </div>
      </div>
     </div>
+
     @include('scripts.delete')
+    
  </x-app-layout>
+
+ 

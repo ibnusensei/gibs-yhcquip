@@ -39,7 +39,10 @@ class AboutController extends Controller
             'description' => 'string|nullable',
         ]); 
         $data['slug'] = Str::slug($request->title);
-        $about = About::create($data);
+        $create = About::create($data);
+        if ($request->hasFile('image')) {
+            $create->addMediaFromRequest('image')->toMediaCollection('image');
+        }
 
         toast('Created About Successfully', 'success');
         return redirect()->route('admin.about.index');
@@ -75,6 +78,15 @@ class AboutController extends Controller
             'description' => 'string|nullable'
         ]);
         $data['slug'] = Str::slug($request->name);
+        if ($request->hasFile('image')) { // check if a new image has been uploaded
+            if ($about->hasMedia('image')) { // check if an existing image exists
+                $about->getFirstMedia('image')->delete(); // delete the existing image
+            }
+            $about->addMediaFromRequest('image')->toMediaCollection('image'); // add the new image
+        } else if ($request->input('delete_image')) { // check if the delete image checkbox is checked
+            $about->clearMediaCollection('image'); // delete the existing image
+        }
+        
         $about->update($data);
 
         toast('Update About Succesfully', 'success');
@@ -88,7 +100,7 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
         $about->delete();
-        toast('Delete About Successfully', 'success');
+        alert()->success('SuccessAlert','Delete About Successfully');
         return redirect()->route('admin.about.index');
     }
 

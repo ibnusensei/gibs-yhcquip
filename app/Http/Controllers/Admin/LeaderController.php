@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Leader;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class LeaderController extends Controller
@@ -39,7 +37,11 @@ class LeaderController extends Controller
             'name' => 'required|string',
             'position' => 'required|string',
         ]);
-        Leader::create($data);
+        $leader = Leader::create($data);
+        if ($request->hasFile('image')) {
+            $leader->addMediaFromRequest('image')->toMediaCollection('image');
+        }
+        
         toast('Create Leader Successfully','success');
         return redirect()->route('admin.leader.index');
     }
@@ -72,6 +74,16 @@ class LeaderController extends Controller
             'name' => 'required|string',
             'position' => 'required|string',
         ]);
+        
+        if ($request->hasFile('image')) { // check if a new image has been uploaded
+            if ($leader->hasMedia('image')) { // check if an existing image exists
+                $leader->getFirstMedia('image')->delete(); // delete the existing image
+            }
+            $leader->addMediaFromRequest('image')->toMediaCollection('image'); // add the new image
+        } else if ($request->input('delete_image')) { // check if the delete image checkbox is checked
+            $leader->clearMediaCollection('image'); // delete the existing image
+        }
+        
         $leader->update($data);
         toast('Update Leader Successfully', 'success');
         return redirect()->route('admin.leader.index');
@@ -80,9 +92,12 @@ class LeaderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Leader $leader)
     {
-        //
+        $leader->delete();
+
+        alert()->success('SuccessAlert','Delete Leader Successfully');
+        return redirect()->route('admin.leader.index');
     }
 
     public function imageStore(Request $request, $id)

@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class About extends Model implements HasMedia
+class CampusTour extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -17,7 +17,7 @@ class About extends Model implements HasMedia
     protected $fillable = [
         'title',
         'slug',
-        'description',
+        'description'
     ];
 
     public function registerMediaConversions(?Media $media = null): void
@@ -27,4 +27,5 @@ class About extends Model implements HasMedia
         ->fit(Manipulations::FIT_CROP, 300, 300)
         ->nonQueued();
     }
+
 }

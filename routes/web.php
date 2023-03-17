@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\LeaderController as AdminLeaderController;
+use App\Http\Controllers\Admin\CampusTourController as AdminCampustTourController;
+use App\Http\Controllers\Admin\StaffController as AdminStaffController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,12 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::resource('leader', AdminLeaderController::class);
     Route::post('leader-image/{leader}', [AdminLeaderController::class, 'imageStore'])->name('leader.image.store');
     Route::delete('leader-image/{leader}', [AdminLeaderController::class, 'imageDestroy'])->name('leader.image.destroy');
+
+    //Camputours
+    Route::resource('campustour', AdminCampustTourController::class);
+
+    //Staff
+    Route::resource('staff', AdminStaffController::class);
 
 });
 
