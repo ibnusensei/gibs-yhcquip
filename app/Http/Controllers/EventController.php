@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\PostDec;
 
 class EventController extends Controller
 {
@@ -13,7 +14,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // $events = Event::all();
+        // dd(request('search'));
+        $events = Event::latest()->filter(request(['search']))->get();
+
+        // $events = $events->get();
+
         return view('admin.event.event', compact('events'));
     }
 
@@ -47,6 +53,7 @@ class EventController extends Controller
 
         return redirect()->route('admin.event.index');
     }
+
     /**
      * Display the specified resource.
      */

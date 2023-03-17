@@ -16,11 +16,20 @@
         <div class="card m-5">
             <div class="card-body">
                 <h4 class="card-title">Data Event</h4>
+
+                <form action="/admin/event">
+                    <div class="input-group p-3">
+                        <input type="text" class="form-control" name="search" placeholder="Search. . ."
+                            value="{{ request('search') }}">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Title</th>
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Publish</th>
@@ -31,7 +40,7 @@
                             @forelse ($events as $event)
                                 <tr>
                                     <td scope="row">{{ $event->title }}</td>
-                                    <td>{{ $event->description }}</td>
+                                    <td>{{ Str::limit($event->description, 50, '...') }}</td>
                                     <td>
                                         <img src=" {{ $event->getFirstMediaUrl('images') }}"
                                             style="max-width: 100px; height: auto">
@@ -46,6 +55,8 @@
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
                                             href="{{ route('admin.event.edit', $event) }}">Edit</a>
+                                        <a name="" id="" class="btn btn-outline-info btn-sm"
+                                            href="{{ route('admin.event.show', $event) }}">Show</a>
                                         <form action="{{ route('admin.event.destroy', $event) }}" method="POST"
                                             class="d-inline">
                                             @method('DELETE')
@@ -65,4 +76,6 @@
             </div>
         </div>
     </div>
+
+    @include('scripts.delete')
 </x-app-layout>

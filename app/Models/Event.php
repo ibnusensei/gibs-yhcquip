@@ -14,12 +14,15 @@ class Event extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'is_published'
-    ];
+    protected $fillable = ['title', 'slug', 'description', 'is_published'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        if (isset($filters['search']) ? $filters['search'] : false) {
+            return $query->where('title', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+        }
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

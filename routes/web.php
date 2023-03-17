@@ -44,6 +44,4 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::post('image', [EventController::class, 'imageStore'])->name('event.image.store');
 });
 
-
-
 require __DIR__ . '/auth.php';

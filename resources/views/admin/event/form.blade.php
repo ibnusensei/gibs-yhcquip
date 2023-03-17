@@ -36,9 +36,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
-                            <input type="text" name="description" id="description" class="form-control"
-                                value="{{ @$event->description }}">
+                            {{-- <input type="text" name="description" id="description" class="form-control"
+                                value="{{ @$event->description }}"> --}}
+                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$event->description }}</textarea>
                         </div>
+
                         <div class="mb-3">
                             <div class="mb-3">
                                 @if (@$event)
