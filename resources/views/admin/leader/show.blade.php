@@ -1,5 +1,4 @@
 <x-app-layout>
-    <!-- Content -->
     @push('styles')
         <style>
             .img-custom {
@@ -22,12 +21,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Gallery</h1>
+                    <h1 class="page-header-title">Leader</h1>
                 </div>
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.gallery.index') }}">
+                    <a class="btn btn-primary" href="{{ route('admin.leader.index') }}">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
@@ -35,12 +34,10 @@
             </div>
             <!-- End Row -->
         </div>
-        <!-- End Page Header -->
-
         <div class="card mb-3">
             <div class="card-body">
                 <h4 class="card-title">Add Images</h4>
-                <form action="{{ route('admin.gallery.image.store', $gallery) }}" method="POST"
+                <form action="{{ route('admin.leader.image.store', $leader) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -52,12 +49,11 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{ $gallery->name }}</h4>
-                <p class="card-text">{{ $gallery->description }}</p>
-
+                <h4 class="card-title">Detail : {{ $leader->name }}</h4>
+                <h4 class="card-title">Jabatan : {{ $leader->position }}</h4>
                 {{-- media --}}
                 <div class="row ">
-                    @foreach ($gallery->getMedia('images') as $image)
+                    @foreach ($leader->getMedia('images') as $image)
                         <div class="col-md-4 mb-4">
                             <div class="img-custom rounded mb-2">
                                 <img src="{{ $image->getUrl() }}" class="" alt="">
@@ -72,9 +68,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- End Content -->
-    @include('scripts.delete')
-
 </x-app-layout>

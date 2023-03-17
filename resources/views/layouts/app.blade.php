@@ -364,6 +364,46 @@
                                 <span class="nav-link-title">Gallery</span>
                             </a>
                         </div>
+
+                        <span class="dropdown-header mt-4">Profile</span>
+                      <small class="bi-three-dots nav-subtitle-replacer"></small>
+                      <div class="navbar-nav nav-compact">
+          
+                      </div>
+                      <div id="navbarVerticalMenuPagesMenu">
+                        <!-- Collapse -->
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.about.*') ? 'active' : '' }}" href="{{ route('admin.about.index') }}" data-placement="left" >
+                                <i class="bi bi-person nav-icon"></i>
+                                <span class="nav-link-title">About</span>
+                            </a>
+                        </div>
+                        
+                        <!-- End Collapse -->
+          
+                        <!-- Collapse -->
+                        <div class="nav-item">
+                          <a class="nav-link {{ Request()->routeIs('admin.leader.*') ? 'active' : '' }}" href="{{ route('admin.leader.index') }}">
+                            <i class="bi-person-badge nav-icon"></i>
+                            <span class="nav-link-title">Leader</span>
+                          </a>
+                        </div>
+                        <!-- End Collapse -->
+          
+                        <!-- Collapse -->
+                        <div class="nav-item">
+                          <a class="nav-link  " href="#navbarVerticalMenuPagesAccountMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesAccountMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesAccountMenu">
+                            <i class="bi-people nav-icon"></i>
+                            <span class="nav-link-title">Staff</span>
+                          </a>
+                        </div>
+                        <div class="nav-item">
+                          <a class="nav-link  " href="#navbarVerticalMenuPagesAccountMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesAccountMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesAccountMenu">
+                            <i class="bi bi-building nav-icon"></i>
+                            <span class="nav-link-title">Campus Tour</span>
+                          </a>
+                        </div>
+                    </div>
                     </div>
 
                 </div>

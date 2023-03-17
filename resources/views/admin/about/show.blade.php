@@ -1,5 +1,4 @@
 <x-app-layout>
-    <!-- Content -->
     @push('styles')
         <style>
             .img-custom {
@@ -17,30 +16,24 @@
             }
         </style>
     @endpush
-    <div class="content container-fluid">
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h1 class="page-header-title">Gallery</h1>
-                </div>
-                <!-- End Col -->
 
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row aligns-items-center">
+                <div class="col">
+                    <h1 class="page-header-title">About</h1>
+                </div>
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.gallery.index') }}">
+                    <a href="{{ route('admin.about.index') }}" class="btn btn-primary">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
-                <!-- End Col -->
             </div>
-            <!-- End Row -->
         </div>
-        <!-- End Page Header -->
-
         <div class="card mb-3">
             <div class="card-body">
                 <h4 class="card-title">Add Images</h4>
-                <form action="{{ route('admin.gallery.image.store', $gallery) }}" method="POST"
+                <form action="{{ route('admin.about.image.store', $about) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -52,17 +45,16 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{ $gallery->name }}</h4>
-                <p class="card-text">{{ $gallery->description }}</p>
+                <h4>Detail : {{ $about->title }}</h4>
+                <p>{{ $about->description }}</p>
 
-                {{-- media --}}
                 <div class="row ">
-                    @foreach ($gallery->getMedia('images') as $image)
+                    @foreach ($about->getMedia('images') as $image)
                         <div class="col-md-4 mb-4">
                             <div class="img-custom rounded mb-2">
                                 <img src="{{ $image->getUrl() }}" class="" alt="">
                             </div>
-                            <form action="{{ route('admin.gallery.image.destroy', $image) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.about.image.destroy', $image) }}" method="POST" class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
@@ -70,11 +62,9 @@
                         </div>
                     @endforeach
                 </div>
+                
             </div>
         </div>
-
     </div>
-    <!-- End Content -->
     @include('scripts.delete')
-
 </x-app-layout>

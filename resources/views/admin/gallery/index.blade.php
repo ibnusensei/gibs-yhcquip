@@ -40,7 +40,7 @@
                             @forelse ($galleries as $gallery)
                                 <tr>
                                     <td scope="row">{{ $gallery->name }}</td>
-                                    <td>{{ Str::limit($gallery->description, 100, '...') }}</td>
+                                    <td>{{ Str::limit($gallery->description, 50, '...') }}</td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
                                             href="{{ route('admin.gallery.edit', $gallery) }}">Edit</a>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
+use App\Http\Controllers\Admin\LeaderController as AdminLeaderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,17 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
+
+    // About 
+    Route::resource('about', AdminAboutController::class);
+    Route::post('about-image/{about}', [AdminAboutController::class, 'imageStore'])->name('about.image.store');
+    Route::delete('about-image/{about}', [AdminAboutController::class, 'imageDestroy'])->name('about.image.destroy');
+
+    // leader
+    Route::resource('leader', AdminLeaderController::class);
+    Route::post('leader-image/{leader}', [AdminLeaderController::class, 'imageStore'])->name('leader.image.store');
+    Route::delete('leader-image/{leader}', [AdminLeaderController::class, 'imageDestroy'])->name('leader.image.destroy');
+
 });
 
 
