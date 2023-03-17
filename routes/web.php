@@ -18,29 +18,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
 // administrator
-Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
-    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::resource('gallery', AdminGalleryController::class);
-    Route::get('article', [AdminArticleController::class, 'index'])->name('article');
-    Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
-    Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
+Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function () {
+  Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+  Route::resource('gallery', AdminGalleryController::class);
+  Route::resource('article', AdminArticleController::class);
+  Route::get('article-category', [AdminArticleController::class, 'category'])->name('category');
+  Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
+  Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
