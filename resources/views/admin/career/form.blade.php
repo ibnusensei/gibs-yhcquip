@@ -6,7 +6,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Career</h1>
+                    <h1 class="page-header-title">career</h1>
                 </div>
                 <!-- End Col -->
 
@@ -30,36 +30,42 @@
                             @method('PUT')
                         @endif
                         @csrf
-                        <div class="mb-3">
-                            <label class="form-label" for="posisi">Posisi</label>
-                            <input type="text" id="posisi" class="form-control" name="posisi"
-                                placeholder="Posisi" value="{{ @$career->posisi}}">
-                        </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="unit">Unit</label>
-                            <input type="text" id="unit" class="form-control" name="unit"
-                                placeholder="Unit" value="{{ @$career->unit}}">
+                            <label class="form-label" for="title">title</label>
+                            <input type="text" id="title" class="form-control" name="title"
+                                placeholder="title" value="{{ @$career->title}}">
                         </div>
+
+                        
+                        {{-- ckeditor description --}}
 
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
                             <textarea id="editor" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->description }}</textarea>
                         </div>
 
-                        <!-- Flatpickr -->
-                        <div class="mb-3">
-                            <label class="form-label" for="start_date">start_date</label>
-                            <input type="text" name="start_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select start_date" value="{{ @$career->start_date }}"
-                            data-hs-flatpickr-options='{
-                                "dateFormat": "d/m/Y"
-                            }'>
+                        {{-- ckeditor description end --}}
 
+                        <div class="mb-3">
+                            <label class="form-label">Jobs</label>
+                            <div class="form-check">
+                                @foreach($jobs as $job)
+                                <input class="form-check-input" type="checkbox" name="jobs[]"
+                                       value="{{ $job->id }}" id="job{{ $job->id }}"
+                                       @if(isset($career) && in_array($job->id, $career->jobs->pluck('id')->toArray())) checked @endif>
+                                <label class="form-check-label" for="job{{ $job->id }}">
+                                    {{ $job->posisi }}
+                                </label>
+                                <br>
+                                @endforeach
+                            </div>
                         </div>
 
+                        <!-- Flatpickr -->
                         <div class="mb-3">
-                            <label class="form-label" for="end_date">end_date</label>
-                            <input type="text" name="end_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select end_date" value="{{ @$career->end_date }}"
+                            <label class="form-label" for="date">Date</label>
+                            <input type="text" name="date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select date" value="{{ @$career->date }}"
                             data-hs-flatpickr-options='{
                                 "dateFormat": "d/m/Y"
                             }'>
@@ -96,12 +102,10 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $('#preview').html('<img src="' + e.target.result + '" alt="">');
-                    $('#preview img').css('max-width', '300px'); // Add this line
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
 
     </script>    
     <script>

@@ -386,12 +386,12 @@
                             </a>
                         </div>
 
-                        {{-- <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.information.*') ? 'active' : '' }}" href="{{ route('admin.information.index') }}" data-placement="left">
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.job.*') ? 'active' : '' }}" href="{{ route('admin.job.index') }}" data-placement="left">
                                 <i class="bi bi-briefcase nav-icon"></i>
-                                <span class="nav-link-title">Information</span>
+                                <span class="nav-link-title">Job</span>
                             </a>
-                        </div> --}}
+                        </div>
                     </div>
 
                 </div>

@@ -9,11 +9,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Information extends Model implements HasMedia
+class Job extends Model implements HasMedia
 {
-    protected $table = 'informations';
     use InteractsWithMedia;
-    protected $fillable = ['title', 'slug', 'description','date', 'is_published'];
+    protected $fillable = [ 'slug', 'description', 'posisi','start_date','end_date', 'unit', 'is_published'];
     use HasFactory;
 
     public function registerMediaConversions(Media $media = null): void
@@ -23,4 +22,10 @@ class Information extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }
+
+    public function careers()
+    {
+        return $this->belongsToMany(Career::class);
+    }
+
 }

@@ -18,7 +18,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Career</h1>
+                    <h1 class="page-header-title">career</h1>
                 </div>
                 <!-- End Col -->
 
@@ -35,38 +35,30 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Careers Data</h4>
+                <h4 class="card-title">careers Data</h4>
                 <div class="table-responsive">
-                    <table id="table_data" class="table">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Posisi</th>
-                                <th>Unit</th>
+                                <th>Name</th>
                                 <th>Description</th>
-                                <th>Publish</th>
+                                <th>Poster</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody class="table-align-middle">
                             @forelse ($careers as $career)
                                 <tr>
-                                    <td>{{ $career->id }}</td>
-                                    <td>{{ $career->posisi }}</td>
-                                    <td>{{ $career->unit }}</td>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($career->description, 50) !!}</td>
+                                    <td scope="row">{{ $career->title }}</td>
+                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit(strip_tags($career->description), 50) }}</td>
+                                    <td class="img-custom">@if ($career->getFirstMedia('image'))
+                                        <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
+                                    @endif</td>
                                     <td>
-                                        <form class="publishForm" action="{{ route('admin.career.publish', $career->id) }}" method="POST">
-                                            @csrf
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $career->is_published ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="publishSwitch">{{ $career->is_published ? 'Published' : 'Unpublished' }}</label>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a name="" id="" class="btn btn-outline-primary btn-sm" href="{{ route('admin.career.edit', $career) }}">Edit</a>
-                                        <a name="" id="" class="btn btn-outline-info btn-sm" href="{{ route('admin.career.show', $career) }}">Show</a>
+                                        <a name="" id="" class="btn btn-outline-primary btn-sm"
+                                            href="{{ route('admin.career.edit', $career) }}">Edit</a>
+                                        <a name="" id="" class="btn btn-outline-info btn-sm"
+                                            href="{{ route('admin.career.show', $career) }}">Show</a>
                                         <form action="{{ route('admin.career.destroy', $career) }}" method="POST" class="d-inline">
                                             @method('DELETE')
                                             @csrf
@@ -76,10 +68,9 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">No Data</td>
+                                    <td colspan="3" class="text-center">No Data</td>
                                 </tr>
                             @endforelse
-
                         </tbody>
                     </table>
                 </div>
@@ -87,26 +78,6 @@
         </div>
     </div>
     <!-- End Content -->
+    
     @include('scripts.delete')
-
-    @push('scripts')
-    <script>
-    $(document).ready(function () {
-    $("#table_data").DataTable();
-    });
-
-    </script>
-
-    <script>
-    const publishForms = document.querySelectorAll('.publishForm');
-    const publishSwitches = document.querySelectorAll('.publishSwitch');
-
-    publishSwitches.forEach((publishSwitch, index) => {
-        publishSwitch.addEventListener('change', () => {
-            publishForms[index].submit();
-        });
-    });
-
-  </script>
-    @endpush
 </x-app-layout>
