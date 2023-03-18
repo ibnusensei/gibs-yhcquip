@@ -38,6 +38,7 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
   Route::resource('gallery', AdminGalleryController::class);
   Route::resource('article', AdminArticleController::class);
   Route::get('article-category', [AdminArticleController::class, 'category'])->name('category');
+  Route::get('article-comment', [AdminArticleController::class, 'category'])->name('comment');
   Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
   Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 });
