@@ -11,8 +11,10 @@ class CategoryArticle extends Model
   use HasFactory;
   protected $fillable = ['slug', 'name'];
 
-  public function article(): HasMany
-  {
-    return $this->hasMany(Article::class);
-  }
+  // public $timestamps = false;
+
+  // public function article(): HasMany
+  // {
+  //   return $this->hasMany(Article::class);
+  // }
 }
