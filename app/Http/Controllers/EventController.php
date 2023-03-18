@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\PostDec;
 
 class EventController extends Controller
 {
@@ -16,8 +15,8 @@ class EventController extends Controller
     {
         // $events = Event::all();
         // dd(request('search'));
-        $events = Event::latest()->filter(request(['search']))->get();
-
+        $events = Event::latest()->filter(request(['search']))->paginate(5)->withQueryString('search');
+        // $events = Event::paginate(5);
         // $events = $events->get();
 
         return view('admin.event.event', compact('events'));

@@ -17,11 +17,21 @@
             <div class="card-body">
                 <h4 class="card-title">Data Event</h4>
 
-                <form action="/admin/event">
-                    <div class="input-group p-3">
-                        <input type="text" class="form-control" name="search" placeholder="Search. . ."
+                <form action="/admin/event" class="d-flex">
+                    {{-- <div class="input-group p-3">
+                        <input type="text" class="form-control width" name="search" placeholder="Search. . ."
                             value="{{ request('search') }}">
                         <button class="btn btn-primary" type="submit">Search</button>
+                    </div> --}}
+                    <div class="input-group justify-content-end">
+                        <div class="form-outline">
+                            <input type="search" class="form-control" placeholder="Search. . ." name="search"
+                                value="{{ request('search') }}">
+                            {{-- <label class="form-label" for="form1">Search</label> --}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            {{-- <i class="fas fa-search"></i> --}}Search
+                        </button>
                     </div>
                 </form>
 
@@ -72,6 +82,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $events->links('vendor/pagination/bootstrap-5') }}
                 </div>
             </div>
         </div>
