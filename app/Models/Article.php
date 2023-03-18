@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Article extends Model
+class Article extends Model implements HasMedia
 {
   use HasFactory;
-  protected $fillable = ['slug', 'title', 'description', 'author', 'comment',];
+  use InteractsWithMedia;
 
-  public function category_article(): BelongsTo
-  {
-    return $this->belongsTo(CategoryArticle::class);
-  }
+  protected $fillable = ['slug', 'title', 'description', 'author', 'comment'];
+
+  // public function category_article(): BelongsTo
+  // {
+  //   return $this->belongsTo(CategoryArticle::class);
+  // }
 
   public function registerMediaConversions(Media $media = null): void
   {
