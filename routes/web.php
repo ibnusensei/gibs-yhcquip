@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\NewsCategoryController as AdminNewsCategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -37,7 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', AdminGalleryController::class);
     Route::resource('news', AdminNewsController::class);
+    Route::resource('news-category', AdminNewsCategoryController::class);
     Route::post('news-publis', [AdminNewsController::class, 'publis'])->name('publis.news');
+    Route::post('news-publis-delete/{id}', [AdminNewsController::class, 'destroy'])->name('delete.news');
+    Route::get('news-search', [AdminNewsController::class, 'search'])->name('search.news');
+    Route::get('news-ajax', [AdminNewsController::class, 'ajax'])->name('ajax.news');
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 });

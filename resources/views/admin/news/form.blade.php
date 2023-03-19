@@ -1,4 +1,19 @@
 <x-app-layout>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('/dropify/dist/css/dropify.min.css') }}">
+        <style>
+            .ck-editor__editable[role="textbox"] {
+                /* editing area */
+                min-height: 200px;
+            }
+
+            .ck-content .image {
+                /* block images */
+                max-width: 80%;
+                margin: 20px auto;
+            }
+        </style>
+    @endpush
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -37,32 +52,24 @@
 
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
-                            <select name="category" id="" class="form-select">
+                            <select name="news_category_id" id="" class="form-select">
                                 <option selected>Category</option>
-                                <option {{ @$news['category'] && $news['category'] == 'school' ? 'selected' : '' }}
-                                    value="school">School</option>
-                                <option {{ @$news['category'] && $news['category'] == 'tecno' ? 'selected' : '' }}
-                                    value="tecno">Tecno</option>
+                                @foreach ($category as $item)
+                                    <option
+                                        {{ @$news['news_category_id'] && $news['news_category_id'] == $item->id ? 'selected' : '' }}
+                                        value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input type="file" id="images" name="images" class="form-control"
-                                onchange="previewImage()">
-                        </div>
-                        <div class="form-group mb-3">
-                            <img src="" id="image-preview" class="img-thumbnail"
-                                style="display:none; width:240px">
-                        </div>
-                        @if (@$news)
-                            <img id="old-img" src="{{ @$news->getFirstMediaUrl('news', 'thumb') }}" alt=""
-                                class="img-thumbnail" width="240px">
-                        @endif
 
+                        <div class="mb-4">
+                            <input type="file" class="dropify mb-3"  name="images" data-max-file-size="1M"
+                                @if (@$news) data-default-file="{{ @$news->getFirstMediaUrl('news', 'thumb') }}" @endif />
+                        </div>
 
                         <div class="mb-3">
-                            <textarea id="konten" class="form-control" name="content" rows="10" cols="50">{!! @$news->content !!}</textarea>
+                            <textarea id="editor" class="form-control" name="content" rows="10" cols="50">{!! @$news->content !!}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -73,38 +80,17 @@
 
     </div>
     @push('scripts')
-        <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+        <script src="{{ asset('dropify/dist/js/dropify.min.js') }}"></script>
+        <script src="{{ asset('/vendor/ckeditor5/ckeditor.js') }}"></script>
         <script>
-            var konten = document.getElementById("konten");
-            CKEDITOR.replace(konten, {
-                language: 'en-gb'
-            });
-            CKEDITOR.config.allowedContent = true;
+            $('.dropify').dropify();
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
         </script>
 
-        <script>
-            function previewImage() {
-                var preview = document.querySelector('#image-preview');
-                var file = document.querySelector('#images').files[0];
-                var old = document.querySelector('#old-img');
-                var reader = new FileReader();
-
-                reader.onloadend = function() {
-                    if (old) {
-                        old.hidden = true;
-                    }
-                    preview.src = reader.result;
-                    preview.style.display = 'block';
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = "";
-                    preview.style.display = 'none';
-                }
-            }
-        </script>
     @endpush
     <!-- End Content -->
 </x-app-layout>

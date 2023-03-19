@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('user_id');
+            $table->bigInteger('news_category_id')->unsigned();
+            $table->foreign('news_category_id')->references('id')->on('news_categories')->onDelete('cascade');
             $table->string("title");
-            $table->string("category");
             $table->string("slug");
             $table->longText("content");
             $table->boolean('is_publish')->default(false);
             $table->dateTime('published_at');
-            $table->timestamps();
+        $table->timestamps();
         }); 
     }
 

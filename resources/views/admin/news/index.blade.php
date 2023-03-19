@@ -23,13 +23,28 @@
         </div>
         <!-- End Page Header -->
 
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body">
-                <h4 class="card-title">Data News</h4>
+                <h4 class="card-title">Create New News</h4>
+                <!-- seacrch-->
+                <div class="mb-4 w-md-50">
+                    <div class="input-group input-group-merge">
+                        <input type="text" class="js-form-search form-control" id="search" placeholder="Search..."
+                            data-hs-form-search-options='{
+             "clearIcon": "#clearIcon2",
+             "defaultIcon": "#defaultClearIconToggleEg"
+           }'>
+                        <button type="button" class="input-group-append input-group-text">
+                            <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                            <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- End search -->
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
+                    <table class="table table-thead-bordered">
+                        <thead class="thead-light">
+                            <tr class="py-2">
                                 <th>No</th>
                                 <th>title</th>
                                 <th>category</th>
@@ -39,20 +54,19 @@
                             </tr>
                         </thead>
 
-                        <tbody class="table-align-middle">
+                        <tbody class="allData table-align-middle">
                             @forelse ($news as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->category }}</td>
+                                    <td>{{ $item->newsCategory->name }}</td>
                                     <td>{{ $item->user->name }}</td>
                                     <td>
-
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input published-checkbox" type="checkbox"
-                                                name="publish" role="switch" id="publish"
+                                            <input class="switch form-check-input published-checkbox" type="checkbox"
+                                                name="publish" role="switch" id="pub lish{{$item->id}}"
                                                 onclick="publisNews({{ $item->id }})"
-                                                {{ $item->publish == true ? 'checked' : '' }}>
+                                                {{ $item->is_publish == true ? 'checked' : '' }}>
                                         </div>
                                     </td>
 
@@ -69,31 +83,69 @@
                                         </form>
                                     </td>
                                 </tr>
+                            @empty
+                                <p class="text-center">Not Data</p>
+                            @endforelse
                         </tbody>
-                    @empty
-                        @endforelse
+                        <tbody id="Content" class="searchData">
+                        </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
+        {{ $news->links() }}
     </div>
     <!-- End Content -->
 
     @include('scripts.delete')
 
     @push('scripts')
+        <script src="{{ asset('dropify/dist/js/dropify.min.js') }}"></script>
+
         <script>
             function publisNews(id) {
+                // $(".switch").prop('checked', true); 
+
+
                 $.ajax({
+
                     type: "post",
                     url: "{{ route('admin.publis.news') }}",
                     data: {
                         '_token': `{{ csrf_token() }}`,
                         'id': id,
                     },
-                    
+                    // success: function(data) {
+                    //     status = $('#publish'+data);
+                    //     status.prop('checked', true);
+                    // }
+
                 })
             }
+
+            $('#search').on('keyup', function() {
+                value = $(this).val();
+                if (value) {
+                    $('.allData').hide();
+                    $('.searchData').show();
+                } else {
+                    $('.allData').show();
+                    $('.searchData').hide();
+                }
+                $.ajax({
+                    type: 'get',
+                    url: "{{ route('admin.search.news') }}",
+                    data: {
+                        'search': value,
+                    },
+
+                    success: function(data) {
+                        console.log(data);
+                        $('#Content').html(data);
+                    }
+                });
+            })
         </script>
     @endpush
 </x-app-layout>
