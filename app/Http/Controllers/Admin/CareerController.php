@@ -23,6 +23,20 @@ class CareerController extends Controller
         return view('admin.career.index', compact('careers'));
     }
 
+    public function publish($id)
+    {
+        $career = Career::find($id);
+        $career->is_published = !$career->is_published;
+        $career->save();
+
+        if ($career->is_published) {
+            toast('Item has been published', 'success');
+        } else {
+            toast('Item has been published', 'info');
+        }
+        return redirect()->back();
+    }
+
     public function create()
     {
         $url = route('admin.career.store');

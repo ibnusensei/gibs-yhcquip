@@ -18,7 +18,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">job</h1>
+                    <h1 class="page-header-title">Job</h1>
                 </div>
                 <!-- End Col -->
 
@@ -35,7 +35,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">jobs Data</h4>
+                <h4 class="card-title">Jobs Data</h4>
                 <div class="table-responsive">
                     <table id="table_data" class="table">
                         <thead>
@@ -107,6 +107,6 @@
         });
     });
 
-  </script>
+    </script>
     @endpush
 </x-app-layout>

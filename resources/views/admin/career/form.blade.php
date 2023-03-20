@@ -6,7 +6,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">career</h1>
+                    <h1 class="page-header-title">Career</h1>
                 </div>
                 <!-- End Col -->
 
@@ -24,7 +24,7 @@
         <div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3 card-title">{{ @$career ? 'Edit' : 'Create' }} career</h4>
+                    <h4 class="mb-3 card-title">{{ @$career ? 'Edit' : 'Create' }} Career</h4>
                     <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         @if (@$career)
                             @method('PUT')
@@ -50,14 +50,29 @@
                         <div class="mb-3">
                             <label class="form-label">Jobs</label>
                             <div class="form-check">
-                                @foreach($jobs as $job)
-                                <input class="form-check-input" type="checkbox" name="jobs[]"
-                                       value="{{ $job->id }}" id="job{{ $job->id }}"
-                                       @if(isset($career) && in_array($job->id, $career->jobs->pluck('id')->toArray())) checked @endif>
-                                <label class="form-check-label" for="job{{ $job->id }}">
-                                    {{ $job->posisi }}
-                                </label>
-                                <br>
+                                @php
+                                $jobsCount = count($jobs);
+                                $perColumn = ceil($jobsCount / 3); // Change 3 to the desired number of columns
+                                $columnIndex = 0;
+                                @endphp
+                                @foreach($jobs->where('is_published', 1) as $job)
+                                    @if($columnIndex == 0)
+                                        <div class="form-check form-check-inline">
+                                    @endif
+                                    <input class="form-check-input" type="checkbox" name="jobs[]" value="{{ $job->id }}" id="job{{ $job->id }}"
+                                        @if(isset($career) && in_array($job->id, $career->jobs->pluck('id')->toArray())) checked @endif>
+                                    <label class="form-check-label" for="job{{ $job->id }}">
+                                        {{ $job->posisi }}
+                                    </label>
+                                    <br>
+                                    @php
+                                    $columnIndex++;
+                                    if($columnIndex >= $perColumn || $loop->last)
+                                    {
+                                        $columnIndex = 0;
+                                        echo "</div>";
+                                    }
+                                    @endphp
                                 @endforeach
                             </div>
                         </div>

@@ -18,7 +18,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">career</h1>
+                    <h1 class="page-header-title">Career</h1>
                 </div>
                 <!-- End Col -->
 
@@ -35,14 +35,15 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">careers Data</h4>
+                <h4 class="card-title">Careers Data</h4>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="table_data" class="table">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Poster</th>
+                                <th>Publish</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -50,10 +51,19 @@
                             @forelse ($careers as $career)
                                 <tr>
                                     <td scope="row">{{ $career->title }}</td>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{{ Str::limit(strip_tags($career->description), 50) }}</td>
+                                    <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($career->description, 50) !!}</td>
                                     <td class="img-custom">@if ($career->getFirstMedia('image'))
                                         <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
                                     @endif</td>
+                                    <td>
+                                        <form class="publishForm" action="{{ route('admin.career.publish', $career->id) }}" method="POST">
+                                            @csrf
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $career->is_published ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="publishSwitch">{{ $career->is_published ? 'Published' : 'Unpublished' }}</label>
+                                            </div>
+                                        </form>
+                                    </td>
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
                                             href="{{ route('admin.career.edit', $career) }}">Edit</a>
@@ -80,4 +90,25 @@
     <!-- End Content -->
     
     @include('scripts.delete')
+
+    @push('scripts')
+    <script>
+    $(document).ready(function () {
+    $("#table_data").DataTable();
+    });
+
+    </script>
+
+    <script>
+    const publishForms = document.querySelectorAll('.publishForm');
+    const publishSwitches = document.querySelectorAll('.publishSwitch');
+
+    publishSwitches.forEach((publishSwitch, index) => {
+        publishSwitch.addEventListener('change', () => {
+            publishForms[index].submit();
+        });
+    });
+
+    </script>
+    @endpush
 </x-app-layout>

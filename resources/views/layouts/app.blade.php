@@ -381,7 +381,7 @@
 
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
-                                <i class="bi bi-briefcase nav-icon"></i>
+                                <i class="bi bi-file-person nav-icon"></i>
                                 <span class="nav-link-title">Career</span>
                             </a>
                         </div>

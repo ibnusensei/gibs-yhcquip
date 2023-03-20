@@ -23,7 +23,7 @@ class JobController extends Controller
 
     public function publish($id)
     {
-        $job = Job::findOrFail($id);
+        $job = Job::find($id);
         $job->is_published = !$job->is_published;
         $job->save();
 
