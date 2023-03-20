@@ -41,18 +41,13 @@
         <div class="card-body">
             <h4 class="card-title">{{ $career->title }}</h4>
             <p class="card-text">{!! $career->description !!}</p>
-            @if($career->jobs->count() > 0)
-                <h5 class="card-subtitle mb-2 text-muted">Jobs:</h5>
-                <ul>
-                    @foreach($career->jobs->where('is_published', 1) as $job)
-                        <li>{{ $job->posisi }}</li>
-                    @endforeach
-                </ul>
-            @endif
+            <ul>
+                @foreach($career->jobs->where('is_published', 1) as $job)
+                    <li><a href="{{ route('admin.job.show', ['job' => $job->id]) }}">{{ $job->posisi }}</a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
-    
-
   </div>
   <!-- End Content -->
   @include('scripts.delete')

@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Career;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-
-
 
 class CareerController extends Controller
 {
@@ -113,8 +110,13 @@ class CareerController extends Controller
     
         $career->update($data);
     
-        if ($request->hasFile('image')) {
-            $career->addMediaFromRequest('image')->toMediaCollection('image');
+        if ($request->hasFile('image')) { // check if a new image has been uploaded
+            if ($career->hasMedia('image')) { // check if an existing image exists
+                $career->getFirstMedia('image')->delete(); // delete the existing image
+            }
+            $career->addMediaFromRequest('image')->toMediaCollection('image'); // add the new image
+        } else if ($request->input('delete_image')) { // check if the delete image checkbox is checked
+            $career->clearMediaCollection('image'); // delete the existing image
         }
     
         if (isset($data['jobs'])) {

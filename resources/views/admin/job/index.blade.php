@@ -3,13 +3,11 @@
     <style>
     .img-custom img {
         max-width: 300px;
-        max-height: 200px;
+        max-height: 100px;
         margin: 0;
         padding: 0;
     }
     </style>
-
-        
     @endpush
     
     <!-- Content -->

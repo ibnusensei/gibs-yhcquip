@@ -13,7 +13,6 @@
               </div>
               <!-- End Col -->
 
-
               <div class="col-auto">
                   <a class="btn btn-primary" href="{{ route('admin.job.index') }}">
                       <i class="bi-chevron-left me-1"></i> Back
