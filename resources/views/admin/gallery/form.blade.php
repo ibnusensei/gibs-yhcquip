@@ -40,8 +40,6 @@
                             <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$gallery->description }}</textarea>
                         </div>
 
-
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
