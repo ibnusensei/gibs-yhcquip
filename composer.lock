@@ -7435,7 +7435,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.16" 
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.16"
             },
             "funding": [
                 {

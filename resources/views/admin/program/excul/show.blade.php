@@ -3,7 +3,7 @@
     @push('styles')
         <style>
             .img-custom {
-                height: 200px !important;
+                height: 160px !important;
                 border-radius: 0.25rem
                     /* 4px */
                 ;
@@ -22,12 +22,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Gallery</h1>
+                    <h1 class="page-header-title">Excule</h1>
                 </div>
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.gallery.index') }}">
+                    <a class="btn btn-primary" href="{{ route('admin.excul.index') }}">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
@@ -40,7 +40,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h4 class="card-title">Add Images</h4>
-                <form action="{{ route('admin.gallery.image.store', $gallery) }}" method="POST"
+                <form action="{{ route('admin.excul.image.store', $exculs) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
@@ -52,17 +52,17 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">{{ $gallery->name }}</h4>
-                <p class="card-text">{{ $gallery->description }}</p>
+                <h4 class="card-title">{{ $exculs->name }}</h4>
+                <p class="card-text">{{ $exculs->description }}</p>
 
                 {{-- media --}}
                 <div class="row ">
-                    @foreach ($gallery->getMedia('images') as $image)
+                    @foreach ($exculs->getMedia('images') as $image)
                         <div class="col-md-4 mb-4">
                             <div class="img-custom rounded mb-2">
                                 <img src="{{ $image->getUrl() }}" class="" alt="">
                             </div>
-                            <form action="{{ route('admin.gallery.image.destroy', $image) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.excul.image.destroy', $image) }}" method="POST" class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
