@@ -19,7 +19,7 @@ return new class extends Migration
             $table->tinyInteger('is_published')->default(0)->after('description');
         });
 
-        Schema::table('informations', function (Blueprint $table) {
+        Schema::table('jobs', function (Blueprint $table) {
             $table->tinyInteger('is_published')->default(0)->after('description');
         });
     }

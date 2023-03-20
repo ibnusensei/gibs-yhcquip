@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Models\Career;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-
-
 
 class CareerController extends Controller
 {
@@ -24,7 +22,7 @@ class CareerController extends Controller
 
     public function publish($id)
     {
-        $career = Career::findOrFail($id);
+        $career = Career::find($id);
         $career->is_published = !$career->is_published;
         $career->save();
 
@@ -36,39 +34,39 @@ class CareerController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $url = route('admin.career.store');
-        return view('admin.career.form', compact('url'));
+        $jobs = Job::all();
+        return view('admin.career.form', compact('url', 'jobs'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $data = $request->validate([
+            'title' => 'string|required',
             'description' => 'string|nullable',
-            'posisi' => 'string|required',
-            'unit' => 'string|required',
-            'start_date' => 'required|date_format:d/m/Y',
-            'end_date' => 'required|date_format:d/m/Y',
+            'date' => 'required|date_format:d/m/Y',
+            'jobs' => 'nullable|array',
+            'jobs.*' => 'integer|exists:jobs,id',
         ]);
-
-        $data['slug'] = Str::slug($request->posisi);
-        $data['posisi'] = $request->posisi;
-        $data['unit'] = $request->unit;
-        $data['start_date'] = Carbon::createFromFormat('d/m/Y', $data['start_date']);
-        $data['end_date'] = Carbon::createFromFormat('d/m/Y', $data['end_date']);
+    
+        $data['slug'] = Str::slug($request->title);
+        $data['date'] = Carbon::createFromFormat('d/m/Y', $data['date']);
+    
         $career = Career::create($data);
-
+    
         if ($request->hasFile('image')) {
             $career->addMediaFromRequest('image')->toMediaCollection('image');
         }
-
+    
+        if (isset($data['jobs'])) {
+            $career->jobs()->sync($data['jobs']);
+        }
+    
         toast('Your career has been submitted!', 'success');
         return redirect()->route('admin.career.index');
     }
@@ -89,7 +87,8 @@ class CareerController extends Controller
     {
         $career = Career::findOrFail($id);
         $url = route('admin.career.update', $career->id);
-        return view('admin.career.form', compact('career', 'url'));
+        $jobs = Job::all();
+        return view('admin.career.form', compact('url', 'career', 'jobs'));
     }
 
     /**
@@ -99,20 +98,18 @@ class CareerController extends Controller
     {
         $career = Career::findOrFail($id);
         $data = $request->validate([
+            'title' => 'string|required',
             'description' => 'string|nullable',
-            'posisi' => 'string|required',
-            'unit' => 'string|required',
-            'start_date' => 'required|date_format:d/m/Y',
-            'end_date' => 'required|date_format:d/m/Y',
+            'date' => 'required|date_format:d/m/Y',
+            'jobs' => 'nullable|array',
+            'jobs.*' => 'integer|exists:jobs,id',
         ]);
-
-        $data['slug'] = Str::slug($request->posisi);
-        $data['posisi'] = $request->posisi;
-        $data['unit'] = $request->unit;
-        $data['start_date'] = Carbon::createFromFormat('d/m/Y', $data['start_date']);
-        $data['end_date'] = Carbon::createFromFormat('d/m/Y', $data['end_date']);
+    
+        $data['slug'] = Str::slug($request->title);
+        $data['date'] = Carbon::createFromFormat('d/m/Y', $data['date']);
+    
         $career->update($data);
-
+    
         if ($request->hasFile('image')) { // check if a new image has been uploaded
             if ($career->hasMedia('image')) { // check if an existing image exists
                 $career->getFirstMedia('image')->delete(); // delete the existing image
@@ -121,8 +118,12 @@ class CareerController extends Controller
         } else if ($request->input('delete_image')) { // check if the delete image checkbox is checked
             $career->clearMediaCollection('image'); // delete the existing image
         }
-
-        toast('Your career has been updated!','success');
+    
+        if (isset($data['jobs'])) {
+            $career->jobs()->sync($data['jobs']);
+        }
+    
+        toast('Your career has been updated!', 'success');
         return redirect()->route('admin.career.index');
     }
 
@@ -132,8 +133,6 @@ class CareerController extends Controller
     public function destroy(Career $career)
     {
         $career->delete();
-        toast('Your career has been deleted!', 'success');
         return redirect()->route('admin.career.index');
     }
-
 }

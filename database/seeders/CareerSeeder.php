@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Career;
-use carbon\Carbon;
+use App\Models\Job;
+use Faker\Factory as Faker;
 
 class CareerSeeder extends Seeder
 {
@@ -14,40 +15,21 @@ class CareerSeeder extends Seeder
      */
     public function run(): void
     {
-        $careers = [
-            [
-                'slug' => 'web-developer',
-                'description' => 'We are looking for an experienced web developer to join our team.',
-                'posisi' => 'Web Developer',
-                'start_date' => Carbon::now(),
-                'end_date' => Carbon::now()->addDays(30),
-                'unit' => 'IT',
-                'is_published' => true,
-            ],
-            [
-                'slug' => 'graphic-designer',
-                'description' => 'We are seeking a talented graphic designer to create stunning visual content.',
-                'posisi' => 'Graphic Designer',
-                'start_date' => Carbon::now(),
-                'end_date' => Carbon::now()->addDays(30),
-                'unit' => 'Marketing',
-                'is_published' => true,
-            ],
-            [
-                'slug' => 'sales-executive',
-                'description' => 'We are looking for a motivated sales executive to join our growing team.',
-                'posisi' => 'Sales Executive',
-                'start_date' => Carbon::now(),
-                'end_date' => Carbon::now()->addDays(30),
-                'unit' => 'Sales',
-                'is_published' => true,
-            ],
-        ];
+        $faker = Faker::create();
 
-        foreach ($careers as $career) {
-            $career = Career::create($career);
-            // You can also add media to the career model here if needed
+        foreach (range(1, 10) as $index) {
+            $career = Career::create([
+                'title' => $faker->jobTitle(),
+                'description' => $faker->paragraph(),
+                'date' => $faker->dateTimeThisYear(),
+                'slug' => $faker->unique()->slug(),
+                'is_published' => true,
+            ]);
+        
+            $jobs = $faker->randomElements($array = [1, 2, 3, 4, 5, 6, 7], $count = $faker->numberBetween(3, 7));
+            $career->jobs()->sync($jobs);
+        
         }
+        
     }
-    
 }

@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\CareerController as AdminCareerController;
-use App\Http\Controllers\Admin\InformationController as AdminInformationController;
+use App\Http\Controllers\Admin\JobController as AdminJobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
@@ -49,10 +49,10 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::resource('career', AdminCareerController::class);
     Route::post('career-publish/{career}', [AdminCareerController::class, 'publish'])->name('career.publish');
 
-    // information
-    Route::resource('information', AdminInformationController::class);
-    Route::post('information-image/{information}', [AdminInformationController::class, 'imageStore'])->name('information.image.store');
-    Route::delete('information-image/{information}', [AdminInformationController::class, 'imageDestroy'])->name('information.image.destroy');
+    // job
+    Route::resource('job', AdminJobController::class);
+    Route::post('job-publish/{job}', [AdminJobController::class, 'publish'])->name('job.publish');
+
 
     // event
     Route::resource('event', EventController::class);

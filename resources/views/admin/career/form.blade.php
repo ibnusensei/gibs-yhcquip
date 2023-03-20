@@ -24,42 +24,63 @@
         <div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3 card-title">{{ @$career ? 'Edit' : 'Create' }} career</h4>
+                    <h4 class="mb-3 card-title">{{ @$career ? 'Edit' : 'Create' }} Career</h4>
                     <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         @if (@$career)
                             @method('PUT')
                         @endif
                         @csrf
-                        <div class="mb-3">
-                            <label class="form-label" for="posisi">Posisi</label>
-                            <input type="text" id="posisi" class="form-control" name="posisi"
-                                placeholder="Posisi" value="{{ @$career->posisi}}">
-                        </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="unit">Unit</label>
-                            <input type="text" id="unit" class="form-control" name="unit"
-                                placeholder="Unit" value="{{ @$career->unit}}">
+                            <label class="form-label" for="title">title</label>
+                            <input type="text" id="title" class="form-control" name="title"
+                                placeholder="title" value="{{ @$career->title}}">
                         </div>
+
+                        
+                        {{-- ckeditor description --}}
 
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
                             <textarea id="editor" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$career->description }}</textarea>
                         </div>
 
-                        <!-- Flatpickr -->
-                        <div class="mb-3">
-                            <label class="form-label" for="start_date">start_date</label>
-                            <input type="text" name="start_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select start_date" value="{{ @$career->start_date }}"
-                            data-hs-flatpickr-options='{
-                                "dateFormat": "d/m/Y"
-                            }'>
+                        {{-- ckeditor description end --}}
 
+                        <div class="mb-3">
+                            <label class="form-label">Jobs</label>
+                            <div class="form-check">
+                                @php
+                                $jobsCount = count($jobs);
+                                $perColumn = ceil($jobsCount / 3); // Change 3 to the desired number of columns
+                                $columnIndex = 0;
+                                @endphp
+                                @foreach($jobs->where('is_published', 1) as $job)
+                                    @if($columnIndex == 0)
+                                        <div class="form-check form-check-inline">
+                                    @endif
+                                    <input class="form-check-input" type="checkbox" name="jobs[]" value="{{ $job->id }}" id="job{{ $job->id }}"
+                                        @if(isset($career) && in_array($job->id, $career->jobs->pluck('id')->toArray())) checked @endif>
+                                    <label class="form-check-label" for="job{{ $job->id }}">
+                                        {{ $job->posisi }}
+                                    </label>
+                                    <br>
+                                    @php
+                                    $columnIndex++;
+                                    if($columnIndex >= $perColumn || $loop->last)
+                                    {
+                                        $columnIndex = 0;
+                                        echo "</div>";
+                                    }
+                                    @endphp
+                                @endforeach
+                            </div>
                         </div>
 
+                        <!-- Flatpickr -->
                         <div class="mb-3">
-                            <label class="form-label" for="end_date">end_date</label>
-                            <input type="text" name="end_date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select end_date" value="{{ @$career->end_date }}"
+                            <label class="form-label" for="date">Date</label>
+                            <input type="text" name="date" class="js-flatpickr form-control flatpickr-custom" placeholder="Select date" value="{{ @$career->date }}"
                             data-hs-flatpickr-options='{
                                 "dateFormat": "d/m/Y"
                             }'>
@@ -101,9 +122,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
-
-    </script>    
+    </script>     
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ) )

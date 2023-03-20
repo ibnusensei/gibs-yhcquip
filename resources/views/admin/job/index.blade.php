@@ -16,12 +16,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Career</h1>
+                    <h1 class="page-header-title">Job</h1>
                 </div>
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.career.create') }}">
+                    <a class="btn btn-primary" href="{{ route('admin.job.create') }}">
                         <i class="bi-plus me-1"></i> Create
                     </a>
                 </div>
@@ -33,41 +33,39 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Careers Data</h4>
+                <h4 class="card-title">Jobs Data</h4>
                 <div class="table-responsive">
                     <table id="table_data" class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>No</th>
+                                <th>Posisi</th>
+                                <th>Unit</th>
                                 <th>Description</th>
-                                <th>Poster</th>
                                 <th>Publish</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody class="table-align-middle">
-                            @forelse ($careers as $career)
+                            @forelse ($jobs as $job)
                                 <tr>
-                                    <td scope="row">{{ $career->title }}</td>
-                                    <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($career->description, 50) !!}</td>
-                                    <td class="img-custom">@if ($career->getFirstMedia('image'))
-                                        <img src="{{ $career->getFirstMediaUrl('image') }}" class="img-thumbnail" alt="">
-                                    @endif</td>
+                                    <td>{{ $job->id }}</td>
+                                    <td>{{ $job->posisi }}</td>
+                                    <td>{{ $job->unit }}</td>
+                                    <td style="white-space: pre-wrap; max-width: 200px">{!! Str::limit($job->description, 50) !!}</td>
                                     <td>
-                                        <form class="publishForm" action="{{ route('admin.career.publish', $career->id) }}" method="POST">
+                                        <form class="publishForm" action="{{ route('admin.job.publish', $job->id) }}" method="POST">
                                             @csrf
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $career->is_published ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="publishSwitch">{{ $career->is_published ? 'Published' : 'Unpublished' }}</label>
+                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $job->is_published ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="publishSwitch">{{ $job->is_published ? 'Published' : 'Unpublished' }}</label>
                                             </div>
                                         </form>
                                     </td>
                                     <td>
-                                        <a name="" id="" class="btn btn-outline-primary btn-sm"
-                                            href="{{ route('admin.career.edit', $career) }}">Edit</a>
-                                        <a name="" id="" class="btn btn-outline-info btn-sm"
-                                            href="{{ route('admin.career.show', $career) }}">Show</a>
-                                        <form action="{{ route('admin.career.destroy', $career) }}" method="POST" class="d-inline">
+                                        <a name="" id="" class="btn btn-outline-primary btn-sm" href="{{ route('admin.job.edit', $job) }}">Edit</a>
+                                        <a name="" id="" class="btn btn-outline-info btn-sm" href="{{ route('admin.job.show', $job) }}">Show</a>
+                                        <form action="{{ route('admin.job.destroy', $job) }}" method="POST" class="d-inline">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
@@ -76,9 +74,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data</td>
+                                    <td colspan="6" class="text-center">No Data</td>
                                 </tr>
                             @endforelse
+
                         </tbody>
                     </table>
                 </div>
@@ -86,7 +85,6 @@
         </div>
     </div>
     <!-- End Content -->
-    
     @include('scripts.delete')
 
     @push('scripts')
