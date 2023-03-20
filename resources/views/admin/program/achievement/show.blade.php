@@ -59,8 +59,7 @@
                       <span class="d-block m-5">Pencapaian</span>
                       <span class="d-block m-5">Lokasi</span>
                       <span class="d-block m-5">Tahun</span>
-                      <span class="d-block m-5">Nama</span>
-                      <span class="d-block m-5">Asal</span>
+                      <span class="d-block m-5">Peraih</span>
 
 
                     </div>
@@ -71,8 +70,12 @@
                         <span class="d-block m-5">{{ $achievement->achiev }}</span>
                         <span class="d-block m-5">{{ $achievement->location }}</span>
                         <span class="d-block m-5">{{ $achievement->year }}</span>
-                        <span class="d-block m-5">{{ $achievement->name }}</span>
-                        <span class="d-block m-5"> {{ $achievement->from }}</span>
+                        <span class="d-block m-5">
+                            @foreach ($achievement->gainer as $item)
+                                {{ $item->name}} ({{ $item->from}}) <br>
+                            @endforeach
+                        </span>
+
                     </div>
                     <!-- End Col -->
                   </div>

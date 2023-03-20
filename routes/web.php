@@ -60,6 +60,7 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
     // Achievement
     Route::resource('achievement', AdminProgramAchievementController::class);
+    // Route::post('/achievement/update/{id}', [AdminProgramAchievementController::class, 'update'])->name('achievement.update');
     Route::post('achievement-image/{achievement}', [AdminProgramAchievementController::class, 'imageStore'])->name('achievement.image.store');
     Route::delete('achievement-image/{achievement}', [AdminProgramAchievementController::class, 'imageDestroy'])->name('achievement.image.destroy');
     Route::post('achievement-publish/{achievement}', [AdminProgramAchievementController::class, 'publish'])->name('achievement.publish');

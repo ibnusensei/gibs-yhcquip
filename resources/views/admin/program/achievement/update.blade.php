@@ -72,37 +72,36 @@
 
                         </div> --}}
 
-
-                        <div class="form-group row mb-1">
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Gainer</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name[]" value="{{ @$achievement->gainer->name }}"
-                                    placeholder="Enter Name" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="from[]" value="{{ @$achievement->gainer->from }}"
-                                    placeholder="From ..." required>
-                            </div>
-
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-10">
                                 <a href="javascript:;" class="addGainer form-link mb-2"><i class="bi-plus-circle me-1"></i>Add Gainer</a>
                             </div>
                         </div>
 
+                        @foreach ($achievement->gainer as $gainer)
+                        <div>
+                        <div class="form-group row mb-1">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name[]" value="{{ @$gainer->name }}"placeholder="Enter Name" required>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="javascript:;" class="remove link-danger" style="float:right;">
+                                    <i class="bi-x-circle"></i>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-9"><input type="text" class="form-control" name="from[]" value="{{ @$gainer->from }}"placeholder="From ..." required>
+                        </div>
 
-
-
+                    </div>
+                </div>
+                        @endforeach
 
                         <div class="gainer"></div>
-
-
 
                         <div class="mb-3">
                             <label for="level_id" class="form-label">Level</label>
@@ -173,15 +172,13 @@
         });
         // <a href="#" class="remove btn btn-danger" style="float: right;">Hapus</a>
         function addGainer() {
-            var gainer = '<div><div class="form-group row mb-1"><label class="col-sm-2 col-form-label"></label><div class="col-sm-9"><input type="text" class="form-control" name="name[]" value="{{ @$achievement->gainer->name }}"placeholder="Enter Name" required></div><div class="col-sm-1"><a href="javascript:;" class="remove link-danger" style="float:right;"><i class="bi-x-circle"></i></a></div></div><div class="form-group row mb-3"><label class="col-sm-2 col-form-label"></label><div class="col-sm-9"><input type="text" class="form-control" name="from[]" value="{{ @$achievement->gainer->from }}"placeholder="From ..." required></div></div></div>'
+            var gainer = '<div><div class="form-group row mb-1"><label class="col-sm-2 col-form-label"></label><div class="col-sm-9"><input type="text" class="form-control" name="name[]" value="{{ @$achievements->gainer->name }}"placeholder="Enter Name" required></div><div class="col-sm-1"><a href="javascript:;" class="remove link-danger" style="float:right;"><i class="bi-x-circle"></i></a></div></div><div class="form-group row mb-3"><label class="col-sm-2 col-form-label"></label><div class="col-sm-9"><input type="text" class="form-control" name="from[]" value="{{ @$achievements->gainer->from }}"placeholder="From ..." required></div></div></div>'
         $('.gainer').append(gainer);
         };
         $('.remove').live('click', function() {
             $(this).parent().parent().parent().remove();
         });
     </script>
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

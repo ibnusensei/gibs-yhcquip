@@ -18,11 +18,15 @@ return new class extends Migration
             $table->string('slug');
             $table->string('location');
             $table->year('year');
-            $table->string('name');
-            $table->string('from');
+            // $table->string('name');
+            // $table->string('from');
             $table->foreignId('level_id');
             $table->foreignId('user_id');
             $table->timestamps();
+        });
+
+        Schema::table('gainers', function (Blueprint $table) {
+            $table->foreignId('achievement_id')->default(1)->after('from')->constrained('achievements');
         });
     }
 

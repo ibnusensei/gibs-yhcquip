@@ -20,7 +20,7 @@ class Achievement extends Model implements HasMedia
      *
      * @var array
      */
-    protected $fillable = ['achiev', 'title', 'slug', 'location', 'year', 'name', 'from', 'level_id', 'user_id', 'is_published'];
+    protected $fillable = ['achiev', 'title', 'slug', 'location', 'year', 'level_id', 'user_id', 'is_published'];
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -40,6 +40,11 @@ class Achievement extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function gainer()
+    {
+        return $this->hasMany('App\Models\Gainer', 'achievement_id');
     }
 
     /**
