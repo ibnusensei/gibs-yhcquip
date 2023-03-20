@@ -62,7 +62,8 @@
                             <div class="img-custom rounded mb-2">
                                 <img src="{{ $image->getUrl() }}" class="" alt="">
                             </div>
-                            <form action="{{ route('admin.gallery.image.destroy', $gallery) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.gallery.image.destroy', $gallery) }}" method="POST"
+                                class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>

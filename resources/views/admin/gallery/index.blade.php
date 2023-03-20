@@ -1,8 +1,7 @@
 <x-app-layout>
     @push('styles')
-        
     @endpush
-    
+
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -46,13 +45,15 @@
                                             href="{{ route('admin.gallery.edit', $gallery) }}">Edit</a>
                                         <a name="" id="" class="btn btn-outline-info btn-sm"
                                             href="{{ route('admin.gallery.show', $gallery) }}">Show</a>
-                                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST"
+                                            class="d-inline">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
+
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">No Data</td>
@@ -65,6 +66,6 @@
         </div>
     </div>
     <!-- End Content -->
-    
+
     @include('scripts.delete')
 </x-app-layout>

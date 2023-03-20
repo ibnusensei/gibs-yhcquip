@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\CareerController as AdminCareerController;
 use App\Http\Controllers\Admin\InformationController as AdminInformationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
 // administrator
-Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
+Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // gallery
@@ -52,8 +54,9 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::post('information-image/{information}', [AdminInformationController::class, 'imageStore'])->name('information.image.store');
     Route::delete('information-image/{information}', [AdminInformationController::class, 'imageDestroy'])->name('information.image.destroy');
 
+    // event
+    Route::resource('event', EventController::class);
+    Route::post('image', [EventController::class, 'imageStore'])->name('event.image.store');
 });
 
-
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
