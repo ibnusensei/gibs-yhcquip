@@ -30,26 +30,12 @@
         <form action="">
                 {{-- level --}}
             <div class="row mb-3">
-                {{-- <div class="col-md-3">
-                    <select name="level" class="form-control" onchange="form.submit()">
-                        <option value="">Semua Jenjang</option>
-                        @foreach ($levels as $item)
-                            <option value="{{ $item->slug }}"
-                                {{ @$_GET['level'] == $item->slug ? 'selected' : ''}}>
-                                {{ $item->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div> --}}
 
                 {{-- Searching --}}
             <div class="col-md-5 col-lg-5">
 
                 <!-- Input Card -->
                 <div class="input-group input-group-merge">
-                  {{-- <span class="input-group-prepend input-group-text">
-                      <i class="bi-search"></i>
-                    </span> --}}
                   <input type="text" class="form-control" placeholder="Search for Title ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
                   <button class="btn btn-warning"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button>
                 </div>
@@ -82,9 +68,6 @@
                                     <td scope="row">
 
                                             <span class="avatar avatar-sm avatar-circle">
-                                                {{-- @if ($exculs->getFirstMedia('images'))
-                                        <img src="{{ $exculs->getFirstMediaUrl('images') }}" class="avatar-img" alt="">
-                                    @endif --}}
                                                 <img class="avatar-img" src="{{$excul->getFirstMediaUrl('images')}}" alt="######">
                                               </span>
 
@@ -122,7 +105,7 @@
                     </table>
                 </div>
             </div>
-            {{-- {{ $excul->withQueryString()->links()}} --}}
+
         </div>
         {{ $exculs->withQueryString()->links()}}
     </div>

@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Facades\DB;
+
 
 class StreamsController extends Controller
 {
@@ -35,10 +37,6 @@ class StreamsController extends Controller
         ];
 
         return view('admin.program.streams.index', $data);
-        // data gallery
-        // $streams = Streams::all();
-        // return response()->json($galleries);
-        // return view('admin.program.streams.index', compact('streams'))->with('user');
     }
 
 
@@ -72,27 +70,26 @@ class StreamsController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $data = $request->validate([
-            'name' => 'string|required',
-            'description' => 'string|nullable'
-        ]);
 
-        $data['slug'] = Str::slug($request->name);
-        $data['user_id'] = Auth()->user()->id;
-        $streams = Streams::create($data);
+        try {
 
-        // if ($request->has('images')) {
-        //     $streams->addMediaFromRequest(['images'])
-        //     ->each(function ($fileAdder) {
-        //         $fileAdder->toMediaCollection('images');
-        //     });
-        // }
+            DB::beginTransaction();
 
-        // if ($request->hasFile('images')) {
-        //     $streams->addMediaFromRequest('images')->toMediaCollection('images');
-        // }
+            $data = $request->validate([
+                'name' => 'string|required',
+                'description' => 'string|nullable'
+            ]);
 
-        // image
+            $data['slug'] = Str::slug($request->name);
+            $data['user_id'] = Auth()->user()->id;
+            $streams = Streams::create($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         toast('Your Streams has been created!','success');
         return redirect()->route('admin.streams.index');
@@ -115,10 +112,7 @@ class StreamsController extends Controller
     {
         $streams = Streams::findOrFail($id);
         $url = route('admin.streams.update', $streams);
-        // $data = [
-        //     'gallery' => Gallery::findOrFail($id),
-        //     'url' => route('admin.gallery.update', $gallery)
-        // ];
+
         return view('admin.program.streams.form', compact('url', 'streams'));
     }
 
@@ -128,24 +122,27 @@ class StreamsController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request->all());
-        $streams = Streams::findOrFail($id);
-        $data = $request->validate([
-            'name' => 'string|required',
-            'description' => 'string|nullable'
-        ]);
 
-        $data['slug'] = Str::slug($request->name);
-        $data['user_id'] = Auth()->user()->id;
-        $streams->update($data);
+        try {
 
-        // if ($request->hasFile('images')) { // check if a new image has been uploaded
-        //     if ($streams->hasMedia('images')) { // check if an existing image exists
-        //         $streams->getFirstMedia('images')->delete(); // delete the existing image
-        //     }
-        //     $streams->addMediaFromRequest('images')->toMediaCollection('images'); // add the new image
-        // } else if ($request->input('delete_images')) { // check if the delete image checkbox is checked
-        //     $streams->clearMediaCollection('images'); // delete the existing image
-        // }
+            DB::beginTransaction();
+
+            $streams = Streams::findOrFail($id);
+            $data = $request->validate([
+                'name' => 'string|required',
+                'description' => 'string|nullable'
+            ]);
+
+            $data['slug'] = Str::slug($request->name);
+            $data['user_id'] = Auth()->user()->id;
+            $streams->update($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         toast('Your Streams has been updated!','success');
         return redirect()->route('admin.streams.index');

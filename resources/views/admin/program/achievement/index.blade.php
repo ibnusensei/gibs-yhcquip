@@ -31,12 +31,6 @@
             {{-- level --}}
         <div class="row mb-3">
 
-            {{-- <div class="col d-md-flex align-items-md-center text-center">
-                <span class="d-block me-md-3 mb-2 mb-md-1">Level:</span>
-                <a class="btn btn-soft-secondary btn-xs rounded-pill m-1" href="javascript:;">SMP</a>
-                <a class="btn btn-soft-secondary btn-xs rounded-pill m-1" href="javascript:;">SMA</a>
-              </div> --}}
-
             <div class="col-md-3">
                 <select name="level" class="form-select" onchange="form.submit()">
                     <option value="">Semua Jenjang</option>
@@ -55,9 +49,7 @@
 
                   <!-- Input Card -->
                   <div class="input-group input-group-merge">
-                    {{-- <span class="input-group-prepend input-group-text">
-                        <i class="bi-search"></i>
-                      </span> --}}
+
                     <input type="text" class="form-control" placeholder="Search for Title ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
                     <button class="btn btn-warning"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button>
                   </div>
@@ -65,24 +57,7 @@
 
               </div>
 
-              {{-- <div class="d-md-flex input-group">
-                <input type="text" class="form-control ms-10" placeholder="Search articles" aria-label="Search articles" name="search" value="{{ @$_GET['search'] }}">
 
-                    <button class="btn btn-warning">
-                        <i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i>
-                    </button>
-              </div> --}}
-
-              {{-- <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ @$_GET['search'] }}">
-            </div>
-            <div class="col-md-5">
-                <a href="{{ @$_GET['search'] }}">
-                    <button class="btn btn-warning">
-                        <i class="bi-search"></i>
-                    </button>
-                </a>
-            </div> --}}
 
         </form>
 
@@ -143,19 +118,12 @@
                             @empty
                                 <tr>
                                     <td colspan="55" class="text-center pt-5">No Data</td>
-                                    {{-- <div class="col-auto"> --}}
-                                        {{-- <a class="btn btn-primary" href="{{ route('admin.achievement.index') }}">
-                                            <i class="bi-chevron-left me-1"></i> Back
-                                        </a> --}}
-                                    {{-- </div> --}}
-                                    <!-- End Col -->
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
-            {{-- {{ $achievement->withQueryString()->links()}} --}}
         </div>
             {{ $achievements->withQueryString()->links()}}
 

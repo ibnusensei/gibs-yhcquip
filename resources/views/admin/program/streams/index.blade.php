@@ -30,17 +30,7 @@
         <form action="">
                 {{-- level --}}
             <div class="row mb-3">
-                {{-- <div class="col-md-3">
-                    <select name="level" class="form-control" onchange="form.submit()">
-                        <option value="">Semua Jenjang</option>
-                        @foreach ($levels as $item)
-                            <option value="{{ $item->slug }}"
-                                {{ @$_GET['level'] == $item->slug ? 'selected' : ''}}>
-                                {{ $item->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div> --}}
+
 
                 {{-- Searching --}}
             <div class="col-md-5 col-lg-5">
@@ -122,7 +112,7 @@
                     </table>
                 </div>
             </div>
-            {{-- {{ $streams->withQueryString()->links()}} --}}
+
         </div>
         {{ $streams->withQueryString()->links()}}
     </div>

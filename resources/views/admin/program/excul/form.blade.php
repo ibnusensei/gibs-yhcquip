@@ -32,41 +32,13 @@
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
                             <input type="text" id="name" class="form-control" name="name"
-                                placeholder="Name of excul" value="{{ @$exculs->name }}">
+                                placeholder="Name of Excule, Ex: Pramuka " value="{{ old('name', @$exculs->name) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$exculs->description }}</textarea>
+                            <textarea id="description" name="description" class="form-control" placeholder="Excule Description..." rows="4" required>{{ old('description', @$exculs->description) }}</textarea>
                         </div>
-
-                        {{-- <div class="mb-3">
-                            <h4 class="card-title">Add Images</h4>
-                <form action="{{ route('admin.excul.image.store', $exculs) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <input type="file" id="customFileEg1" name="images[]" multiple class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-                </form>
-                        </div> --}}
-
-                        {{-- <div class="mb-3">
-                            <label class="form-label" for="image">Image</label>
-                            <input type="file" id="image" name="image" class="form-control" onchange="previewImage(this);">
-                        </div>
-                        <div class="mb-3" id="preview">
-                            @if (@$exculs && $exculs ->hasMedia('images'))
-                                <img src="{{ $exculs->getFirstMediaUrl('images') }}" alt="">
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" value="1" name="delete_images" id="delete_images">
-                                    <label class="form-check-label" for="delete_images">
-                                        Delete existing image
-                                    </label>
-                                </div>
-                            @endif
-                        </div> --}}
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -76,18 +48,4 @@
 
     </div>
     <!-- End Content -->
-
-    @push('scripts')
-    <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#preview').html('<img src="' + e.target.result + '" alt="">');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-    @endpush
 </x-app-layout>

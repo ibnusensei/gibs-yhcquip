@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Facades\DB;
+
 
 class ExculController extends Controller
 {
@@ -35,10 +37,7 @@ class ExculController extends Controller
         ];
 
         return view('admin.program.excul.index', $data);
-        // data gallery
-        // $exculs = Excul::all();
-        // return response()->json($galleries);
-        // return view('admin.program.excul.index', compact('exculs'))->with('user');
+
     }
 
     public function publish($id)
@@ -71,27 +70,26 @@ class ExculController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $data = $request->validate([
-            'name' => 'string|required',
-            'description' => 'string|nullable'
-        ]);
 
-        $data['slug'] = Str::slug($request->name);
-        $data['user_id'] = Auth()->user()->id;
-        $exculs = Excul::create($data);
+        try {
 
-        // if ($request->has('images')) {
-        //     $exculs->addMediaFromRequest(['images'])
-        //     ->each(function ($fileAdder) {
-        //         $fileAdder->toMediaCollection('images');
-        //     });
-        // }
+            DB::beginTransaction();
 
-        // if ($request->hasFile('images')) {
-        //     $exculs->addMediaFromRequest('images')->toMediaCollection('images');
-        // }
+            $data = $request->validate([
+                'name' => 'string|required',
+                'description' => 'string|nullable'
+            ]);
 
-        // image
+            $data['slug'] = Str::slug($request->name);
+            $data['user_id'] = Auth()->user()->id;
+            $exculs = Excul::create($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         toast('Your excul has been created!','success');
         return redirect()->route('admin.excul.index');
@@ -114,10 +112,6 @@ class ExculController extends Controller
     {
         $exculs = Excul::findOrFail($id);
         $url = route('admin.excul.update', $exculs);
-        // $data = [
-        //     'gallery' => Gallery::findOrFail($id),
-        //     'url' => route('admin.gallery.update', $gallery)
-        // ];
         return view('admin.program.excul.form', compact('url', 'exculs'));
     }
 
@@ -127,24 +121,25 @@ class ExculController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request->all());
-        $exculs = Excul::findOrFail($id);
-        $data = $request->validate([
-            'name' => 'string|required',
-            'description' => 'string|nullable'
-        ]);
+        try {
 
-        $data['slug'] = Str::slug($request->name);
-        $data['user_id'] = Auth()->user()->id;
-        $exculs->update($data);
+            DB::beginTransaction();
+            $exculs = Excul::findOrFail($id);
+            $data = $request->validate([
+                'name' => 'string|required',
+                'description' => 'string|nullable'
+            ]);
 
-        // if ($request->hasFile('images')) { // check if a new image has been uploaded
-        //     if ($exculs->hasMedia('images')) { // check if an existing image exists
-        //         $exculs->getFirstMedia('images')->delete(); // delete the existing image
-        //     }
-        //     $exculs->addMediaFromRequest('images')->toMediaCollection('images'); // add the new image
-        // } else if ($request->input('delete_images')) { // check if the delete image checkbox is checked
-        //     $exculs->clearMediaCollection('images'); // delete the existing image
-        // }
+            $data['slug'] = Str::slug($request->name);
+            $data['user_id'] = Auth()->user()->id;
+            $exculs->update($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         toast('Your excul has been updated!','success');
         return redirect()->route('admin.excul.index');

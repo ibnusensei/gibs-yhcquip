@@ -33,19 +33,18 @@
                         <div class="mb-3">
                             <label class="form-label" for="title">Title</label>
                             <input type="text" id="title" class="form-control" name="title"
-                                placeholder="Title of program" value="{{ @$unggulan->title }}">
+                                placeholder="Title of Program, Ex: Tadarus" value="{{ old('title', @$unggulan->title) }}" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="location">Keunggulan</label>
-                            <input type="text" id="superiority" class="form-control" name="superiority"
-                                placeholder="Superiority" value="{{ @$unggulan->superiority }}">
-                        </div>
+                            <label class="form-label" for="superiority">Keunggulan</label>
+                            <textarea id="superiority" name="superiority" class="form-control" placeholder="Program Superiority..." rows="4" required>{{ old('superiority', @$unggulan->superiority) }}</textarea>
+                            </div>
 
                         <div class="mb-3">
                             <label for="program_category_id" class="form-label">Program Category</label>
                             <select name="program_category_id" class="form-control">
-                                <option value="">-Silahkan Pilih-</option>
+                                <option value="">- Silahkan Pilih -</option>
                                 @foreach ($program_categories as $item)
                                     <option value="{{ $item->id }}"
                                         {{ old('program_category_id', @$unggulan->program_category_id) == $item->id ? 'selected' : '' }}> {{ $item->name }}

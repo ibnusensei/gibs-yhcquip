@@ -55,9 +55,7 @@
 
                   <!-- Input Card -->
                   <div class="input-group input-group-merge">
-                    {{-- <span class="input-group-prepend input-group-text">
-                        <i class="bi-search"></i>
-                      </span> --}}
+
                     <input type="text" class="form-control" placeholder="Search for Title ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
                     <button class="btn btn-warning"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button>
                   </div>
@@ -65,24 +63,7 @@
 
               </div>
 
-              {{-- <div class="d-md-flex input-group">
-                <input type="text" class="form-control ms-10" placeholder="Search articles" aria-label="Search articles" name="search" value="{{ @$_GET['search'] }}">
 
-                    <button class="btn btn-warning">
-                        <i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i>
-                    </button>
-              </div> --}}
-
-              {{-- <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ @$_GET['search'] }}">
-            </div>
-            <div class="col-md-5">
-                <a href="{{ @$_GET['search'] }}">
-                    <button class="btn btn-warning">
-                        <i class="bi-search"></i>
-                    </button>
-                </a>
-            </div> --}}
 
         </form>
 
@@ -143,19 +124,14 @@
                             @empty
                                 <tr>
                                     <td colspan="55" class="text-center pt-5">No Data</td>
-                                    {{-- <div class="col-auto"> --}}
-                                        {{-- <a class="btn btn-primary" href="{{ route('admin.unggulan.index') }}">
-                                            <i class="bi-chevron-left me-1"></i> Back
-                                        </a> --}}
-                                    {{-- </div> --}}
-                                    <!-- End Col -->
+
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
-            {{-- {{ $unggulan->withQueryString()->links()}} --}}
+
         </div>
             {{ $unggulans->withQueryString()->links()}}
 

@@ -14,17 +14,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
 use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Support\Facades\DB;
+
 
 class AchievementController extends Controller
 {
     public $levels;
     public $users;
-    // public $gainers;
 
     public function __construct() {
         $this->levels = Level::all();
         $this->users = User::all();
-        // $this->gainers = Gainer::all();
 
     }
     /**
@@ -79,104 +79,36 @@ class AchievementController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        // insert data
-        // $data['achievement_id'] = $request->id;
-        // return $achievement_id->id;
-        // $data = $request ->validate ([
-        //     'achiev' => 'string|required',
-        //     'title' => 'string|required',
-        //     'location' => 'string|required',
-        //     'year' => 'required',
-        //     'name' => 'string|required',
-        //     'from' => 'string|required',
-        //     'level_id' => 'required',
 
-        // ]);
+        try {
 
+            DB::beginTransaction();
 
-        // $data['slug'] = Str::slug($request->title);
-        // $data['user_id'] = Auth()->user()->id;
+            $data = $request->all();
+            $data['slug'] = Str::slug($request->title);
+            $data['user_id'] = Auth()->user()->id;
+            $achievement = Achievement::create($data);
 
-        // foreach($request->from as $value){
-        //   Achievement::create([
-        //     'achiev' => $request->achiev,
-        //     'title' => $request->title,
-        //     'location' => $request->location,
-        //     'year' => $request->year,
-        //     'name' => $request->name,
-        //     'from' => $value,
-        //     'level_id' => $request->level_id,
-        //     'slug' => Str::slug($request->title),
-        //     'user_id' => Auth()->user()->id,
-        // ]);
-        // }
-
-        // $achievement = Achievement::create($data);
-
-        // return $request->id;
-        // return($request);
-        // Achievement::create([
-        //     'achiev' => $data['achiev'],
-        //     'title' => $data['title'],
-        //     'location' => $data['location'],
-        //     'year' => $data['year'],
-        //     'level_id' => $data['level_id'],
-        //     'slug' => $data['slug'],
-        //     'user_id' => $data['user_id'],
-        // ]);
-
-        // $achievement_id = Achievement::latest()->first();
-        // $data['achievement_id'] = $achievement_id->id;
-
-        // $gainer = Gainer::create($data);
-        // return $achievement_id->id;
-
-        // foreach ($data = $request->name as $value) {
-        //     Gainer::create([
-        //         'name' => $value,
-        //         'from' => $data['from'],
-        //         'achievement_id' => $data['achievement_id'],
-        //     ]);
-        // }
-
-        // for ($i = 1; $i<count($request->name); $i++) {
-        //     Gainer::create([
-        //         'name' => $request->name[$i],
-        //         'from' => $request->from[$i],
-        //         'achievement_id' => $achievement_id->id,
-        //     ]);
-        // }
-
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
-        $data['user_id'] = Auth()->user()->id;
-        // dd($data);
-        // $achievement = new Achievement;
-        // $achievement->achiev = $data['achiev'];
-        // $achievement->title = $data['title'];
-        // $achievement->location = $data['location'];
-        // $achievement->year = $data['year'];
-        // $achievement->level_id = $data['level_id'];
-        // $achievement->slug = $data['slug'];
-        // $achievement->user_id = $data['user_id'];
-        // $achievement->save();
-        $achievement = Achievement::create($data);
-
-        if ($request->name) {
-            foreach ($data['name'] as $item => $value) {
-                $data2 = array(
-                    'achievement_id' => $achievement->id,
-                    'name' => $data['name'][$item],
-                    'from' => $data['from'][$item],
-                );
-                Gainer::create($data2);
+            if ($request->name) {
+                foreach ($data['name'] as $item => $value) {
+                    $data2 = array(
+                        'achievement_id' => $achievement->id,
+                        'name' => $data['name'][$item],
+                        'from' => $data['from'][$item],
+                    );
+                    Gainer::create($data2);
+                };
             };
-        };
 
+            DB::commit();
+
+        } catch (\Throwable $th) {
+
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         //return succes
-        // flash('Book was stored!');
         toast('Your Achievement has been created!','success');
         return to_route('admin.achievement.index');
     }
@@ -189,7 +121,6 @@ class AchievementController extends Controller
     {
         $achievement = Achievement::findOrFail($id);
         $achievement = Achievement::where('id', $id)->first();
-        // $gainer = Gainer::findOrFail($id);
         return view('admin.program.achievement.show', compact('achievement'));
     }
 
@@ -202,11 +133,7 @@ class AchievementController extends Controller
         $achievement = Achievement::findOrFail($id);
         $url = route('admin.achievement.update', $achievement->id);
         $levels = Level::all();
-        // $data = [
-        //     'url' => route('admin.achievement.update', $achievement->id),
-        //     'levels' => Level::all(),
-        //     'achievement' => $achievement,
-        // ];
+
         return view('admin.program.achievement.update', compact('achievement', 'levels', 'url'));
     }
 
@@ -215,46 +142,40 @@ class AchievementController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // update data
-        // $achievements = Achievement::findOrFail($id);
-        // $gainers = Gainer::findOrFail($id);
+        try {
 
-        $achievements = Achievement::with('gainer')->find($id);
-        Gainer::where('achievement_id', $id)->delete();
+            DB::beginTransaction();
 
+            $achievement = Achievement::with('gainer')->find($id);
+            Gainer::where('achievement_id', $id)->delete();
 
-        $data = $request->all();
-        $data['levels'] = Level::All();
+            $data = $request->all();
+            $data['levels'] = Level::All();
+            $data['slug'] = Str::slug($request->title);
+            $data['user_id'] = Auth()->user()->id;
 
-        // $data= $request->validate ([
-        //     'achiev' => 'string|required',
-        //     'title' => 'string|required',
-        //     'location' => 'string|required',
-        //     'name' => 'string|required',
-        //     'from' => 'string|required',
-        //     'level_id' => 'required',
-        // ]);
+            $achievement->update($data);
 
-        $data['slug'] = Str::slug($request->title);
-        $data['user_id'] = Auth()->user()->id;
-        // $data['achievement_id'] = Str::slug($request->title);
-
-        $achievements->update($data);
-
-        if ($request->name) {
-            foreach ($data['name'] as $item => $value) {
-                $data2 = array(
-                    'achievement_id' => $achievements->id,
-                    'name' => $data['name'][$item],
-                    'from' => $data['from'][$item],
-                );
-                Gainer::create($data2);
+            if ($request->name) {
+                foreach ($data['name'] as $item => $value) {
+                    $data2 = array(
+                        'achievement_id' => $achievement->id,
+                        'name' => $data['name'][$item],
+                        'from' => $data['from'][$item],
+                    );
+                    Gainer::create($data2);
+                };
             };
-        };
 
+            DB::commit();
+
+        } catch (\Throwable $th) {
+
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         // return success
-        // flash('Book was updated!');
         toast('Your Achievement has been updated!','success');
         return to_route('admin.achievement.index');
 

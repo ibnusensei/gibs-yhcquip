@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Facades\DB;
 
 
 class UnggulanController extends Controller
@@ -74,23 +75,33 @@ class UnggulanController extends Controller
     {
         // insert data
 
-        $data= $request->validate ([
-            'title' => 'string|required',
-            'superiority' => 'string|required',
-            'program_category_id' => 'required',
+        try {
 
-        ]);
+            DB::beginTransaction();
+
+            $data= $request->validate ([
+                'title' => 'string|required',
+                'superiority' => 'string|required',
+                'program_category_id' => 'required',
+
+            ]);
 
 
 
-        $data['slug'] = Str::slug($request->title);
-        $data['user_id'] = Auth()->user()->id;
-        // return($request);
-        $unggulan = Unggulan::create($data);
+            $data['slug'] = Str::slug($request->title);
+            $data['user_id'] = Auth()->user()->id;
+
+            $unggulan = Unggulan::create($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
 
         //return succes
-        // flash('Book was stored!');
         toast('Your Program has been created!','success');
         return to_route('admin.unggulan.index');
     }
@@ -122,22 +133,32 @@ class UnggulanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // update data
-        $unggulans = Unggulan::findOrFail($id);
 
-        $data= $request->validate ([
-            'title' => 'string|required',
-            'superiority' => 'string|required',
-            'program_category_id' => 'required',
+        try {
 
-        ]);
+            DB::beginTransaction();
 
-        $data['slug'] = Str::slug($request->title);
-        $data['user_id'] = Auth()->user()->id;
-        $unggulans->update($data);
+            // update data
+            $unggulans = Unggulan::findOrFail($id);
+
+            $data= $request->validate ([
+                'title' => 'string|required',
+                'superiority' => 'string|required',
+                'program_category_id' => 'required',
+            ]);
+
+            $data['slug'] = Str::slug($request->title);
+            $data['user_id'] = Auth()->user()->id;
+            $unggulans->update($data);
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
         // return success
-        // flash('Book was updated!');
         toast('Your Program has been updated!','success');
         return to_route('admin.unggulan.index');
 
