@@ -10,7 +10,8 @@ class CategoryArticle extends Model
 {
   use HasFactory;
   protected $fillable = ['slug', 'name'];
-
+  
+  protected $guarded = ['id'];
   // public $timestamps = false;
 
   // public function article(): HasMany
