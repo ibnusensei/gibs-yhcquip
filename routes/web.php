@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\AcademicController as AdminAcademicController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +36,13 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('gallery', AdminGalleryController::class);
-
+    Route::resource('academic', AdminAcademicController::class);
+    
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
+
+    Route::post('academic-image/{academic}', [AdminAcademicController::class, 'imageStore'])->name('academic.image.store');
+    Route::delete('academic-image/{academic}', [AdminAcademicController::class, 'imageDestroy'])->name('academic.image.destroy');
 });
 
 
