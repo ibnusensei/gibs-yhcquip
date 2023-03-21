@@ -364,6 +364,13 @@
                                 <span class="nav-link-title">Gallery</span>
                             </a>
                         </div>
+
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.academic.*') ? 'active' : '' }}" href="{{ route('admin.academic.index') }}" data-placement="left">
+                                <i class="bi-book nav-icon"></i>
+                                <span class="nav-link-title">Academic</span>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
