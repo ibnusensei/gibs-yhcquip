@@ -425,7 +425,7 @@
                             </a>
                         </div>
 
-                        <span class="dropdown-header">Information</span>
+                        <span class="dropdown-header mt-3">Information</span>
 
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
@@ -441,7 +441,7 @@
                             </a>
                         </div>
 
-                        <span class="dropdown-header">Program</span>
+                        <span class="dropdown-header mt-3">Program</span>
 
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.streams.*') ? 'active' : '' }}" href="{{ route('admin.streams.index') }}" data-placement="left">
