@@ -391,10 +391,17 @@
                             <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
                                 <i class="bi bi-file-person nav-icon"></i>
                                 <span class="nav-link-title">Career</span>
+                            </a>    
                         </div>
 
-                        <span class="dropdown-header mt-3">Program</span>
-                        <small class="bi-three-dots nav-subtitle-replacer"></small>
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.job.*') ? 'active' : '' }}" href="{{ route('admin.job.index') }}" data-placement="left">
+                                <i class="bi bi-briefcase nav-icon"></i>
+                                <span class="nav-link-title">Job</span>
+                            </a>
+                        </div>
+
+                        <span class="dropdown-header">Program</span>
 
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.streams.*') ? 'active' : '' }}" href="{{ route('admin.streams.index') }}" data-placement="left">
@@ -410,11 +417,6 @@
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.job.*') ? 'active' : '' }}" href="{{ route('admin.job.index') }}" data-placement="left">
-                                <i class="bi bi-briefcase nav-icon"></i>
-                                <span class="nav-link-title">Job</span>
-                            </a>
-                        </div>
                             <a class="nav-link {{ Request()->routeIs('admin.achievement.*') ? 'active' : '' }}" href="{{ route('admin.achievement.index') }}" data-placement="left">
                                 <i class="bi-trophy nav-icon"></i>
                                 <span class="nav-link-title">Achievement</span>
