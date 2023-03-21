@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
-<<<<<<< HEAD
 
     {{-- CSS flatpickr --}}
     @stack('flatpickr-css')
@@ -33,8 +32,6 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
-=======
->>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
 
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="./node_modules/tom-select/dist/css/tom-select.bootstrap5.css">
@@ -379,7 +376,6 @@
                                 <span class="nav-link-title">Gallery</span>
                             </a>
                         </div>
-<<<<<<< HEAD
 
                         <span class="dropdown-header mt-4">Profile</span>
                       <small class="bi-three-dots nav-subtitle-replacer"></small>
@@ -474,7 +470,6 @@
                             </a>
                         </div>
 
-=======
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true"
@@ -503,7 +498,6 @@
                         <div class="nav-item">
 
                         </div>
->>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
                     </div>
 
                 </div>
