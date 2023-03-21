@@ -64,17 +64,18 @@
                                 placeholder="Author of Article" value="{{ @$article->author }}">
                         </div>
 
-                        {{--  <div class="mb-4">
+                        <div class="mb-4">
                             <label class="form-label" for="category">Category</label>
-                            <select class="form-select" aria-label="Select by Category">
-                                <option selected>Select by Category</option>
-                                <option value="1">Technology</option>
-                                <option value="2">Education</option>
-                                <option value="3">Social</option>
-                                <option value="4">Sports</option>
-                                <option value="5">Health</option>
+                            <select name="category_id" class="form-select" aria-label="Select by Category">
+                                <option selected>Select Category</option>
+                                @foreach ($category as $item)
+                                  <option {{ @$article['category_id'] && $article['category_id'] == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
+                                    {{ $item->name }}
+                                  </option>
+                                  
+                                @endforeach
                             </select>
-                        </div>  --}}
+                        </div>
 
 
                         <button type="submit" class="btn btn-primary">Submit</button>
