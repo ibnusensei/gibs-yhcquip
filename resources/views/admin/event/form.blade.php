@@ -38,7 +38,7 @@
                             <label class="form-label" for="description">Description</label>
                             {{-- <input type="text" name="description" id="description" class="form-control"
                                 value="{{ @$event->description }}"> --}}
-                            <textarea id="description" name="description" class="form-control" placeholder="Textarea field" rows="4">{{ @$event->description }}</textarea>
+                            <textarea id="description" name="description" class="form-control" rows="4">{{ @$event->description }}</textarea>
                         </div>
 
                         <div class="mb-3">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input name="is_published" type="checkbox" @checked(@$event->is_published)>
+                            <input id="is_published" type="checkbox" @checked(@$event->is_published)>
                             <label for="is_published">Publish Event?</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

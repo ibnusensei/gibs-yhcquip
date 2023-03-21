@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <div class="card-title">Event</div>
+                    <h1 class="page-header-title">Event</h1>
                 </div>
 
                 <div class="col-auto">
