@@ -615,11 +615,8 @@
 
     <main id="content" role="main" class="main">
         {{ $slot }}
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
         <div class="footer">
             <div class="row justify-content-between align-items-center">
                 <div class="col">
