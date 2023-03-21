@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-3">
                             <label class="col-sm-2 col-form-label text-end">From</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="from[]" value="{{old('from', @$achievement->gainer->from)}}"
