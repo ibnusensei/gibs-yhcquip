@@ -35,7 +35,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody class="table-align-middle">
+                        <tbody class="table-align-middle" >
                             @forelse ($galleries as $gallery)
                                 <tr>
                                     <td scope="row">{{ $gallery->name }}</td>
@@ -49,7 +49,8 @@
                                             class="d-inline">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
+                                            <button class="btn btn-soft-danger btn-sm delete-btn" style="margin-left:10px;">
+                                                <i class="bi bi-trash3"></i> Delete</button>
                                         </form>
                                     </td>
                                 </tr>
