@@ -21,6 +21,18 @@
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 
+    {{-- CSS flatpickr --}}
+    @stack('flatpickr-css')
+
+    {{-- datatables css --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
+
+    {{-- ckeditor --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+
+
     <!-- CSS Front Template -->
 
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme.min.css" data-hs-appearance="default"
@@ -363,6 +375,7 @@
                                 <span class="nav-link-title">Gallery</span>
                             </a>
                         </div>
+                        
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.event.*') ? 'active' : '' }}"
                                 href="{{ route('admin.event.index') }}" data-placement="left">
@@ -370,6 +383,22 @@
                                 <span class="nav-link-title">Event</span>
                             </a>
                         </div>
+
+                        <span class="dropdown-header">Information</span>
+
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
+                                <i class="bi bi-briefcase nav-icon"></i>
+                                <span class="nav-link-title">Career</span>
+                            </a>
+                        </div>
+
+                        {{-- <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.information.*') ? 'active' : '' }}" href="{{ route('admin.information.index') }}" data-placement="left">
+                                <i class="bi bi-briefcase nav-icon"></i>
+                                <span class="nav-link-title">Information</span>
+                            </a>
+                        </div> --}}
                     </div>
 
                 </div>
@@ -1776,6 +1805,11 @@
             })
         })()
     </script>
+    {{-- jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    {{-- datatables js --}}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
     @include('sweetalert::alert')
     @stack('scripts')
