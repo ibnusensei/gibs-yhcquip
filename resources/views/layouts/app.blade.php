@@ -377,6 +377,40 @@
                             </a>
                         </div>
 
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.event.*') ? 'active' : '' }}"
+                                href="{{ route('admin.event.index') }}" data-placement="left">
+                                <i class="bi-bell nav-icon"></i>
+                                <span class="nav-link-title">Event</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true"
+                                aria-controls="navbarVerticalMenuPagesUsersMenu">
+                                <i class="bi  bi-newspaper nav-icon"></i>
+                                <span class="nav-link-title">News</span>
+                            </a>
+
+                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse show"
+                                data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu"
+                                style="">
+                                <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.news.index') }}">
+                                    <i class="bi bi-caret-right-fill nav-icon"></i>
+                                    View
+                                </a>
+                                <a class="nav-link {{ Request()->routeIs('admin.news-category.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.news-category.index') }}">
+                                    <i class="bi bi-caret-right-fill nav-icon"></i>
+                                    News Category
+                                </a>
+
+
+                            </div>
+                        </div>
+
                         <span class="dropdown-header mt-4">Profile</span>
                       <small class="bi-three-dots nav-subtitle-replacer"></small>
                       <div class="navbar-nav nav-compact">
@@ -417,13 +451,7 @@
                         </div>
                     </div>
 
-                        <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.event.*') ? 'active' : '' }}"
-                                href="{{ route('admin.event.index') }}" data-placement="left">
-                                <i class="bi-bell nav-icon"></i>
-                                <span class="nav-link-title">Event</span>
-                            </a>
-                        </div>
+
 
                         <span class="dropdown-header mt-3">Information</span>
 
@@ -470,31 +498,7 @@
                             </a>
                         </div>
 
-                        <div class="nav-item">
-                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true"
-                                aria-controls="navbarVerticalMenuPagesUsersMenu">
-                                <i class="bi  bi-newspaper nav-icon"></i>
-                                <span class="nav-link-title">News</span>
-                            </a>
 
-                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse show"
-                                data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu"
-                                style="">
-                                <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}"
-                                    href="{{ route('admin.news.index') }}">
-                                    <i class="bi bi-caret-right-fill nav-icon"></i>
-                                    View
-                                </a>
-                                <a class="nav-link {{ Request()->routeIs('admin.news-category.*') ? 'active' : '' }}"
-                                    href="{{ route('admin.news-category.index') }}">
-                                    <i class="bi bi-caret-right-fill nav-icon"></i>
-                                    News Category
-                                </a>
-
-
-                            </div>
-                        </div>
                         <div class="nav-item">
 
                         </div>
