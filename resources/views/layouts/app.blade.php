@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+<<<<<<< HEAD
 
     {{-- CSS flatpickr --}}
     @stack('flatpickr-css')
@@ -32,9 +33,11 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 
+=======
+>>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
 
     <!-- CSS Front Template -->
-
+    <link rel="stylesheet" href="./node_modules/tom-select/dist/css/tom-select.bootstrap5.css">
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme.min.css" data-hs-appearance="default"
         as="style">
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme-dark.min.css" data-hs-appearance="dark"
@@ -376,11 +379,12 @@
                                 <span class="nav-link-title">Gallery</span>
                             </a>
                         </div>
+<<<<<<< HEAD
 
                         <span class="dropdown-header mt-4">Profile</span>
                       <small class="bi-three-dots nav-subtitle-replacer"></small>
                       <div class="navbar-nav nav-compact">
-          
+
                       </div>
                       <div id="navbarVerticalMenuPagesMenu">
                         <!-- Collapse -->
@@ -390,9 +394,9 @@
                                 <span class="nav-link-title">About</span>
                             </a>
                         </div>
-                        
+
                         <!-- End Collapse -->
-          
+
                         <!-- Collapse -->
                         <div class="nav-item">
                           <a class="nav-link {{ Request()->routeIs('admin.leader.*') ? 'active' : '' }}" href="{{ route('admin.leader.index') }}">
@@ -401,7 +405,7 @@
                           </a>
                         </div>
                         <!-- End Collapse -->
-          
+
                         <!-- Collapse -->
                         <div class="nav-item">
                           <a class="nav-link {{ Request()->routeIs('admin.staff.*') ? 'active' : '' }}  " href="{{ route('admin.staff.index') }}">
@@ -416,7 +420,7 @@
                           </a>
                         </div>
                     </div>
-                    
+
                         <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.event.*') ? 'active' : '' }}"
                                 href="{{ route('admin.event.index') }}" data-placement="left">
@@ -431,7 +435,7 @@
                             <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
                                 <i class="bi bi-file-person nav-icon"></i>
                                 <span class="nav-link-title">Career</span>
-                            </a>    
+                            </a>
                         </div>
 
                         <div class="nav-item">
@@ -470,6 +474,36 @@
                             </a>
                         </div>
 
+=======
+                        <div class="nav-item">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true"
+                                aria-controls="navbarVerticalMenuPagesUsersMenu">
+                                <i class="bi  bi-newspaper nav-icon"></i>
+                                <span class="nav-link-title">News</span>
+                            </a>
+
+                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse show"
+                                data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu"
+                                style="">
+                                <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.news.index') }}">
+                                    <i class="bi bi-caret-right-fill nav-icon"></i>
+                                    View
+                                </a>
+                                <a class="nav-link {{ Request()->routeIs('admin.news-category.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.news-category.index') }}">
+                                    <i class="bi bi-caret-right-fill nav-icon"></i>
+                                    News Category
+                                </a>
+
+
+                            </div>
+                        </div>
+                        <div class="nav-item">
+
+                        </div>
+>>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
                     </div>
 
                 </div>
@@ -587,8 +621,11 @@
 
     <main id="content" role="main" class="main">
         {{ $slot }}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5e4715a58aa62a9dfcd9886be5c76d28b0b23493
         <div class="footer">
             <div class="row justify-content-between align-items-center">
                 <div class="col">

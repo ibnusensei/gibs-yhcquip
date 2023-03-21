@@ -15,7 +15,8 @@ use App\Http\Controllers\Admin\Program\UnggulanController as AdminProgramUnggula
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\NewsCategoryController as AdminNewsCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,15 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::post('gallery-image/{gallery}', [AdminGalleryController::class, 'imageStore'])->name('gallery.image.store');
     Route::delete('gallery-image/{gallery}', [AdminGalleryController::class, 'imageDestroy'])->name('gallery.image.destroy');
 
-    // About 
+    // News
+    Route::resource('news', AdminNewsController::class);
+    Route::resource('news-category', AdminNewsCategoryController::class);
+    Route::post('news-publis', [AdminNewsController::class, 'publis'])->name('publis.news');
+    Route::post('news-publis-delete/{id}', [AdminNewsController::class, 'destroy'])->name('delete.news');
+    Route::get('news-search', [AdminNewsController::class, 'search'])->name('search.news');
+    Route::get('news-ajax', [AdminNewsController::class, 'ajax'])->name('ajax.news');
+
+    // About
     Route::resource('about', AdminAboutController::class);
     Route::post('about-image/{about}', [AdminAboutController::class, 'imageStore'])->name('about.image.store');
     Route::delete('about-image/{about}', [AdminAboutController::class, 'imageDestroy'])->name('about.image.destroy');
@@ -108,5 +117,7 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::post('unggulan-publish/{unggulan}', [AdminProgramUnggulanController::class, 'publish'])->name('unggulan.publish');
 
 });
+
+
 
 require __DIR__ . '/auth.php';

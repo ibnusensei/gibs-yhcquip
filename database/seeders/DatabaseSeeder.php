@@ -19,5 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call(LevelSeeder::class);
         $this->call(ProgramCategorySeeder::class);
 
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $this->call(NewsCategorySeeder::class);
     }
 }
