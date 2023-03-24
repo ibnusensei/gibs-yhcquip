@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "114675d17623bed94cfc66d098b4a2ea",
+    "content-hash": "020b29703e6530fc22258327daa05657",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -6830,18 +6830,6 @@
         },
         {
             "name": "nunomaduro/collision",
-<<<<<<< HEAD
-            "version": "v7.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "ec91efc82a40ca4224a53494e7e93775cebc39e5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/ec91efc82a40ca4224a53494e7e93775cebc39e5",
-                "reference": "ec91efc82a40ca4224a53494e7e93775cebc39e5",
-=======
             "version": "v7.1.2",
             "source": {
                 "type": "git",
@@ -6852,7 +6840,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nunomaduro/collision/zipball/f502ff3b2051124c89b4dd3a8a497ca65f3ce26c",
                 "reference": "f502ff3b2051124c89b4dd3a8a497ca65f3ce26c",
->>>>>>> e37906696494f7fbfb16267b28f7ae1798de574b
                 "shasum": ""
             },
             "require": {
@@ -6935,11 +6922,9 @@
                     "type": "patreon"
                 }
             ],
-<<<<<<< HEAD
+
             "time": "2023-03-13T17:02:54+00:00"
-=======
-            "time": "2023-03-14T14:34:49+00:00"
->>>>>>> e37906696494f7fbfb16267b28f7ae1798de574b
+
         },
         {
             "name": "phar-io/manifest",

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('galleries', function (Blueprint $table) {
-            $table->tinyInteger('is_published')->default(0)->after('description');
+        Schema::create('campus_tours', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug');
+            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('galleries', function (Blueprint $table) {
-            $table->dropColumn(['is_published']);
-        });
+        Schema::dropIfExists('campus_tours');
     }
 };
