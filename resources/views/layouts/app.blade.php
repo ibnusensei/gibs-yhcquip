@@ -377,6 +377,13 @@
                             </a>
                         </div>
 
+                        <div class="nav-item">
+                            <a class="nav-link {{ Request()->routeIs('admin.academic.*') ? 'active' : '' }}" href="{{ route('admin.academic.index') }}" data-placement="left">
+                                <i class="bi-book nav-icon"></i>
+                                <span class="nav-link-title">Academic</span>
+                            </a>
+                        </div>
+
                         <span class="dropdown-header mt-4">Profile</span>
                       <small class="bi-three-dots nav-subtitle-replacer"></small>
                       <div class="navbar-nav nav-compact">
@@ -498,6 +505,7 @@
                         <div class="nav-item">
 
                         </div>
+
                     </div>
 
                 </div>
