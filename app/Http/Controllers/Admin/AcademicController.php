@@ -15,7 +15,7 @@ class AcademicController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $academics = Academic::latest()->filter(request(['search']))->paginate(5)->withQueryString('search');
 
             // data gallery
@@ -135,7 +135,7 @@ class AcademicController extends Controller
 
     public function imageDestroy($image)
     {
-        $media = Media::findOrFail($image); 
+        $media = Media::findOrFail($image);
         $media->delete();
 
         toast('Your Image has been deleted', 'success');

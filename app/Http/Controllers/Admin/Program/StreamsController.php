@@ -82,7 +82,12 @@ class StreamsController extends Controller
 
             $data['slug'] = Str::slug($request->name);
             $data['user_id'] = Auth()->user()->id;
-            $streams = Streams::create($data);
+            $stream = Streams::create($data);
+
+            // image
+        if($request->hasFile('images')){
+            $stream->addMediaFromRequest('images')->toMediaCollection('images');
+        }
 
             DB::commit();
 
@@ -137,6 +142,12 @@ class StreamsController extends Controller
             $data['user_id'] = Auth()->user()->id;
             $streams->update($data);
 
+            if($request->hasFile('images')){
+                if($streams->hasMedia('images')){
+                    $streams->getFirstMedia('images')->delete();
+                }
+                $streams->addMediaFromRequest('images')->toMediaCollection('images');
+            }
             DB::commit();
 
         } catch (\Throwable $th) {

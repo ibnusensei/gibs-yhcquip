@@ -93,6 +93,11 @@ class UnggulanController extends Controller
 
             $unggulan = Unggulan::create($data);
 
+            // image
+        if($request->hasFile('images')){
+            $unggulan->addMediaFromRequest('images')->toMediaCollection('images');
+        }
+
             DB::commit();
 
         } catch (\Throwable $th) {
@@ -150,6 +155,13 @@ class UnggulanController extends Controller
             $data['slug'] = Str::slug($request->title);
             $data['user_id'] = Auth()->user()->id;
             $unggulans->update($data);
+
+            if($request->hasFile('images')){
+                if($unggulans->hasMedia('images')){
+                    $unggulans->getFirstMedia('images')->delete();
+                }
+                $unggulans->addMediaFromRequest('images')->toMediaCollection('images');
+            }
 
             DB::commit();
 
