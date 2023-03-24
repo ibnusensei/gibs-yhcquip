@@ -43,7 +43,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        // return $request;
         $data = $request->validate([
             "title" => "string|required|unique:news",
             "content" => "required",
@@ -185,12 +185,12 @@ class NewsController extends Controller
                                         <a name="" id="" class="btn btn-outline-info btn-sm"
                                             href="/admin/news/' . $item->slug . '">Show</a>
                                         <form action="news-publis-delete/' . $item->id . '" method="POST"
-                                            class="d-inline">                                           
+                                            class="d-inline">
                                             <input type="hidden" name="_token" value=" ' . csrf_token() . '"   />
                                             <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
                                         </form>
                                     </td>
-                                    
+
                                 </tr>';
         }
 
