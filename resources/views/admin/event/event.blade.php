@@ -27,11 +27,8 @@
                         <div class="form-outline">
                             <input type="search" class="form-control" placeholder="Search. . ." name="search"
                                 value="{{ request('search') }}">
-                            {{-- <label class="form-label" for="form1">Search</label> --}}
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            {{-- <i class="fas fa-search"></i> --}}Search
-                        </button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </form>
 
@@ -62,6 +59,10 @@
                                             <i class="bi bi-x-circle fs-2 text-danger "></i>
                                         @endif
                                     </td>
+                                    {{-- <td> --}}
+                                    {{-- {{ Carbon\Carbon::parse($event->created_at)->diffForHumans() }} --}}
+                                    {{-- {{ $event->created_at }} --}}
+                                    {{-- </td> --}}
                                     <td>
                                         <a name="" id="" class="btn btn-outline-primary btn-sm"
                                             href="{{ route('admin.event.edit', $event) }}">Edit</a>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -13,9 +15,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        // $events = Event::all();
+        // $events = Event::with('user')->get();
         // dd(request('search'));
-        $events = Event::latest()->filter(request(['search']))->paginate(5)->withQueryString('search');
+        $users = User::find(Auth::user()->id);
+
+        $events = $users->events()->with('user')->filter(request(['search']))->paginate(5)->withQueryString('search');
+        // $events = Event::find(Auth::user()->id)->with('user')->filter(request(['search']))->paginate(5)->withQueryString('search');
         // $events = Event::paginate(5);
         // $events = $events->get();
 
@@ -44,6 +49,7 @@ class EventController extends Controller
 
         $data['slug'] = Str::slug($request->title);
         $data['is_published'] = $request->has('is_published') ? true : false;
+        $data['user_id'] = Auth::user()->id;
         $event = Event::create($data);
 
         if ($request->hasFile('images')) {

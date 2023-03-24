@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\AcademicController as AdminAcademicController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\LeaderController as AdminLeaderController;
 use App\Http\Controllers\Admin\CampusTourController as AdminCampustTourController;
@@ -49,6 +50,11 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
     // dashboard
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // academic
+    Route::resource('academic', AdminAcademicController::class);
+    Route::post('academic-image/{academic}', [AdminAcademicController::class, 'imageStore'])->name('academic.image.store');
+    Route::delete('academic-image/{academic}', [AdminAcademicController::class, 'imageDestroy'])->name('academic.image.destroy');
 
     // gallery
     Route::resource('gallery', AdminGalleryController::class);
