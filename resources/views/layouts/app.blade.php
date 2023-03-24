@@ -387,7 +387,7 @@
 
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="true"
+                                data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="truephp"
                                 aria-controls="navbarVerticalMenuPagesUsersMenu">
                                 <i class="bi  bi-newspaper nav-icon"></i>
                                 <span class="nav-link-title">News</span>
