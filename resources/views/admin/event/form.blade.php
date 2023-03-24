@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input id="is_published" type="checkbox" @checked(@$event->is_published)>
+                            <input id="is_published" name="is_published" type="checkbox" @checked(@$event->is_published)>
                             <label for="is_published">Publish Event?</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

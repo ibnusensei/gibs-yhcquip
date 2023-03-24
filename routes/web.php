@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\ArticleCategoryController as AdminArticleCategoryController;
 use App\Http\Controllers\Admin\AcademicController as AdminAcademicController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\LeaderController as AdminLeaderController;
@@ -30,21 +31,24 @@ use App\Http\Controllers\Admin\NewsCategoryController as AdminNewsCategoryContro
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Welcome
 Route::get('/', function () {
   return view('welcome');
 });
+
+// Dashboard
+
 
 Route::get('/dashboard', function () {
   return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Auth
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 // administrator
 Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
@@ -129,6 +133,8 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::post('unggulan-publish/{unggulan}', [AdminProgramUnggulanController::class, 'publish'])->name('unggulan.publish');
 
 });
+
+
 
 
 

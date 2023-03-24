@@ -25,11 +25,12 @@
             <img src="{{ $article->getFirstMediaUrl('image') }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h2 class="card-title text-primary">{{ $article->title }}</h2>
-                <p class="card-text text-dark py-2">{{ $article->description }}</p>
+                <p class="card-text text-dark py-2">{{ strip_tags($article->description) }}</p>
                 <p class="card-text">
                     <i class="bi bi-pencil-square nav-icon pe-1"></i> {{ $article->author }}
                 </p>
             </div>
+            
         </div>
         
     </div>
