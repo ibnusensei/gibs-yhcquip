@@ -17,6 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Illuminate\Support\Facades\DB;
 
 
+
 class AchievementController extends Controller
 {
     public $levels;
@@ -89,6 +90,11 @@ class AchievementController extends Controller
             $data['user_id'] = Auth()->user()->id;
             $achievement = Achievement::create($data);
 
+             // image
+        if($request->hasFile('images')){
+            $achievement->addMediaFromRequest('images')->toMediaCollection('images');
+        }
+
             if ($request->name) {
                 foreach ($data['name'] as $item => $value) {
                     $data2 = array(
@@ -99,6 +105,8 @@ class AchievementController extends Controller
                     Gainer::create($data2);
                 };
             };
+
+
 
             DB::commit();
 
@@ -155,6 +163,13 @@ class AchievementController extends Controller
             $data['user_id'] = Auth()->user()->id;
 
             $achievement->update($data);
+
+            if($request->hasFile('images')){
+                if($achievement->hasMedia('images')){
+                    $achievement->getFirstMedia('images')->delete();
+                }
+                $achievement->addMediaFromRequest('images')->toMediaCollection('images');
+            }
 
             if ($request->name) {
                 foreach ($data['name'] as $item => $value) {

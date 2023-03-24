@@ -102,6 +102,18 @@
                             @enderror
                          </div>
 
+                         <div class="mb-3">
+
+                            <div class="mb-3">
+                                @if (@$achievement)
+                                    <img src=" {{ $achievement->getFirstMediaUrl('images') }}"
+                                        style="max-width: 100px; height: auto">
+                                @endif
+                                <label class="form-label" for="images">Choose Image</label>
+                                <input type="file" id="images" name="images" multiple class="form-control">
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
