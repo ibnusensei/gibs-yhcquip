@@ -3,10 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
-<<<<<<< HEAD
 use App\Http\Controllers\Admin\ArticleCategoryController as AdminArticleCategoryController;
-
-=======
 use App\Http\Controllers\Admin\AcademicController as AdminAcademicController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\LeaderController as AdminLeaderController;
@@ -18,7 +15,6 @@ use App\Http\Controllers\Admin\Program\StreamsController as AdminProgramStreamsC
 use App\Http\Controllers\Admin\Program\ExculController as AdminProgramExculController;
 use App\Http\Controllers\Admin\Program\AchievementController as AdminProgramAchievementController;
 use App\Http\Controllers\Admin\Program\UnggulanController as AdminProgramUnggulanController;
->>>>>>> 42b7d0887510da9c3dc183a135d3be46f59c3678
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
