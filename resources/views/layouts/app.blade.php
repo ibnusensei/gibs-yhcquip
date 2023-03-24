@@ -9,6 +9,10 @@
     <!-- Title -->
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- datatables -->
+    {{--  @stack('stylesDataTables')  --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="./favicon.ico">
 
@@ -39,6 +43,14 @@
         as="style">
     <link rel="preload" href="{{ asset('dist') }}/assets/css/theme-dark.min.css" data-hs-appearance="dark"
         as="style">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/ckeditor.scss') }}" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/ckeditor.js') }}" defer></script>
+
 
     <style data-hs-appearance-onload-styles>
         * {
@@ -219,6 +231,7 @@
     </script>
 
     @stack('styles')
+    @stack('stylesDataTables')
 </head>
 
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
@@ -332,9 +345,11 @@
                         alt="Logo" data-hs-theme-appearance="default">
                     <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos-light/logoyhc.png"
                         alt="Logo" data-hs-theme-appearance="dark">
+
                     <img class="navbar-brand-logo-mini"
                         src="{{ asset('dist') }}/assets/svg/logos/logoyhcshort.png" alt="Logo"
                         data-hs-theme-appearance="default">
+
                     <img class="navbar-brand-logo-mini"
                         src="{{ asset('dist') }}/assets/svg/logos-light/logoyhcshort.png" alt="Logo"
                         data-hs-theme-appearance="dark">
@@ -621,8 +636,35 @@
           </div>
           <!-- End Footer -->
 
-            </div>
-        </div>
+
+                        <div class="nav-item">
+                            <a class="nav-link dropdown-toggle collapsed {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.category') || Request()->routeIs('admin.comment') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
+                                href="#" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#shopCategoriesThree" aria-expanded="false"
+                                aria-controls="shopCategoriesThree">
+                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i> Article
+                            </a>
+
+                            <div id="shopCategoriesThree"
+                                class="nav-collapse collapse {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.category') || Request()->routeIs('admin.comment') ? 'show' : '' }}"
+                                data-bs-parent="#shopNavCategories">
+                                <div id="shopNavCategoriesThree">
+                                    <a class="nav-link {{ Request()->routeIs('admin.article.*') ? 'active' : '' }}"
+                                        href="{{ route('admin.article.index') }}">Articles</a>
+
+                                    <a class="nav-link {{ Request()->routeIs('admin.category') ? 'active' : '' }}"
+                                        href="{{ route('admin.category') }}">Article Category</a>
+
+                                    <a class="nav-link {{ Request()->routeIs('admin.comment') ? 'active' : '' }}"
+                                        href="{{ route('admin.comment') }}">Article Comment</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End Content -->
+
+                    </div>
+                </div>
     </aside>
 
     <main id="content" role="main" class="main">
@@ -2029,6 +2071,12 @@
 
     {{-- datatables js --}}
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    {{--  @stack('scriptsDataTables')  --}}
 
     @include('sweetalert::alert')
     @stack('scripts')
