@@ -81,17 +81,17 @@
 
                         <div class="gainer"></div>
 
-                        <div class="mb-3">
+
 
                             <div class="mb-3">
                                 @if (@$achievement)
                                     <img src=" {{ $achievement->getFirstMediaUrl('images') }}"
                                         style="max-width: 100px; height: auto">
                                 @endif
-                                <label class="form-label" for="images">Choose Image</label>
+                                <label class="form-label" for="images">Add Image</label>
                                 <input type="file" id="images" name="images" multiple class="form-control">
                             </div>
-                        </div>
+
 
                         <div class="mb-3">
                             <label for="level_id" class="form-label">Level</label>

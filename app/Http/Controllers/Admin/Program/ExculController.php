@@ -82,7 +82,12 @@ class ExculController extends Controller
 
             $data['slug'] = Str::slug($request->name);
             $data['user_id'] = Auth()->user()->id;
-            $exculs = Excul::create($data);
+            $excul = Excul::create($data);
+
+            // image
+        if($request->hasFile('images')){
+            $excul->addMediaFromRequest('images')->toMediaCollection('images');
+        }
 
             DB::commit();
 
@@ -133,6 +138,13 @@ class ExculController extends Controller
             $data['slug'] = Str::slug($request->name);
             $data['user_id'] = Auth()->user()->id;
             $exculs->update($data);
+
+            if($request->hasFile('images')){
+                if($exculs->hasMedia('images')){
+                    $exculs->getFirstMedia('images')->delete();
+                }
+                $exculs->addMediaFromRequest('images')->toMediaCollection('images');
+            }
 
             DB::commit();
 
