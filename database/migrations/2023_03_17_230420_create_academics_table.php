@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('galleries', function (Blueprint $table) {
-            $table->tinyInteger('is_published')->default(0)->after('description');
+        Schema::create('academics', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->text('description');          
+            $table->boolean('is_published')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('galleries', function (Blueprint $table) {
-            $table->dropColumn(['is_published']);
-        });
+        Schema::dropIfExists('academics');
     }
 };

@@ -1,8 +1,7 @@
 <x-app-layout>
     @push('styles')
-        
     @endpush
-    
+
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -36,7 +35,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody class="table-align-middle">
+                        <tbody class="table-align-middle" >
                             @forelse ($galleries as $gallery)
                                 <tr>
                                     <td scope="row">{{ $gallery->name }}</td>
@@ -46,13 +45,16 @@
                                             href="{{ route('admin.gallery.edit', $gallery) }}">Edit</a>
                                         <a name="" id="" class="btn btn-outline-info btn-sm"
                                             href="{{ route('admin.gallery.show', $gallery) }}">Show</a>
-                                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST"
+                                            class="d-inline">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
+                                            <button class="btn btn-soft-danger btn-sm delete-btn" style="margin-left:10px;">
+                                                <i class="bi bi-trash3"></i> Delete</button>
                                         </form>
                                     </td>
                                 </tr>
+
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">No Data</td>
@@ -65,6 +67,6 @@
         </div>
     </div>
     <!-- End Content -->
-    
+
     @include('scripts.delete')
 </x-app-layout>

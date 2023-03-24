@@ -10,7 +10,7 @@
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <a class="btn btn-primary" href="{{ route('admin.gallery.index') }}">
+                    <a class="btn btn-soft-primary" href="{{ route('admin.gallery.index') }}">
                         <i class="bi-chevron-left me-1"></i> Back
                     </a>
                 </div>
