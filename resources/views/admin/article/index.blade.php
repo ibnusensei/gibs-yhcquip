@@ -50,7 +50,7 @@
                                         </div>
                                     </td>
                                     <td>{!! Str::limit(strip_tags($article->description), 30) !!}
-</td>
+                                    </td>
                                     <td>{{ $article->author }}</td>
                                     <td>
                                         <div class="form-check form-switch">
@@ -109,16 +109,6 @@
     </div>
     <!-- End Content -->
 
-    {{--  @push('scriptsDataTables')
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-
-        <script>
-
-            $(document).ready(function() {
-                $('#myTable').DataTable();
-            });
-        </script>
-    @endpush  --}}
     @push('scripts')
         <script>
             $(document).ready(function() {

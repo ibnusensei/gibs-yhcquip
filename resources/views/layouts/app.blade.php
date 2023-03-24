@@ -545,6 +545,32 @@
                                 <span class="nav-link-title">Program Unggulan</span>
                             </a>
                         </div>
+                        
+                        <div class="nav-item">
+                            <a class="nav-link dropdown-toggle collapsed {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
+                                href="#" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#shopCategoriesThree" aria-expanded="false"
+                                aria-controls="shopCategoriesThree">
+                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i> Article
+                            </a>
+
+                            <div id="shopCategoriesThree"
+                                class="nav-collapse collapse {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'show' : '' }}"
+                                data-bs-parent="#shopNavCategories">
+                                <div id="shopNavCategoriesThree">
+                                    <a class="nav-link {{ Request()->routeIs('admin.article.*') ? 'active' : '' }}"
+                                        href="{{ route('admin.article.index') }}">Articles</a>
+
+                                    <a class="nav-link {{ Request()->routeIs('admin.article-category.*') ? 'active' : '' }}"
+                                        href="{{ route('admin.article-category.index') }}">Article Category</a>
+
+                                    {{--  <a class="nav-link {{ Request()->routeIs('admin.comment') ? 'active' : '' }}"
+                                        href="{{ route('admin.comment') }}">Article Comment</a>  --}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End Content -->
 
                         </div>
 
@@ -658,9 +684,6 @@
             </ul>
           </div>
           <!-- End Footer -->
-
-
-
 
                     </div>
                 </div>

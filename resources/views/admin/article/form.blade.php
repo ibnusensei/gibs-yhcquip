@@ -70,7 +70,7 @@
                                 <option selected>Select Category</option>
                                 @foreach ($category as $item)
                                   <option {{ @$article['category_id'] && $article['category_id'] == $item->id ? 'selected' : '' }} value="{{ $item->id }}">
-                                    {{ $item->name }}
+                                    {{ ucfirst($item->name) }}
                                   </option>
                                   
                                 @endforeach
