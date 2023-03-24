@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3 card-title">{{ @$unggulan ? 'Edit' : 'Create' }} Program Unggulan</h4>
-                    <form action="{{ $url }}" method="POST">
+                    <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         @if (@$unggulan)
                             @method('PUT')
                         @endif
@@ -39,6 +39,15 @@
                         <div class="mb-3">
                             <label class="form-label" for="superiority">Keunggulan</label>
                             <textarea id="superiority" name="superiority" class="form-control" placeholder="Program Superiority..." rows="4" required>{{ old('superiority', @$unggulan->superiority) }}</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                @if (@$unggulan)
+                                    <img src=" {{ $unggulan->getFirstMediaUrl('images') }}"
+                                        style="max-width: 100px; height: auto">
+                                @endif
+                                <label class="form-label" for="images">Add Image</label>
+                                <input type="file" id="images" name="images" multiple class="form-control">
                             </div>
 
                         <div class="mb-3">

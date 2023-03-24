@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3 card-title">{{ @$exculs ? 'Edit' : 'Create' }} Excule</h4>
-                    <form action="{{ $url }}" method="POST">
+                    <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         @if (@$exculs)
                             @method('PUT')
                         @endif
@@ -38,6 +38,15 @@
                         <div class="mb-3">
                             <label class="form-label" for="description">Description</label>
                             <textarea id="description" name="description" class="form-control" placeholder="Excule Description..." rows="4" required>{{ old('description', @$exculs->description) }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            @if (@$exculs)
+                                <img src=" {{ $exculs->getFirstMediaUrl('images') }}"
+                                    style="max-width: 100px; height: auto">
+                            @endif
+                            <label class="form-label" for="images">Add Image</label>
+                            <input type="file" id="images" name="images" multiple class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3 card-title">{{ @$achievement ? 'Edit' : 'Create' }} Achievement</h4>
-                    <form action="{{ $url }}" method="POST">
+                    <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         @if (@$achievement)
                             @method('PUT')
                         @endif
@@ -101,6 +101,18 @@
                             </div>
                             @enderror
                          </div>
+
+                         <div class="mb-3">
+
+                            <div class="mb-3">
+                                @if (@$achievement)
+                                    <img src=" {{ $achievement->getFirstMediaUrl('images') }}"
+                                        style="max-width: 100px; height: auto">
+                                @endif
+                                <label class="form-label" for="images">Choose Image</label>
+                                <input type="file" id="images" name="images" multiple class="form-control">
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

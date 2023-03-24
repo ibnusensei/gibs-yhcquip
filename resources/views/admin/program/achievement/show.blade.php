@@ -82,6 +82,7 @@
                   <!-- End Row -->
 
                 {{-- media --}}
+
                 <div class="row">
                     @foreach ($achievement->getMedia('images') as $image)
                         <div class="col-md-4 mb-4">
