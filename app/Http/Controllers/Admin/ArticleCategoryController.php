@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CategoryArticle;
+use App\Http\Controllers\Controller;
 
 class ArticleCategoryController extends Controller
 {
@@ -12,8 +14,9 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        // return view
-        return view ('admin.article.category');
+        $categories = CategoryArticle::all();
+        // Return response
+        return view ('admin.article-category.index', compact('categories'));
     }
 
     /**
@@ -21,7 +24,10 @@ class ArticleCategoryController extends Controller
      */
     public function create()
     {
-        //
+      $categories = CategoryArticle::all();
+      $url = route('admin.article-category.store');
+      // Return hasil
+      return view('admin.article-category.form', compact('url', 'categories'));
     }
 
     /**
@@ -29,7 +35,16 @@ class ArticleCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // return $request;
+      $data = $request->validate([
+        'name' => 'required | string',
+      ]);
+
+      $data['slug'] = Str::slug($request->name);
+      $category = CategoryArticle::create($data);
+
+      toast('Create category Success', 'success');
+      return redirect()->route('admin.article-category.index');
     }
 
     /**

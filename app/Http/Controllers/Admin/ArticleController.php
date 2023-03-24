@@ -12,16 +12,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ArticleController extends Controller
 {
 
-  public function category()
-  {
-    return view('admin.article.category');
-  }
-
-  public function comment()
-  {
-    return view('admin.article.comment');
-  }
-
   public function index()
   {
     // Data Articles
@@ -108,5 +98,15 @@ class ArticleController extends Controller
 
     toast('Your Image has been deleted', 'success');
     return redirect()->back();
+  }
+
+  public function category()
+  {
+    return view('admin.article.category');
+  }
+
+  public function comment()
+  {
+    return view('admin.article.comment');
   }
 }
