@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\CategoryArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -31,17 +32,20 @@ class ArticleController extends Controller
 
   public function create()
   {
+    $category = CategoryArticle::all();
     $url = route('admin.article.store');
-    // ss
-    return view('admin.article.form', compact('url'));
+    // Return hasil
+    return view('admin.article.form', compact('url', 'category'));
   }
 
   public function store(Request $request)
   {
+    // return $request;
     $data = $request->validate([
       'title' => 'required | string',
       'description' => 'nullable | string',
       'author' => 'required | string',
+      'category_id' => 'required',
     ]);
 
     $data['slug'] = Str::slug($request->title);
@@ -61,13 +65,14 @@ class ArticleController extends Controller
     return view('admin.article.show', compact('article'));
   }
 
-  
+
   public function edit(string $id)
   {
+    $category = CategoryArticle::all();
     $article = Article::findOrFail($id);
     $url = route('admin.article.update', $article);
 
-    return view('admin.article.form', compact('article', 'url'));
+    return view('admin.article.form', compact('article', 'url', 'category'));
   }
 
   public function update(Request $request, string $id)
@@ -77,6 +82,7 @@ class ArticleController extends Controller
       'title' => 'required | string',
       'description' => 'nullable | string',
       'author' => 'required | string',
+      'category_id' => 'required',
     ]);
 
     $data['slug'] = Str::slug($request->title);

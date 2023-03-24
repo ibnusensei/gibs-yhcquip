@@ -401,10 +401,10 @@
                                         href="{{ route('admin.article.index') }}">Articles</a>
 
                                     <a class="nav-link {{ Request()->routeIs('admin.category') ? 'active' : '' }}"
-                                        href="{{ route('admin.category') }}">Article Category</a>
+                                        href="{{ route('admin.article-category.index') }}">Article Category</a>
 
-                                    <a class="nav-link {{ Request()->routeIs('admin.comment') ? 'active' : '' }}"
-                                        href="{{ route('admin.comment') }}">Article Comment</a>
+                                    {{--  <a class="nav-link {{ Request()->routeIs('admin.comment') ? 'active' : '' }}"
+                                        href="{{ route('admin.comment') }}">Article Comment</a>  --}}
                                 </div>
                             </div>
 
