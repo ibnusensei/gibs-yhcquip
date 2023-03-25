@@ -13,7 +13,7 @@ class CategoryArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['technology', 'education', 'social', 'sports', 'health', 'parenting'];
+        $categories = ['technology', 'education', 'social', 'sports', 'health'];
 
         foreach ($categories as $value){
           CategoryArticle::create([
