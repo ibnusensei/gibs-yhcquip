@@ -4,6 +4,20 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
+          <div class="row align-items-center">
+                <div class="col ms-1 mb-4">
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.article.index') }}">Article</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Article Category
+                            </li>
+                        </ol>
+                    </nav>
+                    <!-- End Breadcrumb -->
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col">
                     <h1 class="page-header-title">Article Category - New Page</h1>

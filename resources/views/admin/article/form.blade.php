@@ -36,15 +36,6 @@
                                 placeholder="Title of Article" value="{{ @$article->title }}">
                         </div>
 
-                        {{--  <div class="mb-4">
-                            <label class="form-label" for="image">Upload Image</label>
-                            <input type="file" id="image" class="form-control" name="image">
-                        </div>
-
-                        <div class="mb-4">
-                          <img src="#" id="preview-image" alt="image" class="d-none" style="max-width: 200px">
-                        </div>  --}}
-
                         <div class="mb-3">
                             <label for="image" class="form-label fw-bold fs-5">Choose Image</label>
                             <input type="file" name="image" id="image" class="form-control">
