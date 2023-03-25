@@ -58,8 +58,7 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     
     // article
     Route::resource('article', AdminArticleController::class);
-    Route::get('article-category', AdminArticleController::class);
-    Route::get('article-comment', [AdminArticleController::class, 'category'])->name('comment');
+    Route::resource('article-category', AdminArticleCategoryController::class);
 
     // academic
     Route::resource('academic', AdminAcademicController::class);
