@@ -393,6 +393,29 @@
                         </div>
 
                         <div class="nav-item">
+                            <a class="nav-link dropdown-toggle collapsed {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
+                                href="#" role="button" data-bs-toggle="collapse"
+                                data-bs-target="#shopCategoriesThree" aria-expanded="false"
+                                aria-controls="shopCategoriesThree">
+                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i> Article
+                            </a>
+
+                            <div id="shopCategoriesThree"
+                                class="nav-collapse collapse {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'show' : '' }}"
+                                data-bs-parent="#shopNavCategories">
+                                <div id="shopNavCategoriesThree">
+                                    <a class="nav-link {{ Request()->routeIs('admin.article.*') ? 'active' : '' }}"
+                                        href="{{ route('admin.article.index') }}">Articles</a>
+
+                                    <a class="nav-link {{ Request()->routeIs('admin.article-category.*') ? 'active' : '' }}"
+                                        href="{{ route('admin.article-category.index') }}">Article Category</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End Article Nav-Item -->
+
+                        <div class="nav-item">
                             <a class="nav-link {{ Request()->routeIs('admin.event.*') ? 'active' : '' }}"
                                 href="{{ route('admin.event.index') }}" data-placement="left">
                                 <i class="bi-bell nav-icon"></i>
@@ -415,7 +438,7 @@
                                 <span class="nav-link-title">News</span>
                             </a>
 
-                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse show"
+                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse {{ Request()->routeIs('admin.news.*') || Request()->routeIs('admin.news-category.*') ? 'show' : '' }}"
                                 data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu"
                                 style="">
                                 <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}"
@@ -519,28 +542,7 @@
                             </a>
                         </div>
                         
-                        <div class="nav-item">
-                            <a class="nav-link dropdown-toggle collapsed {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
-                                href="#" role="button" data-bs-toggle="collapse"
-                                data-bs-target="#shopCategoriesThree" aria-expanded="false"
-                                aria-controls="shopCategoriesThree">
-                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i> Article
-                            </a>
-
-                            <div id="shopCategoriesThree"
-                                class="nav-collapse collapse {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'show' : '' }}"
-                                data-bs-parent="#shopNavCategories">
-                                <div id="shopNavCategoriesThree">
-                                    <a class="nav-link {{ Request()->routeIs('admin.article.*') ? 'active' : '' }}"
-                                        href="{{ route('admin.article.index') }}">Articles</a>
-
-                                    <a class="nav-link {{ Request()->routeIs('admin.article-category.*') ? 'active' : '' }}"
-                                        href="{{ route('admin.article-category.index') }}">Article Category</a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- End Content -->
+                        
 
                         </div>
 
