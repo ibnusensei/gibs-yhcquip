@@ -429,7 +429,6 @@
                                     News Category
                                 </a>
 
-
                             </div>
                         </div>
 
@@ -537,9 +536,6 @@
 
                                     <a class="nav-link {{ Request()->routeIs('admin.article-category.*') ? 'active' : '' }}"
                                         href="{{ route('admin.article-category.index') }}">Article Category</a>
-
-                                    {{--  <a class="nav-link {{ Request()->routeIs('admin.comment') ? 'active' : '' }}"
-                                        href="{{ route('admin.comment') }}">Article Comment</a>  --}}
                                 </div>
                             </div>
 
