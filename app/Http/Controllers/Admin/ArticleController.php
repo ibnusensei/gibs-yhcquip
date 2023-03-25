@@ -15,7 +15,7 @@ class ArticleController extends Controller
   public function index()
   {
     // Data Articles
-    $articles = Article::all();
+    $articles = Article::with('category_article')->latest()->get();
     // Return response
     return view('admin.article.index', compact('articles'));
   }

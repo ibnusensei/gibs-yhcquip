@@ -15,12 +15,13 @@ class Article extends Model implements HasMedia
   use HasFactory;
   use InteractsWithMedia;
 
+
   protected $fillable = ['slug', 'title', 'description', 'author', 'comment', 'category_id'];
 
-  // public function category_article(): BelongsTo
-  // {
-  //   return $this->belongsTo(CategoryArticle::class);
-  // }
+  public function category_article(): BelongsTo
+  {
+    return $this->belongsTo(CategoryArticle::class, 'category_id');
+  }
 
   public function registerMediaConversions(Media $media = null): void
   {

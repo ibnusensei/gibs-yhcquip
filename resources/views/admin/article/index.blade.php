@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout class="bg-secondary-subtle">
 
     {{--  @push('stylesDataTables')
         <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css">
@@ -7,10 +7,24 @@
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
-        <div class="page-header">
+        <div>
+            <div class="row align-items-center">
+                <div class="col ms-1 mb-4">
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#">Article</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Article
+                            </li>
+                        </ol>
+                    </nav>
+                    <!-- End Breadcrumb -->
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col">
-                    <h1 class="page-header-title">Article Page</h1>
+                    <h1 class="page-header-title mb-5 ms-1">Article Page</h1>
                 </div>
                 <!-- End Col -->
 
@@ -31,12 +45,13 @@
                     <table id="myTable" class="table py-3">
                         <thead>
                             <tr class="table-secondary">
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Description</th>
-                                <th>Author</th>
-                                <th>Publish</th>
-                                <th>Action</th>
+                                <th class="fw-bolder">Title</th>
+                                <th class="fw-bolder">Image</th>
+                                <th class="fw-bolder">Description</th>
+                                <th class="fw-bolder">Author</th>
+                                <th class="fw-bolder">Category</th>
+                                <th class="fw-bolder">Status</th>
+                                <th class="fw-bolder">Action</th>
                             </tr>
                         </thead>
                         <tbody class="table-align-middle">
@@ -52,11 +67,13 @@
                                     <td>{!! Str::limit(strip_tags($article->description), 30) !!}
                                     </td>
                                     <td>{{ $article->author }}</td>
+                                    <td>{{ ucfirst($article->category_article?->name) }}</td>
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="flexSwitchCheckDefault">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Publish</label>
+                                            <label class="form-check-label"
+                                                for="flexSwitchCheckDefault">Published</label>
                                         </div>
                                     </td>
                                     <td class="flex flex-row">
@@ -77,29 +94,7 @@
                                     <td colspan="3" class="text-center">No Data</td>
                                 </tr>
                             @endforelse
-                            {{--  <tr>
-                                <td>No Data</td>
-                                <td>No Data</td>
-                                <td>No Data</td>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">Publish</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a name="" id="" class="btn btn-success btn-sm"
-                                        href="#">Edit</a>
-                                    <a name="" id="" class="btn btn-primary btn-sm"
-                                        href="#">Show</a>
-                                    <form action="#" method="POST" class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>  --}}
+
 
                         </tbody>
                     </table>
