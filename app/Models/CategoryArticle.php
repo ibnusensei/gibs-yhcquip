@@ -13,8 +13,8 @@ class CategoryArticle extends Model
 
   // public $timestamps = false;
 
-  // public function article(): HasMany
-  // {
-  //   return $this->hasMany(Article::class);
-  // }
+  public function article(): HasMany
+  {
+    return $this->hasMany(Article::class);
+  }
 }
