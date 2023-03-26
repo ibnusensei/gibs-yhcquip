@@ -35,7 +35,7 @@
         </div>
         <!-- End Page Header -->
 
-        <div class="card shadow-lg">
+        <div class="card shadow">
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="myTable" class="table py-3">

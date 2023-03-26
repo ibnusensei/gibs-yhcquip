@@ -23,7 +23,7 @@
         <div>
             <h4 class="mb-4 card-title">Create Article</h4>
             <div class="card">
-                <div class="card-body shadow-lg">
+                <div class="card-body shadow">
 
                     <form action="{{ $url }}" method="POST" enctype="multipart/form-data">
                         {{--  @if (@$category)
