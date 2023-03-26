@@ -234,7 +234,7 @@
     @stack('stylesDataTables')
 </head>
 
-<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset bg-light">
 
     <script src="{{ asset('dist') }}/assets/js/hs.theme-appearance.js"></script>
 
