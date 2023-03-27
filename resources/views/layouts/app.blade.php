@@ -259,19 +259,19 @@
             </a>
             <!-- End Logo -->
 
-            <div class="navbar-nav-wrap-content-start">
+            {{--  <div class="navbar-nav-wrap-content-start">
                 <!-- Navbar Vertical Toggle -->
                 <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                     <i class="bi-arrow-bar-left navbar-toggler-short-align"
                         data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                        data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+                        data-bs-toggle="tooltip" data-bs-placement="right"></i>
                     <i class="bi-arrow-bar-right navbar-toggler-full-align"
                         data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                        data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
+                        data-bs-toggle="tooltip" data-bs-placement="right"></i>
                 </button>
 
                 <!-- End Navbar Vertical Toggle -->
-            </div>
+            </div>  --}}
 
             <div class="navbar-nav-wrap-content-end">
                 <!-- Navbar -->
@@ -340,15 +340,14 @@
             <div class="navbar-vertical-footer-offset mt-3">
                 <!-- Logo -->
 
-                <a class="navbar-brand" href="{{route('admin.dashboard')}}" aria-label="Front">
+                <a class="navbar-brand" href="{{ route('admin.dashboard') }}" aria-label="Front">
                     <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos/logoyhc.png"
                         alt="Logo" data-hs-theme-appearance="default">
                     <img class="navbar-brand-logo" src="{{ asset('dist') }}/assets/svg/logos-light/logoyhc.png"
                         alt="Logo" data-hs-theme-appearance="dark">
 
-                    <img class="navbar-brand-logo-mini"
-                        src="{{ asset('dist') }}/assets/svg/logos/logoyhcshort.png" alt="Logo"
-                        data-hs-theme-appearance="default">
+                    <img class="navbar-brand-logo-mini" src="{{ asset('dist') }}/assets/svg/logos/logoyhcshort.png"
+                        alt="Logo" data-hs-theme-appearance="default">
 
                     <img class="navbar-brand-logo-mini"
                         src="{{ asset('dist') }}/assets/svg/logos-light/logoyhcshort.png" alt="Logo"
@@ -393,12 +392,15 @@
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link dropdown-toggle collapsed {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
+                            <a class="nav-link dropdown-toggle {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') ? 'active bg-secondary bg-opacity-10 text-black' : '' }}"
                                 href="#" role="button" data-bs-toggle="collapse"
-                                data-bs-target="#shopCategoriesThree" aria-expanded="false"
+                                data-bs-target="#shopCategoriesThree" aria-expanded="truephp"
                                 aria-controls="shopCategoriesThree">
-                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i> Article
+                                <i class="bi bi-layout-text-sidebar-reverse nav-icon"></i>
+                                <span class="nav-link-title">Article</span>
                             </a>
+
+
 
                             <div id="shopCategoriesThree"
                                 class="nav-collapse collapse {{ Request()->routeIs('admin.article.*') || Request()->routeIs('admin.article-category.*') || Request()->routeIs('admin.comment') ? 'show' : '' }}"
@@ -424,7 +426,8 @@
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.academic.*') ? 'active' : '' }}" href="{{ route('admin.academic.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.academic.*') ? 'active' : '' }}"
+                                href="{{ route('admin.academic.index') }}" data-placement="left">
                                 <i class="bi-book nav-icon"></i>
                                 <span class="nav-link-title">Academic</span>
                             </a>
@@ -438,7 +441,8 @@
                                 <span class="nav-link-title">News</span>
                             </a>
 
-                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse collapse {{ Request()->routeIs('admin.news.*') || Request()->routeIs('admin.news-category.*') ? 'show' : '' }}"
+                            <div id="navbarVerticalMenuPagesUsersMenu"
+                                class="nav-collapse collapse {{ Request()->routeIs('admin.news.*') || Request()->routeIs('admin.news-category.*') ? 'show' : '' }}"
                                 data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu"
                                 style="">
                                 <a class="nav-link {{ Request()->routeIs('admin.news.*') ? 'active' : '' }}"
@@ -456,58 +460,64 @@
                         </div>
 
                         <span class="dropdown-header mt-4">Profile</span>
-                      <small class="bi-three-dots nav-subtitle-replacer"></small>
-                      <div class="navbar-nav nav-compact">
+                        <small class="bi-three-dots nav-subtitle-replacer"></small>
+                        <div class="navbar-nav nav-compact">
 
-                      </div>
-                      <div id="navbarVerticalMenuPagesMenu">
-                        <!-- Collapse -->
-                        <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.about.*') ? 'active' : '' }}" href="{{ route('admin.about.index') }}" data-placement="left" >
-                                <i class="bi bi-person nav-icon"></i>
-                                <span class="nav-link-title">About</span>
-                            </a>
                         </div>
+                        <div id="navbarVerticalMenuPagesMenu">
+                            <!-- Collapse -->
+                            <div class="nav-item">
+                                <a class="nav-link {{ Request()->routeIs('admin.about.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.about.index') }}" data-placement="left">
+                                    <i class="bi bi-person nav-icon"></i>
+                                    <span class="nav-link-title">About</span>
+                                </a>
+                            </div>
 
-                        <!-- End Collapse -->
+                            <!-- End Collapse -->
 
-                        <!-- Collapse -->
-                        <div class="nav-item">
-                          <a class="nav-link {{ Request()->routeIs('admin.leader.*') ? 'active' : '' }}" href="{{ route('admin.leader.index') }}">
-                            <i class="bi-person-badge nav-icon"></i>
-                            <span class="nav-link-title">Leader</span>
-                          </a>
-                        </div>
-                        <!-- End Collapse -->
+                            <!-- Collapse -->
+                            <div class="nav-item">
+                                <a class="nav-link {{ Request()->routeIs('admin.leader.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.leader.index') }}">
+                                    <i class="bi-person-badge nav-icon"></i>
+                                    <span class="nav-link-title">Leader</span>
+                                </a>
+                            </div>
+                            <!-- End Collapse -->
 
-                        <!-- Collapse -->
-                        <div class="nav-item">
-                          <a class="nav-link {{ Request()->routeIs('admin.staff.*') ? 'active' : '' }}  " href="{{ route('admin.staff.index') }}">
-                            <i class="bi-people nav-icon"></i>
-                            <span class="nav-link-title">Staff</span>
-                          </a>
+                            <!-- Collapse -->
+                            <div class="nav-item">
+                                <a class="nav-link {{ Request()->routeIs('admin.staff.*') ? 'active' : '' }}  "
+                                    href="{{ route('admin.staff.index') }}">
+                                    <i class="bi-people nav-icon"></i>
+                                    <span class="nav-link-title">Staff</span>
+                                </a>
+                            </div>
+                            <div class="nav-item">
+                                <a class="nav-link {{ Request()->routeIs('admin.campustour.*') ? 'active' : '' }}  "
+                                    href="{{ route('admin.campustour.index') }}">
+                                    <i class="bi bi-building nav-icon"></i>
+                                    <span class="nav-link-title">Campus Tour</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="nav-item">
-                          <a class="nav-link {{ Request()->routeIs('admin.campustour.*') ? 'active' : '' }}  " href="{{ route('admin.campustour.index') }}" >
-                            <i class="bi bi-building nav-icon"></i>
-                            <span class="nav-link-title">Campus Tour</span>
-                          </a>
-                        </div>
-                    </div>
 
 
 
                         <span class="dropdown-header mt-3">Information</span>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}" href="{{ route('admin.career.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.career.*') ? 'active' : '' }}"
+                                href="{{ route('admin.career.index') }}" data-placement="left">
                                 <i class="bi bi-file-person nav-icon"></i>
                                 <span class="nav-link-title">Career</span>
                             </a>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.job.*') ? 'active' : '' }}" href="{{ route('admin.job.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.job.*') ? 'active' : '' }}"
+                                href="{{ route('admin.job.index') }}" data-placement="left">
                                 <i class="bi bi-briefcase nav-icon"></i>
                                 <span class="nav-link-title">Job</span>
                             </a>
@@ -516,149 +526,181 @@
                         <span class="dropdown-header mt-3">Program</span>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.streams.*') ? 'active' : '' }}" href="{{ route('admin.streams.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.streams.*') ? 'active' : '' }}"
+                                href="{{ route('admin.streams.index') }}" data-placement="left">
                                 <i class="bi-signpost-2 nav-icon"></i>
                                 <span class="nav-link-title">Streams</span>
                             </a>
                         </div>
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.excul.*') ? 'active' : '' }}" href="{{ route('admin.excul.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.excul.*') ? 'active' : '' }}"
+                                href="{{ route('admin.excul.index') }}" data-placement="left">
                                 <i class="bi-kanban nav-icon"></i>
                                 <span class="nav-link-title">Extracurricullar</span>
                             </a>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.achievement.*') ? 'active' : '' }}" href="{{ route('admin.achievement.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.achievement.*') ? 'active' : '' }}"
+                                href="{{ route('admin.achievement.index') }}" data-placement="left">
                                 <i class="bi-trophy nav-icon"></i>
                                 <span class="nav-link-title">Achievement</span>
                             </a>
                         </div>
 
                         <div class="nav-item">
-                            <a class="nav-link {{ Request()->routeIs('admin.unggulan.*') ? 'active' : '' }}" href="{{ route('admin.unggulan.index') }}" data-placement="left">
+                            <a class="nav-link {{ Request()->routeIs('admin.unggulan.*') ? 'active' : '' }}"
+                                href="{{ route('admin.unggulan.index') }}" data-placement="left">
                                 <i class="bi-bookmark-check-fill nav-icon"></i>
                                 <span class="nav-link-title">Program Unggulan</span>
                             </a>
                         </div>
-                        
-                        
 
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- End Content -->
+            <!-- Footer -->
+            <div class="navbar-vertical-footer">
+                <ul class="navbar-vertical-footer-list">
+                    <li class="navbar-vertical-footer-list-item">
+                        <!-- Style Switcher -->
+                        <div class="dropdown dropup">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                data-bs-dropdown-animation>
+
+                            </button>
+
+                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
+                                aria-labelledby="selectThemeDropdown">
+                                <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                    <i class="bi-moon-stars me-2"></i>
+                                    <span class="text-truncate" title="Auto (system default)">Auto (system
+                                        default)</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-icon="bi-brightness-high"
+                                    data-value="default">
+                                    <i class="bi-brightness-high me-2"></i>
+                                    <span class="text-truncate" title="Default (light mode)">Default (light
+                                        mode)</span>
+                                </a>
+                                <a class="dropdown-item active" href="#" data-icon="bi-moon"
+                                    data-value="dark">
+                                    <i class="bi-moon me-2"></i>
+                                    <span class="text-truncate" title="Dark">Dark</span>
+                                </a>
+                            </div>
                         </div>
 
-                    </div>
+                        <!-- End Style Switcher -->
+                    </li>
 
-                </div>
-                <!-- End Content -->
-                <!-- Footer -->
-          <div class="navbar-vertical-footer">
-            <ul class="navbar-vertical-footer-list">
-              <li class="navbar-vertical-footer-list-item">
-                <!-- Style Switcher -->
-                <div class="dropdown dropup">
-                  <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                    <li class="navbar-vertical-footer-list-item">
+                        <!-- Other Links -->
+                        <div class="dropdown dropup">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                id="otherLinksDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                data-bs-dropdown-animation>
+                                <i class="bi-info-circle"></i>
+                            </button>
 
-                  </button>
+                            <div class="dropdown-menu navbar-dropdown-menu-borderless"
+                                aria-labelledby="otherLinksDropdown">
+                                <span class="dropdown-header">Help</span>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi-journals dropdown-item-icon"></i>
+                                    <span class="text-truncate" title="Resources &amp; tutorials">Resources &amp;
+                                        tutorials</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi-command dropdown-item-icon"></i>
+                                    <span class="text-truncate" title="Keyboard shortcuts">Keyboard shortcuts</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi-alt dropdown-item-icon"></i>
+                                    <span class="text-truncate" title="Connect other apps">Connect other apps</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi-gift dropdown-item-icon"></i>
+                                    <span class="text-truncate" title="What's new?">What's new?</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <span class="dropdown-header">Contacts</span>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi-chat-left-dots dropdown-item-icon"></i>
+                                    <span class="text-truncate" title="Contact support">Contact support</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End Other Links -->
+                    </li>
 
-                  <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
-                    <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                      <i class="bi-moon-stars me-2"></i>
-                      <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
-                    </a>
-                    <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                      <i class="bi-brightness-high me-2"></i>
-                      <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
-                    </a>
-                    <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                      <i class="bi-moon me-2"></i>
-                      <span class="text-truncate" title="Dark">Dark</span>
-                    </a>
-                  </div>
-                </div>
+                    <li class="navbar-vertical-footer-list-item">
+                        <!-- Language -->
+                        <div class="dropdown dropup">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                id="selectLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                data-bs-dropdown-animation>
+                                <img class="avatar avatar-xss avatar-circle"
+                                    src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/us.svg"
+                                    alt="United States Flag">
+                            </button>
 
-                <!-- End Style Switcher -->
-              </li>
+                            <div class="dropdown-menu navbar-dropdown-menu-borderless"
+                                aria-labelledby="selectLanguageDropdown">
+                                <span class="dropdown-header">Select language</span>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/us.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="English">English (US)</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/gb.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="English">English (UK)</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/de.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="Deutsch">Deutsch</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/dk.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="Dansk">Dansk</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/it.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="Italiano">Italiano</span>
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img class="avatar avatar-xss avatar-circle me-2"
+                                        src="{{ asset('dist') }}/assets/vendor/flag-icon-css/flags/1x1/cn.svg"
+                                        alt="Flag">
+                                    <span class="text-truncate" title="中文 (繁體)">中文 (繁體)</span>
+                                </a>
+                            </div>
+                        </div>
 
-              <li class="navbar-vertical-footer-list-item">
-                <!-- Other Links -->
-                <div class="dropdown dropup">
-                  <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="otherLinksDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                    <i class="bi-info-circle"></i>
-                  </button>
+                        <!-- End Language -->
+                    </li>
+                </ul>
+            </div>
+            <!-- End Footer -->
 
-                  <div class="dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="otherLinksDropdown">
-                    <span class="dropdown-header">Help</span>
-                    <a class="dropdown-item" href="#">
-                      <i class="bi-journals dropdown-item-icon"></i>
-                      <span class="text-truncate" title="Resources &amp; tutorials">Resources &amp; tutorials</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="bi-command dropdown-item-icon"></i>
-                      <span class="text-truncate" title="Keyboard shortcuts">Keyboard shortcuts</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="bi-alt dropdown-item-icon"></i>
-                      <span class="text-truncate" title="Connect other apps">Connect other apps</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="bi-gift dropdown-item-icon"></i>
-                      <span class="text-truncate" title="What's new?">What's new?</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <span class="dropdown-header">Contacts</span>
-                    <a class="dropdown-item" href="#">
-                      <i class="bi-chat-left-dots dropdown-item-icon"></i>
-                      <span class="text-truncate" title="Contact support">Contact support</span>
-                    </a>
-                  </div>
-                </div>
-                <!-- End Other Links -->
-              </li>
-
-              <li class="navbar-vertical-footer-list-item">
-                <!-- Language -->
-                <div class="dropdown dropup">
-                  <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                    <img class="avatar avatar-xss avatar-circle" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="United States Flag">
-                  </button>
-
-                  <div class="dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectLanguageDropdown">
-                    <span class="dropdown-header">Select language</span>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="Flag">
-                      <span class="text-truncate" title="English">English (US)</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/gb.svg" alt="Flag">
-                      <span class="text-truncate" title="English">English (UK)</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/de.svg" alt="Flag">
-                      <span class="text-truncate" title="Deutsch">Deutsch</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/dk.svg" alt="Flag">
-                      <span class="text-truncate" title="Dansk">Dansk</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/it.svg" alt="Flag">
-                      <span class="text-truncate" title="Italiano">Italiano</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <img class="avatar avatar-xss avatar-circle me-2" src="{{asset('dist')}}/assets/vendor/flag-icon-css/flags/1x1/cn.svg" alt="Flag">
-                      <span class="text-truncate" title="中文 (繁體)">中文 (繁體)</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- End Language -->
-              </li>
-            </ul>
-          </div>
-          <!-- End Footer -->
-
-                    </div>
-                </div>
+        </div>
+        </div>
     </aside>
 
     <main id="content" role="main" class="main">
@@ -2061,7 +2103,8 @@
         })()
     </script>
     {{-- jquery --}}
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
     {{-- datatables js --}}
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
