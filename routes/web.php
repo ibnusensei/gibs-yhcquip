@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
 
 // administrator
 Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function() {
